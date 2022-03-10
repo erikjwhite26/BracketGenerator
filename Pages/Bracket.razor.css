@@ -1,0 +1,439 @@
+.bracket-page{
+	display: block;
+}
+.bracket-body {
+	margin-top: 40px;
+}
+li:hover {
+	background-color: #aafffc;
+	cursor: pointer;
+}
+.champion{
+	text-align: center;
+	font-weight: bold;
+}
+.action-menu{
+	display:block;
+	font-weight: bold;
+}
+
+.action-menu-mobile{
+	display:none;
+}
+
+.alert-block {
+	display: flex;
+	height: 24px;
+}
+
+.alert-message {
+	position: absolute;
+	right: 0px;
+	margin-right: 8px;
+	padding-left: 110px;
+	width: 440px;
+	border-radius: 3px;
+}
+
+.alert-success {
+	background-color: greenyellow;
+}
+
+.alert-failure {
+	background-color: orange;
+}
+
+#alert-message.hidden {
+	display: none;
+}
+
+#alert-message {
+	display: flex;
+}
+
+.form-group {
+	margin-bottom: 4px;
+	margin-right: 8px;
+	display: flex;
+}
+
+.stats {
+	width: 162px;
+}
+
+.credentials {
+	display: flex;
+	position: absolute;
+	right: 0px;
+}
+
+.username {
+	display: block;
+	margin-right: 8px;
+	width: 162px;
+}
+
+.password {
+	display: block;
+	margin-right: 8px;
+	width: 162px;
+}
+
+.host {
+	display: block;
+	margin-right: 8px;
+	width: 100px;
+}
+
+.select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+	background-repeat: no-repeat;
+	background-position-x: 100%;
+	background-position-y: 5px;
+	border: 2px solid #000;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+.form-control {
+	border: 2px solid #000;
+	font-weight: bold;
+}
+
+.action-btn {
+	margin-right: 8px;
+}
+
+.export-btn {
+	position: absolute;
+	right: 0px;
+}
+
+.bracket {
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: repeat(98,8px);
+	gap: 2px 6px;
+	grid-auto-flow: column;
+	margin: 20px auto;
+	width: 1200px;
+
+	@media (min-width:1400px) {
+		grid-template-columns: repeat(11, 1fr);
+		width:1400px;
+	}
+}
+
+.region {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(46,8px);
+	gap: 2px 6px;
+	grid-auto-flow: column;
+}
+
+.region-1 {
+	grid-column: 1 / span 4;
+	grid-row: 1 / span 47;
+}
+
+.final-four {
+	grid-column: 4 / span 3;
+	grid-row: 43 / span 6;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(6,8px);
+	gap: 2px 6px;
+	grid-auto-flow: column;
+
+	@media (min-width:1400px) {
+		grid-column: 5 / span 3;
+	}
+}
+
+.region-2 {
+	grid-column: 1 / span 4;
+	grid-row: 53 / span 47
+}
+
+.region-3 {
+	grid-column: -5 / span 4;
+	grid-row: 1 / span 47;
+}
+
+.region-4 {
+	grid-column: -5 / span 4;
+	grid-row: 53 / span 47
+}
+
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.team {
+	background-color: white;
+	font-size: 11px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 5px;
+}
+
+.team-top {
+	margin-bottom: 2px;
+}
+
+.winner {
+	background-color: #0A6FAC;
+	color: white;
+}
+
+.matchup {
+	grid-column: span 1;
+	grid-row: span 4;
+	box-shadow: 1px 1px 10px rgba(0,0,0,.5);
+}
+
+.matchup-1,
+.matchup-9 {
+	grid-column: span 1;
+	grid-row: span 4;
+}
+
+.matchup-2,
+.matchup-10 {
+	grid-row: 7 / span 4;
+}
+
+.matchup-3,
+.matchup-11 {
+	grid-row: 13 / span 4;
+}
+
+.matchup-4,
+.matchup-12 {
+	grid-row: 19 / span 4;
+}
+
+.matchup-5,
+.matchup-13 {
+	grid-row: 25 / span 4;
+}
+
+.matchup-6,
+.matchup-14 {
+	grid-row: 31 / span 4;
+}
+
+.matchup-7,
+.matchup-15 {
+	grid-row: 37 / span 4;
+}
+
+.matchup-8,
+.matchup-16 {
+	grid-row: 43 / span 4;
+}
+
+.matchup-17,
+.matchup-25 {
+	grid-column: -2/span 1;
+	grid-row: 1/span 4;
+}
+
+.matchup-18,
+.matchup-26 {
+	grid-column: -2/span 1;
+	grid-row: 7/span 4;
+}
+
+.matchup-19,
+.matchup-27 {
+	grid-column: -2/span 1;
+	grid-row: 13/span 4;
+}
+
+.matchup-20,
+.matchup-28 {
+	grid-column: -2/span 1;
+	grid-row: 19/span 4;
+}
+
+.matchup-21,
+.matchup-29 {
+	grid-column: -2/span 1;
+	grid-row: 25/span 4;
+}
+
+.matchup-22,
+.matchup-30 {
+	grid-column: -2/span 1;
+	grid-row: 31/span 4;
+}
+
+.matchup-23,
+.matchup-31 {
+	grid-column: -2/span 1;
+	grid-row: 37/span 4;
+}
+
+.matchup-24,
+.matchup-32 {
+	grid-column: -2/span 1;
+	grid-row: 43/span 4;
+}
+
+.matchup-33,
+.matchup-37 {
+	grid-column: 2 / span 1;
+	grid-row: 4 / span 4;
+}
+
+.matchup-34,
+.matchup-38 {
+	grid-column: 2 / span 1;
+	grid-row: 16 / span 4;
+}
+
+.matchup-35,
+.matchup-39 {
+	grid-column: 2 / span 1;
+	grid-row: 28 / span 4;
+}
+
+.matchup-36,
+.matchup-40 {
+	grid-column: 2 / span 1;
+	grid-row: 40 / span 4;
+}
+
+.matchup-41,
+.matchup-45 {
+	grid-column: -3 / span 1;
+	grid-row: 4 / span 4;
+}
+
+.matchup-42,
+.matchup-46 {
+	grid-column: -3 / span 1;
+	grid-row: 16 / span 4;
+}
+
+.matchup-43,
+.matchup-47 {
+	grid-column: -3 / span 1;
+	grid-row: 28 / span 4;
+}
+
+.matchup-44,
+.matchup-48 {
+	grid-column: -3 / span 1;
+	grid-row: 40 / span 4;
+}
+
+.matchup-49,
+.matchup-51 {
+	grid-column: 3 / span 1;
+	grid-row: 10 / span 4;
+}
+
+.matchup-50,
+.matchup-52 {
+	grid-column: 3 / span 1;
+	grid-row: 34 / span 4;
+}
+
+.matchup-53,
+.matchup-55 {
+	grid-column: -4 / span 1;
+	grid-row: 10 / span 4;
+}
+
+.matchup-54,
+.matchup-56 {
+	grid-column: -4 / span 1;
+	grid-row: 34 / span 4;
+}
+
+.matchup-57,
+.matchup-58 {
+	grid-column: 4 / span 1;
+	grid-row: 22 / span 4;
+}
+
+.matchup-59,
+.matchup-60 {
+	grid-column: -5 / span 1;
+	grid-row: 22 / span 4;
+}
+
+.matchup-61 {
+	grid-column: 1 / span 1;
+	grid-row: 6/ span 4;
+}
+
+.matchup-62 {
+	grid-column: 3 / span 1;
+	grid-row: 6/ span 4;
+}
+
+.matchup-63 {
+	grid-column: 2 / span 1;
+	grid-row: 1/ span 4;
+	.team {
+	height:28px;
+	line-height: 28px;
+	}
+}
+
+@media (max-width: 1450px) {
+	.bracket-body {
+		overflow-x: scroll;
+	}
+}
+
+@media (max-width: 900px) {
+	.bracket-body {
+		margin-top: 80px;
+	}
+	.action-menu{
+		display:none;
+	}
+	.action-menu-mobile{
+		display:block;
+	}
+	.form-group-host{
+		margin-top: 20px;
+	}
+	.action-btn {
+		height: 40px;
+	}
+	.btn-group-mobile {
+		display: flex;
+		position: absolute;
+		right: 0;
+		margin-top: 24px;
+	}
+	.credentials {
+		display: block;
+	}
+	.export-btn{
+		display: flex;
+		right: inherit;
+		margin-top: 25px;
+		width: 150px;
+	}
+	.stats {
+		display: block;
+		margin-right: 8px;
+		width: 150px;
+	}
+	.host{
+		width: 150px;
+	}
+}

@@ -1,0 +1,76 @@
+﻿@page "/stats"
+
+<PageTitle>Stats</PageTitle>
+
+<div>
+	<h1>Stats</h1>
+	<p>The tables below share the stats used in the calculation of the winner when using Auto-Fill.</p>
+	<p>The table provides the x value in the formula: x>=y where y is a random decimal between 0 and 1.</p>
+</div>
+<div class="stats-body">
+	<div class-="mathmatical-stats">
+		<h3>Mathmatical Stats Table</h3>
+		<table class="stat-table">
+			<thead>
+				<tr>
+					<th>Seeds</th>
+					@for(int l = 1; l<=16; l++)
+					{
+						<td>@l</td>
+					}
+				</tr>
+			</thead>
+			<tbody>
+				@{int k = 1;}
+				@for(int j = 1; j<=16; j++){
+					<tr>
+						<th>@j</th>
+						@for(k = 1; k <= 16; k++)
+						{
+							double x = Math.Round(((double)k / ((double)j + (double)k)),2);
+							<td class='@(@j == k ? "highlight-cell" : "") '>@x</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<br/>
+	<div class="historic-stats">
+		<h3>Historical Stats Table</h3>
+		<table class="stat-table">
+			<thead>
+				<tr>
+					<th>Seeds</th>
+					@foreach(int seed in HistoricStats.Keys)
+					{
+						<td>@seed</td>
+					}
+				</tr>
+			</thead>
+			<tbody>
+				@{int i = 1;}
+				@foreach(int seed in HistoricStats.Keys){
+					<tr>
+						<th>@seed</th>
+						@for(i = 1; i <= 16; i++)
+						{
+							<td class='@(@seed == i ? "highlight-cell" : "") '>@HistoricStats[@seed][i]</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@code 
+{
+	private Dictionary<int,Dictionary<int,double>> HistoricStats = new();
+	private StatsService StatsService = new();
+	
+	protected override void OnInitialized()
+	{   
+		HistoricStats = StatsService.HistoricStats;
+	}
+}
