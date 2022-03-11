@@ -8,6 +8,9 @@ class ExportService
 
     public string ExportBracket(Dictionary<int, RegionalMatchup> winners, string username, string password, string host)
     {
+	# Selenium is not supported in Blazor wasm. Will need to find a different way to export.
+        return "Export functionality is coming soon!";
+
         if(string.IsNullOrEmpty(username)){
 			return "Username cannot be blank!";
 		}
