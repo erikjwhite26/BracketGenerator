@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 
 <PageTitle>Bracket</PageTitle>
 
@@ -21,6 +21,7 @@
 				<div class="host">
 					<label>Export Host</label>
 					<select class="form-control select" @onchange="HostOptionChanged">
+						<option style="display:none"></option>
 						<option>ESPN</option>
 						<option>CBS</option>
 						<option>Yahoo</option>
@@ -29,17 +30,17 @@
 				</div>
 				<div class="username">
 					<label>Username:</label>
-					<input class="form-control" @onchange="UsernameChanged"/>
+					<input class="form-control" disabled @onchange="UsernameChanged"/>
 				</div>
 				<div class="password">
 					<label>Password:</label>
-					<input class="form-control" type="password" @onchange="PasswordChanged"/>
+					<input class="form-control" type="password" disabled @onchange="PasswordChanged"/>
 				</div>
 			</div>
 		</div>
 		<button class="btn btn-primary action-btn" @onclick="() => AutoFill()">Auto-Fill</button>
 		<button class="btn btn-secondary action-btn" @onclick="() => Clear()">Clear</button>
-		<button class="btn btn-primary action-btn export-btn" @onclick="() => ExportBracket()">Export Bracket</button>
+		<a class="btn btn-primary action-btn export-btn" href="@HostURL" target="_blank" rel="noopener noreferrer">Export Bracket</a>
 	</div>
 	<div class="action-menu-mobile">
 		<div class="alert-block" hidden="@HideAlert">
@@ -65,22 +66,23 @@
 				<div class="host">
 					<label>Export Host</label>
 					<select class="form-control select" @onchange="HostOptionChanged">
+						<option></option>
 						<option>ESPN</option>
 						<option>CBS</option>
 						<option>Yahoo</option>
 						<option>NCAA</option>
 					</select>
 				</div>
-				<button class="btn btn-primary action-btn export-btn" @onclick="() => ExportBracket()">Export Bracket</button>	
+				<a class="btn btn-primary action-btn export-btn" href="@HostURL" target="_blank" rel="noopener noreferrer">Export Bracket</a>
 			</div>
 			<div class="credentials">
 				<div class="username">
 					<label>Username:</label>
-					<input class="form-control" @onchange="UsernameChanged"/>
+					<input class="form-control" @onchange="UsernameChanged" disabled/>
 				</div>
 				<div class="password">
 					<label>Password:</label>
-					<input class="form-control" type="password" @onchange="PasswordChanged"/>
+					<input class="form-control" type="password" @onchange="PasswordChanged" disabled/>
 				</div>
 			</div>
 		</div>
@@ -114,6 +116,7 @@
 	private string Username = "";
 	private string Password = "";
 	private string Host = "ESPN";
+	private string HostURL = "";
 	private string ExportError = "";
 	private bool ExportResponse { get; set; } = true;
 	private bool HideAlert = true;
@@ -212,6 +215,7 @@
 
 	private void HostOptionChanged(ChangeEventArgs e){
 		Host = e.Value as string;
+		HostURL = Service.GetHostURL(Host);
 	}
 
 	private void UsernameChanged(ChangeEventArgs e){
