@@ -5,11 +5,30 @@ using OpenQA.Selenium.Support.UI;
 class ExportService
 {
     IWebDriver driver;
+    string ESPNURL = "https://fantasy.espn.com/tournament-challenge-bracket/2022/en/#";
+    string YahooURL = "https://tournament.fantasysports.yahoo.com/t1#";
+    string CBSURL = "https://www.cbssports.com/college-basketball/bracketology/#";
+    string NCAAURL = "https://bracketchallenge.ncaa.com/#";
+
+    public string GetHostURL(string host){
+        if (host == "ESPN")
+        {
+            return ESPNURL;
+        } else if (host == "CBS")
+        {
+            return CBSURL;
+        } else if (host == "Yahoo")
+        {
+            return YahooURL;
+        }
+        else
+        {
+            return NCAAURL;
+        }
+    }
 
     public string ExportBracket(Dictionary<int, RegionalMatchup> winners, string username, string password, string host)
     {
-        return "Export functionality is coming soon!";
-
         if(string.IsNullOrEmpty(username)){
 			return "Username cannot be blank!";
 		}
@@ -70,7 +89,7 @@ class ExportService
      */
     private string ExportToESPN(Dictionary<int, RegionalMatchup> winners, string username, string password)
     {
-        driver.Url = "https://fantasy.espn.com/tournament-challenge-bracket/2022/en/";
+        driver.Url = ESPNURL;
         ESPNLogin(driver, username, password);
         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         wait.Until(d => d.FindElement(By.XPath("//*[@id='main-container']/div/section[1]/div/div[3]/div[3]/div[1]/a")));
@@ -102,7 +121,7 @@ class ExportService
      */
     private string ExportToCBS(Dictionary<int, RegionalMatchup> winners, string username, string password)
     {
-        driver.Url = "https://www.cbssports.com/college-basketball/bracketology/";
+        driver.Url = CBSURL;
         CBSLogin(driver, username, password);
         return "";
     }
@@ -128,7 +147,7 @@ class ExportService
      */
     private string ExportToYahoo(Dictionary<int, RegionalMatchup> winners, string username, string password)
     {
-        driver.Url = "https://tournament.fantasysports.yahoo.com/t1";
+        driver.Url = YahooURL;
         YahooLogin(driver,username,password);
         IWebElement createBracket = driver.FindElement(By.XPath("//*[@id='main-1-Home-Proxy']/div/div[3]/div/div[2]/div/div[2]/a"));
         createBracket.Click();
@@ -174,7 +193,7 @@ class ExportService
      */
     private string ExportToNCAA(Dictionary<int, RegionalMatchup> winners, string username, string password)
     {
-        driver.Url = "https://bracketchallenge.ncaa.com/";
+        driver.Url = NCAAURL;
         NCAALogin(driver,username,password);
         return "";
     }
