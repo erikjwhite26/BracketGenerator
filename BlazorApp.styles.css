@@ -503,6 +503,11 @@ th:hover[b-cg7p1gjo2p]::after {
     z-index: -1;
 }
 
+.fivethirtyeight-stats table thead tr th:first-child[b-cg7p1gjo2p],
+.fivethirtyeight-stats table tbody tr th:first-child[b-cg7p1gjo2p] {
+    width: 150px;
+}
+
 @media (max-width:700px) {
     .stats-body[b-cg7p1gjo2p] {
         overflow: scroll;
