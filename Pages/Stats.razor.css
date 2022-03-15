@@ -62,6 +62,11 @@ th:hover::after {
     z-index: -1;
 }
 
+.fivethirtyeight-stats table thead tr th:first-child,
+.fivethirtyeight-stats table tbody tr th:first-child {
+    width: 150px;
+}
+
 @media (max-width:700px) {
     .stats-body {
         overflow: scroll;

@@ -13,6 +13,7 @@
 				<select class="form-control select" @onchange="StatOptionChanged">
 					<option>Mathmatical</option>
 					<option>Historical</option>
+					<option>538 Odds</option>
 					<option>Coin Flip</option>
 					<option>Random</option>
 				</select>
@@ -52,6 +53,7 @@
 				<select class="form-control select" @onchange="StatOptionChanged">
 					<option>Mathmatical</option>
 					<option>Historical</option>
+					<option>538 Odds</option>
 					<option>Coin Flip</option>
 					<option>Random</option>
 				</select>
@@ -111,6 +113,7 @@
 {
 	private Dictionary<int,RegionalMatchup> TourneyMatchups = new();
 	private Dictionary<int,Dictionary<int,double>> HistoricalStats = new();
+	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOdds = new();
 	private string Champion = "";
 	private string StatOption = "Mathmatical";
 	private string Username = "";
@@ -130,7 +133,7 @@
 		var rand = new Random();
 		foreach(RegionalMatchup regionalMatchup in TourneyMatchups.Values){
 			foreach(Matchup matchup in regionalMatchup.RegionalMatchups.Values){
-				var x = GetXFactor(matchup.Team1.Seed, matchup.Team2.Seed);
+				var x = GetXFactor(matchup);
 				var y = Math.Round(rand.NextDouble(),2);
 				
 				if(x>=y){
@@ -142,18 +145,45 @@
 		}
 	}
 
-	private double GetXFactor(int? Seed1, int? Seed2){
+	private double GetXFactor(Matchup matchup){
+		var Seed1 = matchup.Team1.Seed;
+		var Seed2 = matchup.Team2.Seed;
 		if(StatOption=="Mathmatical"){
 			return Math.Round(((double)Seed2.GetValueOrDefault() / ((double)Seed1.GetValueOrDefault() + (double)Seed2.GetValueOrDefault())),2);
 		} else if(StatOption=="Coin Flip"){
 			return .50;
 		} else if(StatOption=="Random"){
 			return Math.Round(new Random().NextDouble(),2);
+		} else if(StatOption=="538 Odds"){
+			var Round = GetRound(matchup.NextMatchup);
+			var Team1Name = FormatTeamName(matchup.Team1.Name);
+			var Team2Name = FormatTeamName(matchup.Team2.Name);
+			return Math.Round(((double)FiveThirtyEightOdds[Team1Name][Round] / ((double)FiveThirtyEightOdds[Team1Name][Round] + (double)FiveThirtyEightOdds[Team2Name][Round])),2);
 		} else {
 			return HistoricalStats[Seed1.GetValueOrDefault()][Seed2.GetValueOrDefault()];
 		}
 	}
+
+	private int GetRound(int? NextMatchup){
+		switch(NextMatchup){
+			case int n when n >= 33 && n < 49:
+				return 2;
+			case int n when n >= 49 && n < 57:
+				return 3;
+			case int n when n >= 57 && n < 61:
+				return 4;
+			case int n when n >= 61 && n < 63:
+				return 5;
+			case int n when n == 63:
+				return 6;
+		}
+		return 7;
+	}
 	
+	private string FormatTeamName(string TeamName){
+		return TeamName.Split('/')[0];
+	}
+
 	private void Winner(Matchup matchup, int team){
 		var winningTeam = team==1? matchup.Team1: matchup.Team2;
 		var regional = matchup.NextMatchup>60? 5: matchup.Regional;
@@ -242,6 +272,7 @@
 	protected override void OnInitialized()
 	{   
 		HistoricalStats = StatsService.HistoricStats;
+		FiveThirtyEightOdds = StatsService.FiveThirtyEightStats;
 		TourneyMatchups = MatchupService.Matchups;
 	}
 }

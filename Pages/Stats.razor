@@ -1,4 +1,4 @@
-﻿@page "/stats"
+@page "/stats"
 
 <PageTitle>Stats</PageTitle>
 
@@ -62,15 +62,46 @@
 			</tbody>
 		</table>
 	</div>
+	<br/>
+	<div class="fivethirtyeight-stats">
+		<h3>538 Stats Table</h3>
+		<table class="stat-table">
+			<thead>
+				<tr>
+					<th>Team/Round</th>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+				</tr>
+			</thead>
+			<tbody>
+				@{int m = 2;}
+				@foreach(var Team in FiveThirtyEightOdds.Keys){
+					<tr>
+						<th>@Team</th>
+						@for(m = 2; m <= 7; m++)
+						{
+							<td>@FiveThirtyEightOdds[@Team][m]</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 @code 
 {
 	private Dictionary<int,Dictionary<int,double>> HistoricStats = new();
+	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOdds = new();
 	private StatsService StatsService = new();
 	
 	protected override void OnInitialized()
 	{   
 		HistoricStats = StatsService.HistoricStats;
+		FiveThirtyEightOdds = StatsService.FiveThirtyEightStats;
 	}
 }
