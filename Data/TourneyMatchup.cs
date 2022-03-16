@@ -588,7 +588,7 @@ class TourneyMatchup
 							Regional = 4,
 							MatchupClass = "matchup-25",
 							Team1 = new() { Seed = 1, Name = "Kansas" },
-							Team2 = new() { Seed = 16, Name = "Texas Southern/Texas A&M CC" }
+							Team2 = new() { Seed = 16, Name = "Texas Southern" }
 						}
 					},
 					{
