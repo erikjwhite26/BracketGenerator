@@ -12,6 +12,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+#app {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
 body::before {
     content: "";
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/732/wood-floor.jpg) no-repeat;
