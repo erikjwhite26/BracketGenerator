@@ -649,6 +649,7 @@ class TourneyMatchup
 							MatchupClass = "matchup-30",
 							Team1 = new() { Seed = 3, Name = "Gonzaga" },
 							Team2 = new() { Seed = 14, Name = "Grand Canyon" }
+      }
 					},
 					{
 						31,
