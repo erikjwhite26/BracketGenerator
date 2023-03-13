@@ -636,7 +636,7 @@ class StatsService
 			}
 		},
 		{
-			"St Mary\'s",
+			"Saint Mary\'s",
 			new()
 			{
 				{ 2, .60 },
