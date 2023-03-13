@@ -446,7 +446,7 @@ class TourneyMatchup
 							Regional = 3,
 							MatchupClass = "matchup-21",
 							Team1 = new() { Seed = 6, Name = "Iowa St" },
-							Team2 = new() { Seed = 11, Name = "Mississippi St" }
+							Team2 = new() { Seed = 11, Name = "Mississippi St/Pittsburgh" }
 						}
 					},
 					{
