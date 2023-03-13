@@ -816,7 +816,7 @@ class StatsService
 			}
 		},
 		{
-			"Florida Arlantic",
+			"Florida Atlantic",
 			new()
 			{
 				{ 2, .39 },
