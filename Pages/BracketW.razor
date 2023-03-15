@@ -1,0 +1,278 @@
+@page "/BracketW"
+
+<PageTitle>Women's Bracket</PageTitle>
+
+<div class="bracket-page">
+	<div class="action-menu">
+		<div class="alert-block" hidden="@HideAlert">
+			<p class='alert-message @(ExportResponse ? "alert-success" : "alert-failure")' id="alert-message">@AlertMessage</p>
+		</div>
+		<div class="form-group">
+			<div class="stats">
+				<label>Stats to Use:</label>
+				<select class="form-control select" @onchange="StatOptionChanged">
+					<option>Mathmatical</option>
+					<option>Historical</option>
+					<option>538 Odds</option>
+					<option>Coin Flip</option>
+					<option>Random</option>
+				</select>
+			</div>
+			<div class="credentials">
+				<div class="host">
+					<label>Export Host</label>
+					<select class="form-control select" @onchange="HostOptionChanged">
+						<option style="display:none"></option>
+						<option>ESPN</option>
+						<option>CBS</option>
+						<option>Yahoo</option>
+						<option>NCAA</option>
+					</select>
+				</div>
+				<div class="username">
+					<label>Username:</label>
+					<input class="form-control" disabled @onchange="UsernameChanged"/>
+				</div>
+				<div class="password">
+					<label>Password:</label>
+					<input class="form-control" type="password" disabled @onchange="PasswordChanged"/>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary action-btn" @onclick="() => AutoFill()">Auto-Fill</button>
+		<button class="btn btn-secondary action-btn" @onclick="() => Clear()">Clear</button>
+		<a class="btn btn-primary action-btn export-btn" href="@HostURL" target="_blank" rel="noopener noreferrer">Export Bracket</a>
+	</div>
+	<div class="action-menu-mobile">
+		<div class="alert-block" hidden="@HideAlert">
+			<p class='alert-message @(ExportResponse ? "alert-success" : "alert-failure")' id="alert-message">@AlertMessage</p>
+		</div>
+		<div class="form-group">
+			<div class="stats">
+				<label>Stats to Use:</label>
+				<select class="form-control select" @onchange="StatOptionChanged">
+					<option>Mathmatical</option>
+					<option>Historical</option>
+					<option>538 Odds</option>
+					<option>Coin Flip</option>
+					<option>Random</option>
+				</select>
+			</div>
+			<div class="btn-group-mobile">
+				<button class="btn btn-primary action-btn" @onclick="() => AutoFill()">Auto-Fill</button>
+				<button class="btn btn-secondary action-btn" @onclick="() => Clear()">Clear</button>
+			</div>
+		</div>
+		<div class="form-group form-group-host">
+			<div class="host">
+				<div class="host">
+					<label>Export Host</label>
+					<select class="form-control select" @onchange="HostOptionChanged">
+						<option></option>
+						<option>ESPN</option>
+						<option>CBS</option>
+						<option>Yahoo</option>
+						<option>NCAA</option>
+					</select>
+				</div>
+				<a class="btn btn-primary action-btn export-btn" href="@HostURL" target="_blank" rel="noopener noreferrer">Export Bracket</a>
+			</div>
+			<div class="credentials">
+				<div class="username">
+					<label>Username:</label>
+					<input class="form-control" @onchange="UsernameChanged" disabled/>
+				</div>
+				<div class="password">
+					<label>Password:</label>
+					<input class="form-control" type="password" @onchange="PasswordChanged" disabled/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="bracket-body">
+		<h2 class="champion">Champion: @Champion</h2>
+		<div class="bracket">
+			@foreach(var regionalMatchup in TourneyMatchups.Values)
+			{
+			<div class="region @regionalMatchup.RegionalClass">
+				@foreach(var matchup in regionalMatchup.RegionalMatchups.Values)
+				{
+					<ul class="matchup @matchup.MatchupClass">
+						<li @onclick='(() => Winner(matchup,1))' class="team team-top">@matchup.Team1.Seed @matchup.Team1.Name</li>
+						<li @onclick='(() => Winner(matchup,2))' class="team team-bottom">@matchup.Team2.Seed @matchup.Team2.Name</li>
+					</ul>
+				}
+			</div>
+			}
+		</div>
+	</div>
+</div>
+
+@code 
+{
+	private Dictionary<int,RegionalMatchup> TourneyMatchups = new();
+	private Dictionary<int,Dictionary<int,double>> HistoricalStats = new();
+	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOdds = new();
+	private string Champion = "";
+	private string StatOption = "Mathmatical";
+	private string Username = "";
+	private string Password = "";
+	private string Host = "ESPN";
+	private string HostURL = "";
+	private string ExportError = "";
+	private bool ExportResponse { get; set; } = true;
+	private bool HideAlert = true;
+	private string AlertMessage = "";
+	private ExportService Service = new();
+	private StatsServiceW StatsService = new();
+	private TourneyMatchupW MatchupService = new();
+
+	private void AutoFill(){
+		HideAlert = true;
+		var rand = new Random();
+		foreach(RegionalMatchup regionalMatchup in TourneyMatchups.Values){
+			foreach(Matchup matchup in regionalMatchup.RegionalMatchups.Values){
+				var x = GetXFactor(matchup);
+				var y = Math.Round(rand.NextDouble(),2);
+				
+				if(x>=y){
+					Winner(matchup, 1);
+				}else{
+					Winner(matchup, 2);
+				}
+			}
+		}
+	}
+
+	private double GetXFactor(Matchup matchup){
+		var Seed1 = matchup.Team1.Seed;
+		var Seed2 = matchup.Team2.Seed;
+		if(StatOption=="Mathmatical"){
+			return Math.Round(((double)Seed2.GetValueOrDefault() / ((double)Seed1.GetValueOrDefault() + (double)Seed2.GetValueOrDefault())),2);
+		} else if(StatOption=="Coin Flip"){
+			return .50;
+		} else if(StatOption=="Random"){
+			return Math.Round(new Random().NextDouble(),2);
+		} else if(StatOption=="538 Odds"){
+			var Round = GetRound(matchup.NextMatchup);
+			var Team1Name = FormatTeamName(matchup.Team1.Name);
+			var Team2Name = FormatTeamName(matchup.Team2.Name);
+			return Math.Round(((double)FiveThirtyEightOdds[Team1Name][Round] / ((double)FiveThirtyEightOdds[Team1Name][Round] + (double)FiveThirtyEightOdds[Team2Name][Round])),2);
+		} else {
+			return HistoricalStats[Seed1.GetValueOrDefault()][Seed2.GetValueOrDefault()];
+		}
+	}
+
+	private int GetRound(int? NextMatchup){
+		switch(NextMatchup){
+			case int n when n >= 33 && n < 49:
+				return 2;
+			case int n when n >= 49 && n < 57:
+				return 3;
+			case int n when n >= 57 && n < 61:
+				return 4;
+			case int n when n >= 61 && n < 63:
+				return 5;
+			case int n when n == 63:
+				return 6;
+		}
+		return 7;
+	}
+	
+	private string FormatTeamName(string TeamName){
+		return TeamName.Split('/')[0];
+	}
+
+	private void Winner(Matchup matchup, int team){
+		var winningTeam = team==1? matchup.Team1: matchup.Team2;
+		var regional = matchup.NextMatchup>60? 5: matchup.Regional;
+
+		if(matchup.NextMatchup==0){
+			Champion = winningTeam.Name;
+		}else if(matchup.NextMatchupTeam==1){
+			var m = TourneyMatchups[regional].RegionalMatchups[matchup.NextMatchup];
+			if(!string.IsNullOrEmpty(m.Team1.Name) && m.Team1.Name != winningTeam.Name){
+				RemoveTeam(m,1,m.Team1.Name);
+			}
+			m.Team1 = winningTeam;
+		}else {
+			var m = TourneyMatchups[regional].RegionalMatchups[matchup.NextMatchup];
+			if(!string.IsNullOrEmpty(m.Team2.Name) && m.Team2.Name != winningTeam.Name){
+				RemoveTeam(m,2,m.Team2.Name);
+			}
+			m.Team2 = winningTeam;			
+		}
+	}
+
+	private void RemoveTeam(Matchup matchup, int team, string teamName){
+		var regional = matchup.NextMatchup>60? 5: matchup.Regional;
+		
+		if(matchup.NextMatchup==0){
+			Champion = "";
+		}else if(matchup.NextMatchupTeam==1){
+			var m = TourneyMatchups[regional].RegionalMatchups[matchup.NextMatchup];
+			if(!string.IsNullOrEmpty(m.Team1.Name) && m.Team1.Name == teamName){
+				m.Team1 = new Team(){};
+				RemoveTeam(m,1,teamName);
+			}
+		}else {
+			var m = TourneyMatchups[regional].RegionalMatchups[matchup.NextMatchup];
+			if(!string.IsNullOrEmpty(m.Team2.Name) && m.Team2.Name == teamName){
+				m.Team2 = new Team(){};
+				RemoveTeam(m,2,teamName);
+			}
+		}
+	}
+	
+	private void Clear(){
+		foreach(RegionalMatchup regionalMatchup in TourneyMatchups.Values){
+			foreach(int i in regionalMatchup.RegionalMatchups.Keys){
+				if(i>32){
+					Matchup m = regionalMatchup.RegionalMatchups[i];
+					m.Team1 = new Team(){};
+					m.Team2 = new Team(){};
+				}
+			}
+		}
+		Champion = "";
+		HideAlert = true;
+	}
+
+	private void StatOptionChanged(ChangeEventArgs e){
+		StatOption = e.Value as string;
+	}
+
+	private void HostOptionChanged(ChangeEventArgs e){
+		Host = e.Value as string;
+		HostURL = Service.GetHostURL(Host);
+	}
+
+	private void UsernameChanged(ChangeEventArgs e){
+		Username = e.Value as string;
+	}
+
+	private void PasswordChanged(ChangeEventArgs e){
+		Password = e.Value as string;
+	}
+
+	private void ExportBracket(){
+		HideAlert = true;
+		ExportError = Service.ExportBracket(TourneyMatchups,Username,Password,Host);
+		HideAlert = false;
+		if(string.IsNullOrEmpty(ExportError)){
+			ExportResponse = true;
+			AlertMessage = "Export to " + Host + " was successful!";
+		} else {
+			ExportResponse = false;
+			AlertMessage = ExportError;
+		}
+	}
+
+	protected override void OnInitialized()
+	{   
+		HistoricalStats = StatsService.HistoricStats;
+		FiveThirtyEightOdds = StatsService.FiveThirtyEightStats;
+		TourneyMatchups = MatchupService.Matchups;
+	}
+}

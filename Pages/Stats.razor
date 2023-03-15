@@ -37,7 +37,7 @@
 	</div>
 	<br/>
 	<div class="historic-stats">
-		<h3>Historical Stats Table</h3>
+		<h3>Historical Men's Stats Table</h3>
 		<table class="stat-table">
 			<thead>
 				<tr>
@@ -63,8 +63,35 @@
 		</table>
 	</div>
 	<br/>
+	<div class="historic-stats">
+		<h3>Historical Women's Stats Table</h3>
+		<table class="stat-table">
+			<thead>
+				<tr>
+					<th>Seeds</th>
+					@foreach(int seed in HistoricStatsW.Keys)
+					{
+						<td>@seed</td>
+					}
+				</tr>
+			</thead>
+			<tbody>
+				@{int n = 1;}
+				@foreach(int seed in HistoricStatsW.Keys){
+					<tr>
+						<th>@seed</th>
+						@for(n = 1; n <= 16; n++)
+						{
+							<td class='@(@seed == i ? "highlight-cell" : "") '>@HistoricStatsW[@seed][n]</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<br/>
 	<div class="fivethirtyeight-stats">
-		<h3>538 Stats Table</h3>
+		<h3>538 Men's Stats Table</h3>
 		<table class="stat-table">
 			<thead>
 				<tr>
@@ -91,17 +118,51 @@
 			</tbody>
 		</table>
 	</div>
+	<br/>
+	<div class="fivethirtyeight-stats">
+		<h3>538 Women's Stats Table</h3>
+		<table class="stat-table">
+			<thead>
+				<tr>
+					<th>Team/Round</th>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+				</tr>
+			</thead>
+			<tbody>
+				@{int o = 2;}
+				@foreach(var Team in FiveThirtyEightOddsW.Keys){
+					<tr>
+						<th>@Team</th>
+						@for(o = 2; o <= 7; o++)
+						{
+							<td>@FiveThirtyEightOddsW[@Team][o]</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 @code 
 {
 	private Dictionary<int,Dictionary<int,double>> HistoricStats = new();
+	private Dictionary<int,Dictionary<int,double>> HistoricStatsW = new();
 	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOdds = new();
+	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOddsW = new();
 	private StatsService StatsService = new();
+	private StatsServiceW StatsServiceW = new();
 	
 	protected override void OnInitialized()
 	{   
 		HistoricStats = StatsService.HistoricStats;
+		HistoricStatsW = StatsServiceW.HistoricStats;
 		FiveThirtyEightOdds = StatsService.FiveThirtyEightStats;
+		FiveThirtyEightOddsW = StatsServiceW.FiveThirtyEightStats;
 	}
 }
