@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "BlazorApp.dll": "sha256-6lGxL9OOM7qUhsjQulcl16NYPCv6bp7\/fHFZj9hGobc=",
+      "BlazorApp.dll": "sha256-Z\/yC3qFBz0HFQ4XjjW\/NcJ0z8qui8XwOQzm7A5MLacg=",
       "Microsoft.AspNetCore.Components.dll": "sha256-97cCyxxPM2z2xR+BJ3MvfXaY\/3HeO4HKxFZnK0XDLFY=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-J56CIqNtJKqXm6dWMAhvRI23W5p7RnErlWEDZVcwjV0=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-Izlw\/SnIKXEmOa2P51s8rKqkVBfJ+MDvJMUpyP5lHkk=",
@@ -80,9 +80,9 @@
     "libraryInitializers": null,
     "pdb": null,
     "runtime": {
-      "dotnet.6.0.9.c1de61mnaj.js": "sha256-03NiquPMtinG9vfWDKLlDnFptutX\/W2gXDQX4crI020=",
+      "dotnet.6.0.9.c1de61mnaj.js": "sha256-k5NmybPQ5A\/GjzNN5K59+a67r8C3Z8+iGDQGPcyFtCM=",
       "dotnet.timezones.blat": "sha256-DCornv7RwGmh5F2M7NdY9Sg66xjw779ggSN9nS\/Br5o=",
-      "dotnet.wasm": "sha256-jyBvbK1DfRgdYMKAUoBH7XeTQfSA2dhPPDP7eZR+WNA=",
+      "dotnet.wasm": "sha256-PBYI9IZBWvsGwFKLTnUh8Z7utl9OneQGir9H+zN6kfU=",
       "icudt_CJK.dat": "sha256-WPyI4hWDPnOw62Nr27FkzGjdbucZnQD+Ph+GOPhAedw=",
       "icudt_EFIGS.dat": "sha256-4RwaPx87Z4dvn77ie\/ro3\/QzyS+\/gGmO3Y\/0CSAXw4k=",
       "icudt_no_CJK.dat": "sha256-OxylFgLJlFqixsj+nLxYVsv5iZLvfIKMpLf9hrWaChA=",
