@@ -208,7 +208,7 @@ class TourneyMatchup
 							Regional = 2,
 							MatchupClass = "matchup-9",
 							Team1 = new() { Seed = 1, Name = "Purdue" },
-							Team2 = new() { Seed = 16, Name = "Texas Southern/Farleigh Dickinson" }
+							Team2 = new() { Seed = 16, Name = "Farleigh Dickinson" }
 						}
 					},
 					{
@@ -636,7 +636,7 @@ class TourneyMatchup
 							Regional = 4,
 							MatchupClass = "matchup-29",
 							Team1 = new() { Seed = 6, Name = "TCU" },
-							Team2 = new() { Seed = 11, Name = "Arizona St/Nevada" }
+							Team2 = new() { Seed = 11, Name = "Arizona St" }
 						}
 					},
 					{
