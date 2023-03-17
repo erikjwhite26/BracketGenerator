@@ -398,7 +398,7 @@ class TourneyMatchupW
 							Regional = 3,
 							MatchupClass = "matchup-17",
 							Team1 = new() { Seed = 1, Name = "Indiana" },
-							Team2 = new() { Seed = 16, Name = "Tennessee Tech/Monmouth" }
+							Team2 = new() { Seed = 16, Name = "Tennessee Tech" }
 						}
 					},
 					{
@@ -636,7 +636,7 @@ class TourneyMatchupW
 							Regional = 4,
 							MatchupClass = "matchup-29",
 							Team1 = new() { Seed = 6, Name = "North Carolina" },
-							Team2 = new() { Seed = 11, Name = "Purdue/St John\'s" }
+							Team2 = new() { Seed = 11, Name = "St John\'s" }
 						}
 					},
 					{
