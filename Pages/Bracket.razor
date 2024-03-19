@@ -13,6 +13,7 @@
 				<select class="form-control select" @onchange="StatOptionChanged">
 					<option>Mathmatical</option>
 					<option>Historical</option>
+					<option>Sporting News</option>
 					<option>Coin Flip</option>
 					<option>Random</option>
 				</select>
@@ -52,6 +53,7 @@
 				<select class="form-control select" @onchange="StatOptionChanged">
 					<option>Mathmatical</option>
 					<option>Historical</option>
+					<option>Sporting News</option>
 					<option>Coin Flip</option>
 					<option>Random</option>
 				</select>
@@ -152,7 +154,7 @@
 			return .50;
 		} else if(StatOption=="Random"){
 			return Math.Round(new Random().NextDouble(),2);
-		} else if(StatOption=="538 Odds"){
+		} else if(StatOption=="Sporting News"){
 			var Round = GetRound(matchup.NextMatchup);
 			var Team1Name = FormatTeamName(matchup.Team1.Name);
 			var Team2Name = FormatTeamName(matchup.Team2.Name);
