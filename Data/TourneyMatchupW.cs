@@ -78,7 +78,7 @@ class TourneyMatchupW
 							Regional = 1,
 							MatchupClass = "matchup-6",
 							Team1 = new() { Seed = 3, Name = "Oregon St" },
-							Team2 = new() { Seed = 14, Name = "Eastern Washington" }
+							Team2 = new() { Seed = 14, Name = "E Washington" }
 						}
 					},
 					{
@@ -102,7 +102,7 @@ class TourneyMatchupW
 							Regional = 1,
 							MatchupClass = "matchup-8",
 							Team1 = new() { Seed = 2, Name = "Notre Dame" },
-							Team2 = new() { Seed = 15, Name = "Kent State" }
+							Team2 = new() { Seed = 15, Name = "Kent St" }
 						}
 					},
 					{
