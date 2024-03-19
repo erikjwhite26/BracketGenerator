@@ -685,7 +685,7 @@ class StatsService
 			}
 		},
 		{
-			"McNeese St",
+			"McNeese",
 			new()
 			{
 				{ 2, .27 },
