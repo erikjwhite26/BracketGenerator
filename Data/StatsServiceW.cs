@@ -1008,7 +1008,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Eastern Washington",
+			"E Washington",
 			new()
 			{
 				{ 2, .05 },
