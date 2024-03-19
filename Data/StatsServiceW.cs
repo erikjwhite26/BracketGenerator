@@ -372,7 +372,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Indiana",
+			"Iowa",
 			new()
 			{
 				{ 2, .99 },
@@ -384,7 +384,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Stanford",
+			"USC",
 			new()
 			{
 				{ 2, .99 },
@@ -396,7 +396,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"UConn",
+			"Texas",
 			new()
 			{
 				{ 2, .99 },
@@ -408,7 +408,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"LSU",
+			"Stanford",
 			new()
 			{
 				{ 2, .98 },
@@ -420,7 +420,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Iowa",
+			"Ohio St",
 			new()
 			{
 				{ 2, .99 },
@@ -432,7 +432,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Virginia Tech",
+			"UCLA",
 			new()
 			{
 				{ 2, .99 },
@@ -444,7 +444,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Texas",
+			"Notre Dame",
 			new()
 			{
 				{ 2, .98 },
@@ -456,7 +456,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Tennessee",
+			"UConn",
 			new()
 			{
 				{ 2, .98 },
@@ -468,7 +468,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Notre Dame",
+			"LSU",
 			new()
 			{
 				{ 2, .99 },
@@ -480,7 +480,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Maryland",
+			"Oregon St",
 			new()
 			{
 				{ 2, .99 },
@@ -492,7 +492,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Utah",
+			"NC State",
 			new()
 			{
 				{ 2, .99 },
@@ -504,7 +504,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Ohio St",
+			"Indiana",
 			new()
 			{
 				{ 2, .96 },
@@ -516,7 +516,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Iowa St",
+			"Kansas St",
 			new()
 			{
 				{ 2, .84 },
@@ -528,7 +528,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Duke",
+			"Virginia Tech",
 			new()
 			{
 				{ 2, .98 },
@@ -540,7 +540,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Villanova",
+			"Gonzaga",
 			new()
 			{
 				{ 2, .90 },
@@ -552,7 +552,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Louisville",
+			"Utah",
 			new()
 			{
 				{ 2, .84 },
@@ -564,7 +564,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"North Carolina",
+			"Baylor",
 			new()
 			{
 				{ 2, .77 },
@@ -576,7 +576,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"NC State",
+			"Colorado",
 			new()
 			{
 				{ 2, .71 },
@@ -588,7 +588,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Michigan",
+			"Oklahoma",
 			new()
 			{
 				{ 2, .74 },
@@ -600,7 +600,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"UCLA",
+			"Nebraska",
 			new()
 			{
 				{ 2, .95 },
@@ -612,7 +612,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Oklahoma",
+			"Louisville",
 			new()
 			{
 				{ 2, .80 },
@@ -624,7 +624,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Creighton",
+			"Syracuse",
 			new()
 			{
 				{ 2, .72 },
@@ -636,7 +636,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Baylor",
+			"Tennessee",
 			new()
 			{
 				{ 2, .61 },
@@ -648,7 +648,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Colorado",
+			"Iowa St",
 			new()
 			{
 				{ 2, .59 },
@@ -660,7 +660,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Washington St",
+			"Duke",
 			new()
 			{
 				{ 2, .59 },
@@ -672,7 +672,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"South Dakota St",
+			"Creighton",
 			new()
 			{
 				{ 2, .60 },
@@ -696,7 +696,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Florida St",
+			"North Carolina",
 			new()
 			{
 				{ 2, .52 },
@@ -708,7 +708,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Arizona",
+			"West Virginia",
 			new()
 			{
 				{ 2, .57 },
@@ -720,7 +720,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Oklahoma St",
+			"Kansas",
 			new()
 			{
 				{ 2, .52 },
@@ -732,7 +732,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Georgia",
+			"Alabama",
 			new()
 			{
 				{ 2, .48 },
@@ -744,7 +744,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"USC",
+			"Florida St",
 			new()
 			{
 				{ 2, .40 },
@@ -756,7 +756,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Miami",
+			"Michigan",
 			new()
 			{
 				{ 2, .48 },
@@ -768,7 +768,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"FGCU",
+			"Princeton",
 			new()
 			{
 				{ 2, .41 },
@@ -780,7 +780,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Gonzaga",
+			"Michigan St",
 			new()
 			{
 				{ 2, .46 },
@@ -792,7 +792,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"South Florida",
+			"Marquette",
 			new()
 			{
 				{ 2, .57 },
@@ -804,7 +804,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Princeton",
+			"UNLV",
 			new()
 			{
 				{ 2, .29 },
@@ -816,7 +816,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Alabama",
+			"Richmond",
 			new()
 			{
 				{ 2, .39 },
@@ -828,7 +828,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Middle Tennessee",
+			"Maryland",
 			new()
 			{
 				{ 2, .41 },
@@ -840,7 +840,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Marquette",
+			"Green Bay",
 			new()
 			{
 				{ 2, .43 },
@@ -852,7 +852,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Purdue",
+			"Auburn",
 			new()
 			{
 				{ 2, .17 },
@@ -864,7 +864,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"West Virginia",
+			"Arizona",
 			new()
 			{
 				{ 2, .43 },
@@ -876,7 +876,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Mississippi St",
+			"Middle Tennessee",
 			new()
 			{
 				{ 2, .16 },
@@ -888,7 +888,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"UNLV",
+			"Texas A&M",
 			new()
 			{
 				{ 2, .26 },
@@ -900,7 +900,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Toledo",
+			"FGCU",
 			new()
 			{
 				{ 2, .16 },
@@ -912,7 +912,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Illinois",
+			"Drake",
 			new()
 			{
 				{ 2, .12 },
@@ -924,7 +924,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Drake",
+			"Vanderbilt",
 			new()
 			{
 				{ 2, .16 },
@@ -936,7 +936,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Cleveland St",
+			"Colombia",
 			new()
 			{
 				{ 2, .10 },
@@ -948,7 +948,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"St John\'s",
+			"South Dakota St",
 			new()
 			{
 				{ 2, .05 },
@@ -960,7 +960,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Portland",
+			"UC Irvine",
 			new()
 			{
 				{ 2, .20 },
@@ -972,7 +972,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"James Madison",
+			"Marshall",
 			new()
 			{
 				{ 2, .04 },
@@ -984,7 +984,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"East Carolina",
+			"Portland",
 			new()
 			{
 				{ 2, .02 },
@@ -996,7 +996,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"St Louis",
+			"Fairfield",
 			new()
 			{
 				{ 2, .02 },
@@ -1008,7 +1008,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Sacramento St",
+			"Eastern Washington",
 			new()
 			{
 				{ 2, .05 },
@@ -1020,7 +1020,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Gardner-Webb",
+			"Rice",
 			new()
 			{
 				{ 2, .01 },
@@ -1032,7 +1032,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Tennessee Tech",
+			"Jackson St",
 			new()
 			{
 				{ 2, .01 },
@@ -1044,46 +1044,10 @@ class StatsServiceW
 			}
 		},
 		{
-			"Hawaii",
+			"Chattanooga",
 			new()
 			{
 				{ 2, .02 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Holy Cross",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Southern Utah",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Vermont",
-			new()
-			{
-				{ 2, .01 },
 				{ 3, .01 },
 				{ 4, .01 },
 				{ 5, .01 },
@@ -1104,19 +1068,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Iona",
-			new()
-			{
-				{ 2, .02 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Southeastern Louisiana",
+			"Maine",
 			new()
 			{
 				{ 2, .01 },
@@ -1128,7 +1080,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Chattanooga",
+			"California Baptist",
 			new()
 			{
 				{ 2, .01 },
@@ -1140,19 +1092,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Monmouth",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Southern",
+			"Kent St",
 			new()
 			{
 				{ 2, .01 },
@@ -1165,6 +1105,66 @@ class StatsServiceW
 		},
 		{
 			"Sacred Heart",
+			new()
+			{
+				{ 2, .02 },
+				{ 3, .01 },
+				{ 4, .01 },
+				{ 5, .01 },
+				{ 6, .01 },
+				{ 7, .01 }
+			}
+		},
+		{
+			"Presbyterian",
+			new()
+			{
+				{ 2, .01 },
+				{ 3, .01 },
+				{ 4, .01 },
+				{ 5, .01 },
+				{ 6, .01 },
+				{ 7, .01 }
+			}
+		},
+		{
+			"Holy Cross",
+			new()
+			{
+				{ 2, .01 },
+				{ 3, .01 },
+				{ 4, .01 },
+				{ 5, .01 },
+				{ 6, .01 },
+				{ 7, .01 }
+			}
+		},
+		{
+			"UT Martin",
+			new()
+			{
+				{ 2, .01 },
+				{ 3, .01 },
+				{ 4, .01 },
+				{ 5, .01 },
+				{ 6, .01 },
+				{ 7, .01 }
+			}
+		},
+		{
+			"Texas A&MCC",
+			new()
+			{
+				{ 2, .01 },
+				{ 3, .01 },
+				{ 4, .01 },
+				{ 5, .01 },
+				{ 6, .01 },
+				{ 7, .01 }
+			}
+		},
+		{
+			"Drexel",
 			new()
 			{
 				{ 2, .01 },
