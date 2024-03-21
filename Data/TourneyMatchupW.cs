@@ -18,7 +18,7 @@ class TourneyMatchupW
 							Regional = 1,
 							MatchupClass = "matchup-1",
 							Team1 = new() { Seed = 1, Name = "South Carolina" },
-							Team2 = new() { Seed = 16, Name = "Sacred Heart/Presbyterian" }
+							Team2 = new() { Seed = 16, Name = "Presbyterian" }
 						}
 					},
 					{
@@ -612,7 +612,7 @@ class TourneyMatchupW
 							Regional = 4,
 							MatchupClass = "matchup-27",
 							Team1 = new() { Seed = 5, Name = "Baylor" },
-							Team2 = new() { Seed = 12, Name = "Vanderbilt/Colombia" }
+							Team2 = new() { Seed = 12, Name = "Vanderbilt" }
 						}
 					},
 					{
