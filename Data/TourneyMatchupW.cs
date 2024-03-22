@@ -398,7 +398,7 @@ class TourneyMatchupW
 							Regional = 3,
 							MatchupClass = "matchup-17",
 							Team1 = new() { Seed = 1, Name = "Iowa" },
-							Team2 = new() { Seed = 16, Name = "Holy Cross/UT Martin" }
+							Team2 = new() { Seed = 16, Name = "Holy Cross" }
 						}
 					},
 					{
@@ -636,7 +636,7 @@ class TourneyMatchupW
 							Regional = 4,
 							MatchupClass = "matchup-29",
 							Team1 = new() { Seed = 6, Name = "Syracuse" },
-							Team2 = new() { Seed = 11, Name = "Auburn/Arizona" }
+							Team2 = new() { Seed = 11, Name = "Arizona" }
 						}
 					},
 					{
