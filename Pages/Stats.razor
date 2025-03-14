@@ -82,7 +82,7 @@
 						<th>@seed</th>
 						@for(n = 1; n <= 16; n++)
 						{
-							<td class='@(@seed == i ? "highlight-cell" : "") '>@HistoricStatsW[@seed][n]</td>
+							<td class='@(@seed == n ? "highlight-cell" : "") '>@HistoricStatsW[@seed][n]</td>
 						}
 					</tr>
 				}
