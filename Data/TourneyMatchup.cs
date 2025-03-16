@@ -17,8 +17,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 1,
 							MatchupClass = "matchup-1",
-							Team1 = new() { Seed = 1, Name = "UConn" },
-							Team2 = new() { Seed = 16, Name = "Stetson" }
+							Team1 = new() { Seed = 1, Name = "Auburn" },
+							Team2 = new() { Seed = 16, Name = "Alabama St/St Francis" }
 						}
 					},
 					{
@@ -29,8 +29,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 1,
 							MatchupClass = "matchup-2",
-							Team1 = new() { Seed = 8, Name = "FAU" },
-							Team2 = new() { Seed = 9, Name = "Northwestern" }
+							Team1 = new() { Seed = 8, Name = "Louisville" },
+							Team2 = new() { Seed = 9, Name = "Creighton" }
 						}
 					},
 					{
@@ -41,8 +41,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 1,
 							MatchupClass = "matchup-3",
-							Team1 = new() { Seed = 5, Name = "San Diego St" },
-							Team2 = new() { Seed = 12, Name = "UAB" }
+							Team1 = new() { Seed = 5, Name = "Michigan" },
+							Team2 = new() { Seed = 12, Name = "UC San Diego" }
 						}
 					},
 					{
@@ -53,7 +53,7 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 1,
 							MatchupClass = "matchup-4",
-							Team1 = new() { Seed = 4, Name = "Auburn" },
+							Team1 = new() { Seed = 4, Name = "Texas A&M" },
 							Team2 = new() { Seed = 13, Name = "Yale" }
 						}
 					},
@@ -65,8 +65,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 1,
 							MatchupClass = "matchup-5",
-							Team1 = new() { Seed = 6, Name = "BYU" },
-							Team2 = new() { Seed = 11, Name = "Duquesne" }
+							Team1 = new() { Seed = 6, Name = "Ole Miss" },
+							Team2 = new() { Seed = 11, Name = "San Diego St/North Carolina" }
 						}
 					},
 					{
@@ -77,8 +77,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 1,
 							MatchupClass = "matchup-6",
-							Team1 = new() { Seed = 3, Name = "Illinois" },
-							Team2 = new() { Seed = 14, Name = "Morehead St" }
+							Team1 = new() { Seed = 3, Name = "Iowa St" },
+							Team2 = new() { Seed = 14, Name = "Libscomb" }
 						}
 					},
 					{
@@ -89,8 +89,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 1,
 							MatchupClass = "matchup-7",
-							Team1 = new() { Seed = 7, Name = "Washington St" },
-							Team2 = new() { Seed = 10, Name = "Drake" }
+							Team1 = new() { Seed = 7, Name = "Marquette" },
+							Team2 = new() { Seed = 10, Name = "New Mexico" }
 						}
 					},
 					{
@@ -101,8 +101,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 1,
 							MatchupClass = "matchup-8",
-							Team1 = new() { Seed = 2, Name = "Iowa St" },
-							Team2 = new() { Seed = 15, Name = "South Dakota St" }
+							Team1 = new() { Seed = 2, Name = "Michigan St" },
+							Team2 = new() { Seed = 15, Name = "Bryant" }
 						}
 					},
 					{
@@ -207,8 +207,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 2,
 							MatchupClass = "matchup-9",
-							Team1 = new() { Seed = 1, Name = "North Carolina" },
-							Team2 = new() { Seed = 16, Name = "Wagner" }
+							Team1 = new() { Seed = 1, Name = "Florida" },
+							Team2 = new() { Seed = 16, Name = "Norfolk St" }
 						}
 					},
 					{
@@ -219,8 +219,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 2,
 							MatchupClass = "matchup-10",
-							Team1 = new() { Seed = 8, Name = "Mississippi St" },
-							Team2 = new() { Seed = 9, Name = "Michigan St" }
+							Team1 = new() { Seed = 8, Name = "UConn" },
+							Team2 = new() { Seed = 9, Name = "Oklahoma" }
 						}
 					},
 					{
@@ -231,8 +231,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 2,
 							MatchupClass = "matchup-11",
-							Team1 = new() { Seed = 5, Name = "Saint Mary\'s" },
-							Team2 = new() { Seed = 12, Name = "Grand Canyon" }
+							Team1 = new() { Seed = 5, Name = "Memphis" },
+							Team2 = new() { Seed = 12, Name = "Colorado St" }
 						}
 					},
 					{
@@ -243,8 +243,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 2,
 							MatchupClass = "matchup-12",
-							Team1 = new() { Seed = 4, Name = "Alabama" },
-							Team2 = new() { Seed = 13, Name = "Charleston" }
+							Team1 = new() { Seed = 4, Name = "Maryland" },
+							Team2 = new() { Seed = 13, Name = "Grand Canyon" }
 						}
 					},
 					{
@@ -255,8 +255,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 2,
 							MatchupClass = "matchup-13",
-							Team1 = new() { Seed = 6, Name = "Clemson" },
-							Team2 = new() { Seed = 11, Name = "New Mexico" }
+							Team1 = new() { Seed = 6, Name = "Missouri" },
+							Team2 = new() { Seed = 11, Name = "Drake" }
 						}
 					},
 					{
@@ -267,8 +267,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 2,
 							MatchupClass = "matchup-14",
-							Team1 = new() { Seed = 3, Name = "Baylor" },
-							Team2 = new() { Seed = 14, Name = "Colgate" }
+							Team1 = new() { Seed = 3, Name = "Texas Tech" },
+							Team2 = new() { Seed = 14, Name = "UNCW" }
 						}
 					},
 					{
@@ -279,8 +279,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 2,
 							MatchupClass = "matchup-15",
-							Team1 = new() { Seed = 7, Name = "Dayton" },
-							Team2 = new() { Seed = 10, Name = "Nevada" }
+							Team1 = new() { Seed = 7, Name = "Kansas" },
+							Team2 = new() { Seed = 10, Name = "Arkansas" }
 						}
 					},
 					{
@@ -291,8 +291,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 2,
 							MatchupClass = "matchup-16",
-							Team1 = new() { Seed = 2, Name = "Arizona" },
-							Team2 = new() { Seed = 15, Name = "Long Beach St" }
+							Team1 = new() { Seed = 2, Name = "St John\'s" },
+							Team2 = new() { Seed = 15, Name = "Omaha" }
 						}
 					},
 					{
@@ -397,8 +397,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 3,
 							MatchupClass = "matchup-17",
-							Team1 = new() { Seed = 1, Name = "Houston" },
-							Team2 = new() { Seed = 16, Name = "Longwood" }
+							Team1 = new() { Seed = 1, Name = "Duke" },
+							Team2 = new() { Seed = 16, Name = "American/Mount St Mary\'s" }
 						}
 					},
 					{
@@ -409,8 +409,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 3,
 							MatchupClass = "matchup-18",
-							Team1 = new() { Seed = 8, Name = "Nebraska" },
-							Team2 = new() { Seed = 9, Name = "Texas A&M" }
+							Team1 = new() { Seed = 8, Name = "Mississippi St" },
+							Team2 = new() { Seed = 9, Name = "Baylor" }
 						}
 					},
 					{
@@ -421,8 +421,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 3,
 							MatchupClass = "matchup-19",
-							Team1 = new() { Seed = 5, Name = "Wisconsin" },
-							Team2 = new() { Seed = 12, Name = "James Madison" }
+							Team1 = new() { Seed = 5, Name = "Oregon" },
+							Team2 = new() { Seed = 12, Name = "Liberty" }
 						}
 					},
 					{
@@ -433,8 +433,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 3,
 							MatchupClass = "matchup-20",
-							Team1 = new() { Seed = 4, Name = "Duke" },
-							Team2 = new() { Seed = 13, Name = "Vermont" }
+							Team1 = new() { Seed = 4, Name = "Arizona" },
+							Team2 = new() { Seed = 13, Name = "Akron" }
 						}
 					},
 					{
@@ -445,8 +445,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 3,
 							MatchupClass = "matchup-21",
-							Team1 = new() { Seed = 6, Name = "Texas Tech" },
-							Team2 = new() { Seed = 11, Name = "NC State" }
+							Team1 = new() { Seed = 6, Name = "BYU" },
+							Team2 = new() { Seed = 11, Name = "VCU" }
 						}
 					},
 					{
@@ -457,8 +457,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 3,
 							MatchupClass = "matchup-22",
-							Team1 = new() { Seed = 3, Name = "Kentucky" },
-							Team2 = new() { Seed = 14, Name = "Oakland" }
+							Team1 = new() { Seed = 3, Name = "Wisconsin" },
+							Team2 = new() { Seed = 14, Name = "Montana" }
 						}
 					},
 					{
@@ -469,8 +469,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 3,
 							MatchupClass = "matchup-23",
-							Team1 = new() { Seed = 7, Name = "Florida" },
-							Team2 = new() { Seed = 10, Name = "Colorado" }
+							Team1 = new() { Seed = 7, Name = "Saint Mary\'s" },
+							Team2 = new() { Seed = 10, Name = "Vanderbilt" }
 						}
 					},
 					{
@@ -481,8 +481,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 3,
 							MatchupClass = "matchup-24",
-							Team1 = new() { Seed = 2, Name = "Marquette" },
-							Team2 = new() { Seed = 15, Name = "Western Kentucky" }
+							Team1 = new() { Seed = 2, Name = "Alabama" },
+							Team2 = new() { Seed = 15, Name = "Robert Morris" }
 						}
 					},
 					{
@@ -587,8 +587,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 4,
 							MatchupClass = "matchup-25",
-							Team1 = new() { Seed = 1, Name = "Purdue" },
-							Team2 = new() { Seed = 16, Name = "Grambling St" }
+							Team1 = new() { Seed = 1, Name = "Houston" },
+							Team2 = new() { Seed = 16, Name = "SIU Edwardsville" }
 						}
 					},
 					{
@@ -599,8 +599,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 4,
 							MatchupClass = "matchup-26",
-							Team1 = new() { Seed = 8, Name = "Utah St" },
-							Team2 = new() { Seed = 9, Name = "TCU" }
+							Team1 = new() { Seed = 8, Name = "Gonzaga" },
+							Team2 = new() { Seed = 9, Name = "Georgia" }
 						}
 					},
 					{
@@ -611,7 +611,7 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 4,
 							MatchupClass = "matchup-27",
-							Team1 = new() { Seed = 5, Name = "Gonzaga" },
+							Team1 = new() { Seed = 5, Name = "Clemson" },
 							Team2 = new() { Seed = 12, Name = "McNeese" }
 						}
 					},
@@ -623,8 +623,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 4,
 							MatchupClass = "matchup-28",
-							Team1 = new() { Seed = 4, Name = "Kansas" },
-							Team2 = new() { Seed = 13, Name = "Samford" }
+							Team1 = new() { Seed = 4, Name = "Purdue" },
+							Team2 = new() { Seed = 13, Name = "High Point" }
 						}
 					},
 					{
@@ -635,8 +635,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 4,
 							MatchupClass = "matchup-29",
-							Team1 = new() { Seed = 6, Name = "South Carolina" },
-							Team2 = new() { Seed = 11, Name = "Oregon" }
+							Team1 = new() { Seed = 6, Name = "Illinois" },
+							Team2 = new() { Seed = 11, Name = "Texas/Xavier" }
 						}
 					},
 					{
@@ -647,8 +647,8 @@ class TourneyMatchup
 							NextMatchupTeam = 2,
 							Regional = 4,
 							MatchupClass = "matchup-30",
-							Team1 = new() { Seed = 3, Name = "Creighton" },
-							Team2 = new() { Seed = 14, Name = "Akron" }
+							Team1 = new() { Seed = 3, Name = "Kentucky" },
+							Team2 = new() { Seed = 14, Name = "Troy" }
       }
 					},
 					{
@@ -659,8 +659,8 @@ class TourneyMatchup
 							NextMatchupTeam = 1,
 							Regional = 4,
 							MatchupClass = "matchup-31",
-							Team1 = new() { Seed = 7, Name = "Texas" },
-							Team2 = new() { Seed = 10, Name = "Colorado St" }
+							Team1 = new() { Seed = 7, Name = "UCLA" },
+							Team2 = new() { Seed = 10, Name = "Utah St" }
 						}
 					},
 					{
@@ -672,7 +672,7 @@ class TourneyMatchup
 							Regional = 4,
 							MatchupClass = "matchup-32",
 							Team1 = new() { Seed = 2, Name = "Tennessee" },
-							Team2 = new() { Seed = 15, Name = "Saint Peter\'s" }
+							Team2 = new() { Seed = 15, Name = "Wofford" }
 						}
 					},
 					{
