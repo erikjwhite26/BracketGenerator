@@ -672,7 +672,7 @@ class TourneyMatchupW
 							Regional = 4,
 							MatchupClass = "matchup-32",
 							Team1 = new() { Seed = 2, Name = "TCU" },
-							Team2 = new() { Seed = 15, Name = "Fairleigh Dickenson" }
+							Team2 = new() { Seed = 15, Name = "Fairleigh Dickinson" }
 						}
 					},
 					{
