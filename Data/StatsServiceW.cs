@@ -1033,7 +1033,7 @@ class StatsServiceW
 			}
 		},
 		{
-			"Farleigh Dickinson",
+			"Fairleigh Dickinson",
 			new()
 			{
 				{ 2, .01 },
