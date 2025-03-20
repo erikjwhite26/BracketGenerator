@@ -18,7 +18,7 @@ class TourneyMatchupW
 							Regional = 1,
 							MatchupClass = "matchup-1",
 							Team1 = new() { Seed = 1, Name = "UCLA" },
-							Team2 = new() { Seed = 16, Name = "UC San Diego/Southern" }
+							Team2 = new() { Seed = 16, Name = "Southern" }
 						}
 					},
 					{
