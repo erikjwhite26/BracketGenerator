@@ -446,7 +446,7 @@ class TourneyMatchupW
 							Regional = 3,
 							MatchupClass = "matchup-21",
 							Team1 = new() { Seed = 6, Name = "West Virginia" },
-							Team2 = new() { Seed = 11, Name = "Columbia/Washington" }
+							Team2 = new() { Seed = 11, Name = "Columbia" }
 						}
 					},
 					{
