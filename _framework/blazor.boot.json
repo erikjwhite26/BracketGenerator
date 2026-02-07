@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlazorApp",
   "resources": {
-    "hash": "sha256-BKfOiiMHomM8amyrPkH120z7w8ThKw6b4SthFocxbPw=",
+    "hash": "sha256-xBdZHo2ElAWS6pHmGl1PBelx5WZsFFJHrdBhWwMbixM=",
     "jsModuleNative": {
       "dotnet.native.8.0.23.zp85vg4n3e.js": "sha256-75sAMp3BcS1FZpAniuhbKy7JhDVZ94rjpTf2W/YherQ="
     },
@@ -9,7 +9,7 @@
       "dotnet.runtime.8.0.23.gtb93k8kyx.js": "sha256-TGUqQm2/C+r+yZ5BCjd72qyLw9wv0KPFKzKXk/giiyY="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-PgPAB7ibdo2db/VLMQK+OuaNswIAImrLbWlMEia/G+8="
+      "dotnet.native.wasm": "sha256-ZAYee/Mr6Sl0S4+MEhPfYaPkWiUuUld3t1qB28ys7hg="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "BlazorApp.wasm": "sha256-exjrrK0ibDA8Wwvki9/Ta8VdrTeT43mnSF1Fwb8ebP4=",
+      "BlazorApp.wasm": "sha256-Hbgnf+3fLYCyF07X8lnuwvkJPso7oaNNjn+S8GDN45U=",
       "Google.Api.CommonProtos.wasm": "sha256-gbo5/6YTf/+hI7gS9ub+AiIODeY9TPbS8m8xvfVjs9E=",
       "Google.Api.Gax.Grpc.wasm": "sha256-h840amlYtCbbDFcuVbXXfDFSu4h7ONDIF7PUBWOKiG0=",
       "Google.Api.Gax.wasm": "sha256-iQmFAhfj++OWcIW5EkRUpjPscQWdF6b5OJmLGXaECjU=",
