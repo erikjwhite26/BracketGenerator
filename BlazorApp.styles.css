@@ -22,6 +22,10 @@ li:hover[b-zbx9xu7k6e] {
 	display:none;
 }
 
+.stat-select[b-zbx9xu7k6e], .mud-input-control[b-zbx9xu7k6e]{
+	background: #ffffff
+}
+
 .alert-block[b-zbx9xu7k6e] {
 	display: flex;
 	height: 24px;
@@ -386,10 +390,10 @@ ul[b-zbx9xu7k6e] {
 .matchup-63[b-zbx9xu7k6e] {
 	grid-column: 2 / span 1;
 	grid-row: 1/ span 4;
-	.team {
+}
+.team[b-zbx9xu7k6e] {
 	height:28px;
 	line-height: 28px;
-	}
 }
 
 @media (max-width: 1450px) {
@@ -882,6 +886,7 @@ ul[b-xhtqf6zq7t] {
 table[b-cg7p1gjo2p] {
     border-collapse: collapse;
     border-spacing: 0;
+    width: 100%;
     overflow: hidden;
     text-align: center;
     margin-bottom: 20px;
@@ -889,8 +894,9 @@ table[b-cg7p1gjo2p] {
 
 .stat-table[b-cg7p1gjo2p] {
     background-color: #fff;
+    margin-top: 10px;
     position: relative;
-    z-index: 1;
+    z-index: 0;
 }
 
 thead td[b-cg7p1gjo2p] {
@@ -899,7 +905,7 @@ thead td[b-cg7p1gjo2p] {
 
 th[b-cg7p1gjo2p], td[b-cg7p1gjo2p] {
     border: 1px solid black;
-    width: 60px;
+    width: fit-content;
     position: relative;
 }
 
@@ -943,8 +949,8 @@ th:hover[b-cg7p1gjo2p]::after {
     z-index: -1;
 }
 
-.fivethirtyeight-stats table thead tr th:first-child[b-cg7p1gjo2p],
-.fivethirtyeight-stats table tbody tr th:first-child[b-cg7p1gjo2p] {
+table thead tr th:first-child[b-cg7p1gjo2p],
+table tbody tr th:first-child[b-cg7p1gjo2p] {
     width: 150px;
 }
 
