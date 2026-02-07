@@ -1,1179 +1,1177 @@
+using BlazorApp.Entities;
+namespace BlazorApp.Data;
 class StatsService
 {
 //https://mcubed.net/ncaab/seeds.shtml
-	public Dictionary<int, Dictionary<int, double>> HistoricStats { get; } = new()
-	{
-		{
-			1,
-			new()
-			{
-				{ 1, .50 },
-				{ 2, .55 },
-				{ 3, .64 },
-				{ 4, .69 },
-				{ 5, .80 },
-				{ 6, .71 },
-				{ 7, .86 },
-				{ 8, .79 },
-				{ 9, .91 },
-				{ 10, .88 },
-				{ 11, .60 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+	public List<StatDetails> HistoricStats { get; } = new List<StatDetails>{
+		new StatDetails{
+			Id = "1",
+			Stats = new List<StatProbability>{
+				new StatProbability { Id=1, Probability=.50 },
+				new StatProbability(){ Id=2, Probability=.55 },
+				new StatProbability(){ Id=3, Probability=.63 },
+				new StatProbability(){ Id=4, Probability=.71 },
+				new StatProbability(){ Id=5, Probability=.83 },
+				new StatProbability(){ Id=6, Probability=.71 },
+				new StatProbability(){ Id=7, Probability=.86 },
+				new StatProbability(){ Id=8, Probability=.79 },
+				new StatProbability(){ Id=9, Probability=.91 },
+				new StatProbability(){ Id=10, Probability=.88 },
+				new StatProbability(){ Id=11, Probability=.56 },
+				new StatProbability(){ Id=12, Probability=.99 },
+				new StatProbability(){ Id=13, Probability=.99 },
+				new StatProbability(){ Id=14, Probability=.99 },
+				new StatProbability(){ Id=15, Probability=.99 },
+				new StatProbability(){ Id=16, Probability=.99 }
 			}
 		},
-		{
-			2,
-			new()
-			{
-				{ 1, .45 },
-				{ 2, .50 },
-				{ 3, .60 },
-				{ 4, .50 },
-				{ 5, .25 },
-				{ 6, .70 },
-				{ 7, .71 },
-				{ 8, .40 },
-				{ 9, .67 },
-				{ 10, .65 },
-				{ 11, .80 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .93 },
-				{ 16, .99 }
+		new StatDetails{
+			Id = "2",
+			Stats = new List<StatProbability>{
+				new StatProbability{ Id=1, Probability=45 },
+				new StatProbability{ Id=2, Probability=.50 },
+				new StatProbability{ Id=3, Probability=.61 },
+				new StatProbability{ Id=4, Probability=.50 },
+				new StatProbability{ Id=5, Probability=.29 },
+				new StatProbability{ Id=6, Probability=.72 },
+				new StatProbability{ Id=7, Probability=.70 },
+				new StatProbability{ Id=8, Probability=.40 },
+				new StatProbability{ Id=9, Probability=.67 },
+				new StatProbability{ Id=10, Probability=.64 },
+				new StatProbability{ Id=11, Probability=.84 },
+				new StatProbability{ Id=12, Probability=.99 },
+				new StatProbability{ Id=13, Probability=.99 },
+				new StatProbability{ Id=14, Probability=.99 },
+				new StatProbability{ Id=15, Probability=.93 },
+				new StatProbability{ Id=16, Probability=.99 }
 			}
 		},
-		{
-			3,
-			new()
+		new StatDetails{
+			Id="3",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .36 },
-				{ 2, .40 },
-				{ 3, .50 },
-				{ 4, .56 },
-				{ 5, .50 },
-				{ 6, .58 },
-				{ 7, .63 },
-				{ 8, .99 },
-				{ 9, .75 },
-				{ 10, .69 },
-				{ 11, .68 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .85 },
-				{ 15, .67 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=37 },
+				new StatProbability{ Id=2, Probability=39 },
+				new StatProbability{ Id=3, Probability=50 },
+				new StatProbability{ Id=4, Probability=63 },
+				new StatProbability{ Id=5, Probability=50 },
+				new StatProbability{ Id=6, Probability=58 },
+				new StatProbability{ Id=7, Probability=61 },
+				new StatProbability{ Id=8, Probability=99 },
+				new StatProbability{ Id=9, Probability=99 },
+				new StatProbability{ Id=10, Probability=69 },
+				new StatProbability{ Id=11, Probability=66 },
+				new StatProbability{ Id=12, Probability=99 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=85 },
+				new StatProbability{ Id=15, Probability=67 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			4,
-			new()
+		new StatDetails{
+			Id="4",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .31 },
-				{ 2, .50 },
-				{ 3, .44 },
-				{ 4, .50 },
-				{ 5, .57 },
-				{ 6, .43 },
-				{ 7, .33 },
-				{ 8, .39 },
-				{ 9, .40 },
-				{ 10, .99 },
-				{ 11, .01 },
-				{ 12, .72 },
-				{ 13, .79 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=29 },
+				new StatProbability{ Id=2, Probability=50 },
+				new StatProbability{ Id=3, Probability=37 },
+				new StatProbability{ Id=4, Probability=50 },
+				new StatProbability{ Id=5, Probability=56 },
+				new StatProbability{ Id=6, Probability=33 },
+				new StatProbability{ Id=7, Probability=33 },
+				new StatProbability{ Id=8, Probability=33 },
+				new StatProbability{ Id=9, Probability=50 },
+				new StatProbability{ Id=10, Probability=99 },
+				new StatProbability{ Id=11, Probability=99 },
+				new StatProbability{ Id=12, Probability=71 },
+				new StatProbability{ Id=13, Probability=79 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			5,
-			new()
+		new StatDetails{
+			Id="5",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .20 },
-				{ 2, .75 },
-				{ 3, .50 },
-				{ 4, .43 },
-				{ 5, .50 },
-				{ 6, .67 },
-				{ 7, .99 },
-				{ 8, .25 },
-				{ 9, .40 },
-				{ 10, .99 },
-				{ 11, .99 },
-				{ 12, .67 },
-				{ 13, .86 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=17 },
+				new StatProbability{ Id=2, Probability=71 },
+				new StatProbability{ Id=3, Probability=50 },
+				new StatProbability{ Id=4, Probability=44 },
+				new StatProbability{ Id=5, Probability=50 },
+				new StatProbability{ Id=6, Probability=99 },
+				new StatProbability{ Id=7, Probability=99 },
+				new StatProbability{ Id=8, Probability=25 },
+				new StatProbability{ Id=9, Probability=25 },
+				new StatProbability{ Id=10, Probability=99 },
+				new StatProbability{ Id=11, Probability=99 },
+				new StatProbability{ Id=12, Probability=67 },
+				new StatProbability{ Id=13, Probability=84 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			6,
-			new()
+		new StatDetails{
+			Id="6",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .29 },
-				{ 2, .29 },
-				{ 3, .42 },
-				{ 4, .57 },
-				{ 5, .33 },
-				{ 6, .50 },
-				{ 7, .67 },
-				{ 8, .25 },
-				{ 9, .99 },
-				{ 10, .60 },
-				{ 11, .62 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .88 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=29 },
+				new StatProbability{ Id=2, Probability=28 },
+				new StatProbability{ Id=3, Probability=42 },
+				new StatProbability{ Id=4, Probability=67 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=50 },
+				new StatProbability{ Id=7, Probability=67 },
+				new StatProbability{ Id=8, Probability=25 },
+				new StatProbability{ Id=9, Probability=99 },
+				new StatProbability{ Id=10, Probability=60 },
+				new StatProbability{ Id=11, Probability=63 },
+				new StatProbability{ Id=12, Probability=99 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=88 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			7,
-			new()
+		new StatDetails{
+			Id="7",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .14 },
-				{ 2, .30 },
-				{ 3, .37 },
-				{ 4, .67 },
-				{ 5, .01 },
-				{ 6, .33 },
-				{ 7, .50 },
-				{ 8, .50 },
-				{ 9, .99 },
-				{ 10, .61 },
-				{ 11, .01 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .33 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=14 },
+				new StatProbability{ Id=2, Probability=30 },
+				new StatProbability{ Id=3, Probability=39 },
+				new StatProbability{ Id=4, Probability=67 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=33 },
+				new StatProbability{ Id=7, Probability=50 },
+				new StatProbability{ Id=8, Probability=50 },
+				new StatProbability{ Id=9, Probability=99 },
+				new StatProbability{ Id=10, Probability=60 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=99 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=40 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			8,
-			new()
+		new StatDetails{
+			Id="8",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .21 },
-				{ 2, .60 },
-				{ 3, .01 },
-				{ 4, .61 },
-				{ 5, .75 },
-				{ 6, .75 },
-				{ 7, .50 },
-				{ 8, .50 },
-				{ 9, .51 },
-				{ 10, .99 },
-				{ 11, .99 },
-				{ 12, .01 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=21 },
+				new StatProbability{ Id=2, Probability=60 },
+				new StatProbability{ Id=3, Probability=01 },
+				new StatProbability{ Id=4, Probability=67 },
+				new StatProbability{ Id=5, Probability=75 },
+				new StatProbability{ Id=6, Probability=75 },
+				new StatProbability{ Id=7, Probability=50 },
+				new StatProbability{ Id=8, Probability=50 },
+				new StatProbability{ Id=9, Probability=51 },
+				new StatProbability{ Id=10, Probability=99 },
+				new StatProbability{ Id=11, Probability=99 },
+				new StatProbability{ Id=12, Probability=01 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			9,
-			new()
+		new StatDetails{
+			Id="9",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .09 },
-				{ 2, .33 },
-				{ 3, .25 },
-				{ 4, .60 },
-				{ 5, .60 },
-				{ 6, .01 },
-				{ 7, .01 },
-				{ 8, .49 },
-				{ 9, .50 },
-				{ 10, .99 },
-				{ 11, .01 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=09 },
+				new StatProbability{ Id=2, Probability=33 },
+				new StatProbability{ Id=3, Probability=01 },
+				new StatProbability{ Id=4, Probability=50 },
+				new StatProbability{ Id=5, Probability=75 },
+				new StatProbability{ Id=6, Probability=01 },
+				new StatProbability{ Id=7, Probability=01 },
+				new StatProbability{ Id=8, Probability=49 },
+				new StatProbability{ Id=9, Probability=50 },
+				new StatProbability{ Id=10, Probability=99 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=99 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			10,
-			new()
+		new StatDetails{
+			Id="10",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .12 },
-				{ 2, .35 },
-				{ 3, .31 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .40 },
-				{ 7, .39 },
-				{ 8, .01 },
-				{ 9, .01 },
-				{ 10, .50 },
-				{ 11, .50 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=12 },
+				new StatProbability{ Id=2, Probability=36 },
+				new StatProbability{ Id=3, Probability=31 },
+				new StatProbability{ Id=4, Probability=01 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=40 },
+				new StatProbability{ Id=7, Probability=40 },
+				new StatProbability{ Id=8, Probability=01 },
+				new StatProbability{ Id=9, Probability=01 },
+				new StatProbability{ Id=10, Probability=50 },
+				new StatProbability{ Id=11, Probability=50 },
+				new StatProbability{ Id=12, Probability=99 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			11,
-			new()
+		new StatDetails{
+			Id="11",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .40 },
-				{ 2, .20 },
-				{ 3, .32 },
-				{ 4, .99 },
-				{ 5, .01 },
-				{ 6, .38 },
-				{ 7, .99 },
-				{ 8, .01 },
-				{ 9, .99 },
-				{ 10, .50 },
-				{ 11, .50 },
-				{ 12, .99 },
-				{ 13, .99 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=44 },
+				new StatProbability{ Id=2, Probability=16 },
+				new StatProbability{ Id=3, Probability=34 },
+				new StatProbability{ Id=4, Probability=01 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=37 },
+				new StatProbability{ Id=7, Probability=99 },
+				new StatProbability{ Id=8, Probability=01 },
+				new StatProbability{ Id=9, Probability=99 },
+				new StatProbability{ Id=10, Probability=50 },
+				new StatProbability{ Id=11, Probability=50 },
+				new StatProbability{ Id=12, Probability=99 },
+				new StatProbability{ Id=13, Probability=99 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			12,
-			new()
+		new StatDetails{
+			Id="12",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .01 },
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .28 },
-				{ 5, .33 },
-				{ 6, .01 },
-				{ 7, .01 },
-				{ 8, .99 },
-				{ 9, .01 },
-				{ 10, .01 },
-				{ 11, .01 },
-				{ 12, .50 },
-				{ 13, .75 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=01 },
+				new StatProbability{ Id=2, Probability=01 },
+				new StatProbability{ Id=3, Probability=01 },
+				new StatProbability{ Id=4, Probability=29 },
+				new StatProbability{ Id=5, Probability=33 },
+				new StatProbability{ Id=6, Probability=01 },
+				new StatProbability{ Id=7, Probability=01 },
+				new StatProbability{ Id=8, Probability=99 },
+				new StatProbability{ Id=9, Probability=01 },
+				new StatProbability{ Id=10, Probability=01 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=50 },
+				new StatProbability{ Id=13, Probability=75 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			13,
-			new()
+		new StatDetails{
+			Id="13",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .01 },
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .21 },
-				{ 5, .14 },
-				{ 6, .01 },
-				{ 7, .01 },
-				{ 8, .01 },
-				{ 9, .01 },
-				{ 10, .01 },
-				{ 11, .01 },
-				{ 12, .25 },
-				{ 13, .50 },
-				{ 14, .99 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=01 },
+				new StatProbability{ Id=2, Probability=01 },
+				new StatProbability{ Id=3, Probability=01 },
+				new StatProbability{ Id=4, Probability=21 },
+				new StatProbability{ Id=5, Probability=16 },
+				new StatProbability{ Id=6, Probability=01 },
+				new StatProbability{ Id=7, Probability=01 },
+				new StatProbability{ Id=8, Probability=01 },
+				new StatProbability{ Id=9, Probability=01 },
+				new StatProbability{ Id=10, Probability=01 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=25 },
+				new StatProbability{ Id=13, Probability=50 },
+				new StatProbability{ Id=14, Probability=99 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			14,
-			new()
+		new StatDetails{
+			Id="14",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .01 },
-				{ 2, .01 },
-				{ 3, .15 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .12 },
-				{ 7, .01 },
-				{ 8, .01 },
-				{ 9, .01 },
-				{ 10, .01 },
-				{ 11, .01 },
-				{ 12, .01 },
-				{ 13, .01 },
-				{ 14, .50 },
-				{ 15, .99 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=01 },
+				new StatProbability{ Id=2, Probability=01 },
+				new StatProbability{ Id=3, Probability=15 },
+				new StatProbability{ Id=4, Probability=01 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=12 },
+				new StatProbability{ Id=7, Probability=01 },
+				new StatProbability{ Id=8, Probability=01 },
+				new StatProbability{ Id=9, Probability=01 },
+				new StatProbability{ Id=10, Probability=01 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=01 },
+				new StatProbability{ Id=13, Probability=01 },
+				new StatProbability{ Id=14, Probability=50 },
+				new StatProbability{ Id=15, Probability=99 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			15,
-			new()
+		new StatDetails{
+			Id="15",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .01 },
-				{ 2, .07 },
-				{ 3, .33 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .67 },
-				{ 8, .01 },
-				{ 9, .01 },
-				{ 10, .01 },
-				{ 11, .01 },
-				{ 12, .01 },
-				{ 13, .01 },
-				{ 14, .01 },
-				{ 15, .50 },
-				{ 16, .99 }
+				new StatProbability{ Id=1, Probability=01 },
+				new StatProbability{ Id=2, Probability=07 },
+				new StatProbability{ Id=3, Probability=33 },
+				new StatProbability{ Id=4, Probability=01 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=01 },
+				new StatProbability{ Id=7, Probability=60 },
+				new StatProbability{ Id=8, Probability=01 },
+				new StatProbability{ Id=9, Probability=01 },
+				new StatProbability{ Id=10, Probability=01 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=01 },
+				new StatProbability{ Id=13, Probability=01 },
+				new StatProbability{ Id=14, Probability=01 },
+				new StatProbability{ Id=15, Probability=50 },
+				new StatProbability{ Id=16, Probability=99 }
 			}
 		},
-		{
-			16,
-			new()
+		new StatDetails{
+			Id="16",
+			Stats = new List<StatProbability>
 			{
-				{ 1, .01 },
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 },
-				{ 8, .01 },
-				{ 9, .01 },
-				{ 10, .01 },
-				{ 11, .01 },
-				{ 12, .01 },
-				{ 13, .01 },
-				{ 14, .01 },
-				{ 15, .01 },
-				{ 16, .50 }
+				new StatProbability{ Id=1, Probability=01 },
+				new StatProbability{ Id=2, Probability=01 },
+				new StatProbability{ Id=3, Probability=01 },
+				new StatProbability{ Id=4, Probability=01 },
+				new StatProbability{ Id=5, Probability=01 },
+				new StatProbability{ Id=6, Probability=01 },
+				new StatProbability{ Id=7, Probability=01 },
+				new StatProbability{ Id=8, Probability=01 },
+				new StatProbability{ Id=9, Probability=01 },
+				new StatProbability{ Id=10, Probability=01 },
+				new StatProbability{ Id=11, Probability=01 },
+				new StatProbability{ Id=12, Probability=01 },
+				new StatProbability{ Id=13, Probability=01 },
+				new StatProbability{ Id=14, Probability=01 },
+				new StatProbability{ Id=15, Probability=01 },
+				new StatProbability{ Id=16, Probability=50 }
 			}
 		}
 	};
 
-//https://www.sportingnews.com/us/ncaa-basketball/news/march-madness-odds-2024-projecting-chances-ncaa-tournament/c51aa09afcbbe65cf5b5cf20
-	public Dictionary<string,Dictionary<int,double>> FiveThirtyEightStats { get; } = new()
+	public List<StatDetails> FiveThirtyEightStats { get; } = new List<StatDetails>
 	{
-		{
-			"Auburn",
-			new()
-			{
-				{ 2, .99 },
-				{ 3, .79 },
-				{ 4, .61 },
-				{ 5, .40 },
-				{ 6, .24 },
-				{ 7, .12 }
-			}
-		},
-		{
-			"Duke",
-			new()
-			{
-				{ 2, .99 },
-				{ 3, .87 },
-				{ 4, .73 },
-				{ 5, .53 },
-				{ 6, .35 },
-				{ 7, .23 }
-			}
-		},
-		{
-			"Houston",
-			new()
-			{
-				{ 2, .99 },
-				{ 3, .71 },
-				{ 4, .54 },
-				{ 5, .35 },
-				{ 6, .20 },
-				{ 7, .12 }
-			}
-		},
-		{
-			"Florida",
-			new()
-			{
-				{ 2, .98 },
-				{ 3, .82 },
-				{ 4, .61 },
-				{ 5, .41 },
-				{ 6, .26 },
-				{ 7, .14 }
-			}
-		},
-		{
-			"Michigan St",
-			new()
-			{
-				{ 2, .94 },
-				{ 3, .68 },
-				{ 4, .41 },
-				{ 5, .19 },
-				{ 6, .09 },
-				{ 7, .04 }
-			}
-		},
-		{
-			"Alabama",
-			new()
-			{
-				{ 2, .93 },
-				{ 3, .59 },
-				{ 4, .37 },
-				{ 5, .15 },
-				{ 6, .07 },
-				{ 7, .03 }
-			}
-		},
-		{
-			"Tennessee",
-			new()
-			{
-				{ 2, .94 },
-				{ 3, .77 },
-				{ 4, .55 },
-				{ 5, .28 },
-				{ 6, .13 },
-				{ 7, .07 }
-			}
-		},
-		{
-			"St John\'s",
-			new()
-			{
-				{ 2, .93 },
-				{ 3, .67 },
-				{ 4, .37 },
-				{ 5, .16 },
-				{ 6, .08 },
-				{ 7, .03 }
-			}
-		},
-		{
-			"Iowa St",
-			new()
-			{
-				{ 2, .89 },
-				{ 3, .65 },
-				{ 4, .35 },
-				{ 5, .16 },
-				{ 6, .07 },
-				{ 7, .03 }
-			}
-		},
-		{
-			"Wisconsin",
-			new()
-			{
-				{ 2, .91 },
-				{ 3, .52 },
-				{ 4, .23 },
-				{ 5, .08 },
-				{ 6, .03 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Kentucky",
-			new()
-			{
-				{ 2, .79 },
-				{ 3, .42 },
-				{ 4, .15 },
-				{ 5, .05 },
-				{ 6, .02 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Texas Tech",
-			new()
-			{
-				{ 2, .90 },
-				{ 3, .62 },
-				{ 4, .36 },
-				{ 5, .16 },
-				{ 6, .08 },
-				{ 7, .03 }
-			}
-		},
-		{
-			"Texas A&M",
-			new()
-			{
-				{ 2, .75 },
-				{ 3, .53 },
-				{ 4, .18 },
-				{ 5, .09 },
-				{ 6, .04 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Arizona",
-			new()
-			{
-				{ 2, .87 },
-				{ 3, .61 },
-				{ 4, .14 },
-				{ 5, .07 },
-				{ 6, .02 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Purdue",
-			new()
-			{
-				{ 2, .75 },
-				{ 3, .37 },
-				{ 4, .11 },
-				{ 5, .05 },
-				{ 6, .02 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Maryland",
-			new()
-			{
-				{ 2, .84 },
-				{ 3, .58 },
-				{ 4, .21 },
-				{ 5, .11 },
-				{ 6, .05 },
-				{ 7, .02 }
-			}
-		},
-		{
-			"Michigan",
-			new()
-			{
-				{ 2, .54 },
-				{ 3, .20 },
-				{ 4, .05 },
-				{ 5, .02 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Oregon",
-			new()
-			{
-				{ 2, .64 },
-				{ 3, .25 },
-				{ 4, .04 },
-				{ 5, .02 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Clemson",
-			new()
-			{
-				{ 2, .78 },
-				{ 3, .49 },
-				{ 4, .17 },
-				{ 5, .08 },
-				{ 6, .03 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Memphis",
-			new()
-			{
-				{ 2, .41 },
-				{ 3, .13 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Ole Miss",
-			new()
-			{
-				{ 2, .54 },
-				{ 3, .18 },
-				{ 4, .06 },
-				{ 5, .02 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"BYU",
-			new()
-			{
-				{ 2, .50 },
-				{ 3, .23 },
-				{ 4, .09 },
-				{ 5, .03 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Illinois",
-			new()
-			{
-				{ 2, .69 },
-				{ 3, .40 },
-				{ 4, .15 },
-				{ 5, .06 },
-				{ 6, .02 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Missouri",
-			new()
-			{
-				{ 2, .60 },
-				{ 3, .23 },
-				{ 4, .10 },
-				{ 5, .04 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Marquette",
-			new()
-			{
-				{ 2, .58 },
-				{ 3, .20 },
-				{ 4, .09 },
-				{ 5, .03 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Saint Mary\'s",
-			new()
-			{
-				{ 2, .76 },
-				{ 3, .35 },
-				{ 4, .20 },
-				{ 5, .07 },
-				{ 6, .03 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"UCLA",
-			new()
-			{
-				{ 2, .63 },
-				{ 3, .16 },
-				{ 4, .07 },
-				{ 5, .02 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Kansas",
-			new()
-			{
-				{ 2, .62 },
-				{ 3, .22 },
-				{ 4, .09 },
-				{ 5, .03 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Louisville",
-			new()
-			{
-				{ 2, .61 },
-				{ 3, .14 },
-				{ 4, .08 },
-				{ 5, .04 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Mississippi St",
-			new()
-			{
-				{ 2, .49 },
-				{ 3, .06 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Gonzaga",
-			new()
-			{
-				{ 2, .72 },
-				{ 3, .24 },
-				{ 4, .15 },
-				{ 5, .08 },
-				{ 6, .04 },
-				{ 7, .02 }
-			}
-		},
-		{
-			"UConn",
-			new()
-			{
-				{ 2, .70 },
-				{ 3, .15 },
-				{ 4, .07 },
-				{ 5, .03 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Creighton",
-			new()
-			{
-				{ 2, .39 },
-				{ 3, .07 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Baylor",
-			new()
-			{
-				{ 2, .51 },
-				{ 3, .06 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Georgia",
-			new()
-			{
-				{ 2, .28 },
-				{ 3, .05 },
-				{ 4, .02 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Oklahoma",
-			new()
-			{
-				{ 2, .30 },
-				{ 3, .03 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"New Mexico",
-			new()
-			{
-				{ 2, .42 },
-				{ 3, .11 },
-				{ 4, .04 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Vanderbilt",
-			new()
-			{
-				{ 2, .24 },
-				{ 3, .05 },
-				{ 4, .02 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Utah St",
-			new()
-			{
-				{ 2, .37 },
-				{ 3, .06 },
-				{ 4, .02 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Arkansas",
-			new()
-			{
-				{ 2, .38 },
-				{ 3, .10 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"VCU",
-			new()
-			{
-				{ 2, .50 },
-				{ 3, .24 },
-				{ 4, .09 },
-				{ 5, .03 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Drake",
-			new()
-			{
-				{ 2, .40 },
-				{ 3, .12 },
-				{ 4, .04 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"UC San Diego",
-			new()
-			{
-				{ 2, .46 },
-				{ 3, .16 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Liberty",
-			new()
-			{
-				{ 2, .36 },
-				{ 3, .10 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"McNeese",
-			new()
-			{
-				{ 2, .22 },
-				{ 3, .08 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Colorado St",
-			new()
-			{
-				{ 2, .59 },
-				{ 3, .24 },
-				{ 4, .06 },
-				{ 5, .02 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Yale",
-			new()
-			{
-				{ 2, .25 },
-				{ 3, .11 },
-				{ 4, .02 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Akron",
-			new()
-			{
-				{ 2, .13 },
-				{ 3, .04 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"High Point",
-			new()
-			{
-				{ 2, .25 },
-				{ 3, .06 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Grand Canyon",
-			new()
-			{
-				{ 2, .16 },
-				{ 3, .05 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Lipscomb",
-			new()
-			{
-				{ 2, .12 },
-				{ 3, .03 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Montana",
-			new()
-			{
-				{ 2, .09 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Troy",
-			new()
-			{
-				{ 2, .21 },
-				{ 3, .05 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"UNCW",
-			new()
-			{
-				{ 2, .10 },
-				{ 3, .02 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Bryant",
-			new()
-			{
-				{ 2, .06 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Robert Morris",
-			new()
-			{
-				{ 2, .07 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Wofford",
-			new()
-			{
-				{ 2, .06 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Omaha",
-			new()
-			{
-				{ 2, .07 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"SIU Edwardsville",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Norfolk St",
-			new()
-			{
-				{ 2, .02 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"San Diego St",
-			new()
-			{
-				{ 2, .46 },
-				{ 3, .14 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Texas",
-			new()
-			{
-				{ 2, .31 },
-				{ 3, .13 },
-				{ 4, .04 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"North Carolina",
-			new()
-			{
-				{ 2, .46 },
-				{ 3, .14 },
-				{ 4, .03 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Xavier",
-			new()
-			{
-				{ 2, .31 },
-				{ 3, .13 },
-				{ 4, .04 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Alabama St",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"St Francis",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"American",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
-			}
-		},
-		{
-			"Mount St Mary\'s",
-			new()
-			{
-				{ 2, .01 },
-				{ 3, .01 },
-				{ 4, .01 },
-				{ 5, .01 },
-				{ 6, .01 },
-				{ 7, .01 }
+		new StatDetails {
+			Id = "Houston",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.97 },
+				new StatProbability{ Id=3, Probability=.76 },
+				new StatProbability{ Id=4, Probability=.62 },
+				new StatProbability{ Id=5, Probability=.44 },
+				new StatProbability{ Id=6, Probability=.34 },
+				new StatProbability{ Id=7, Probability=.25 }
+			}
+		},
+		new StatDetails {
+			Id = "Alabama",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.99 },
+				new StatProbability{ Id=3, Probability=.81 },
+				new StatProbability{ Id=4, Probability=.64 },
+				new StatProbability{ Id=5, Probability=.44 },
+				new StatProbability{ Id=6, Probability=.29 },
+				new StatProbability{ Id=7, Probability=.15 }
+			}
+		},
+		new StatDetails {
+			Id = "Texas",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.92 },
+				new StatProbability{ Id=3, Probability=.64 },
+				new StatProbability{ Id=4, Probability=.45 },
+				new StatProbability{ Id=5, Probability=.21 },
+				new StatProbability{ Id=6, Probability=.13 },
+				new StatProbability{ Id=7, Probability=.08 }
+			}
+		},
+		new StatDetails {
+			Id = "Purdue",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.99 },
+				new StatProbability{ Id=3, Probability=.72 },
+				new StatProbability{ Id=4, Probability=.42 },
+				new StatProbability{ Id=5, Probability=.26 },
+				new StatProbability{ Id=6, Probability=.13 },
+				new StatProbability{ Id=7, Probability=.05 }
+			}
+		},
+		new StatDetails {
+			Id = "Kansas",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.98 },
+				new StatProbability{ Id=3, Probability=.66 },
+				new StatProbability{ Id=4, Probability=.39 },
+				new StatProbability{ Id=5, Probability=.20 },
+				new StatProbability{ Id=6, Probability=.09 },
+				new StatProbability{ Id=7, Probability=.05 }
+			}
+		},
+		new StatDetails {
+			Id = "Gonzaga",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.92 },
+				new StatProbability{ Id=3, Probability=.63 },
+				new StatProbability{ Id=4, Probability=.38 },
+				new StatProbability{ Id=5, Probability=.22 },
+				new StatProbability{ Id=6, Probability=.09 },
+				new StatProbability{ Id=7, Probability=.04 }
+			}
+		},
+		new StatDetails {
+			Id = "Arizona",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.94 },
+				new StatProbability{ Id=3, Probability=.68 },
+				new StatProbability{ Id=4, Probability=.35 },
+				new StatProbability{ Id=5, Probability=.15 },
+				new StatProbability{ Id=6, Probability=.09 },
+				new StatProbability{ Id=7, Probability=.04 }
+			}
+		},
+		new StatDetails {
+			Id = "UCLA",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.95 },
+				new StatProbability{ Id=3, Probability=.69 },
+				new StatProbability{ Id=4, Probability=.37 },
+				new StatProbability{ Id=5, Probability=.21 },
+				new StatProbability{ Id=6, Probability=.07 },
+				new StatProbability{ Id=7, Probability=.03 }
+			}
+		},
+		new StatDetails {
+			Id = "UConn",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.85 },
+				new StatProbability{ Id=3, Probability=.65 },
+				new StatProbability{ Id=4, Probability=.32 },
+				new StatProbability{ Id=5, Probability=.15 },
+				new StatProbability{ Id=6, Probability=.06 },
+				new StatProbability{ Id=7, Probability=.03 }
+			}
+		},
+		new StatDetails {
+			Id = "Marquette",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.89 },
+				new StatProbability{ Id=3, Probability=.58 },
+				new StatProbability{ Id=4, Probability=.34 },
+				new StatProbability{ Id=5, Probability=.16 },
+				new StatProbability{ Id=6, Probability=.07 },
+				new StatProbability{ Id=7, Probability=.03 }
+			}
+		},
+		new StatDetails {
+			Id = "Baylor",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.89 },
+				new StatProbability{ Id=3, Probability=.45 },
+				new StatProbability{ Id=4, Probability=.24 },
+				new StatProbability{ Id=5, Probability=.10 },
+				new StatProbability{ Id=6, Probability=.06 },
+				new StatProbability{ Id=7, Probability=.03 }
+			}
+		},
+		new StatDetails {
+			Id = "Creighton",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.78 },
+				new StatProbability{ Id=3, Probability=.46 },
+				new StatProbability{ Id=4, Probability=.26 },
+				new StatProbability{ Id=5, Probability=.11 },
+				new StatProbability{ Id=6, Probability=.06 },
+				new StatProbability{ Id=7, Probability=.02 }
+			}
+		},
+		new StatDetails {
+			Id = "Duke",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.82 },
+				new StatProbability{ Id=3, Probability=.46 },
+				new StatProbability{ Id=4, Probability=.23 },
+				new StatProbability{ Id=5, Probability=.13 },
+				new StatProbability{ Id=6, Probability=.06 },
+				new StatProbability{ Id=7, Probability=.02 }
+			}
+		},
+		new StatDetails {
+			Id = "Tennessee",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.87 },
+				new StatProbability{ Id=3, Probability=.46 },
+				new StatProbability{ Id=4, Probability=.22 },
+				new StatProbability{ Id=5, Probability=.12 },
+				new StatProbability{ Id=6, Probability=.05 },
+				new StatProbability{ Id=7, Probability=.02 }
+			}
+		},
+		new StatDetails {
+			Id = "Kentucky",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.67 },
+				new StatProbability{ Id=3, Probability=.45 },
+				new StatProbability{ Id=4, Probability=.23 },
+				new StatProbability{ Id=5, Probability=.10 },
+				new StatProbability{ Id=6, Probability=.04 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Texas A&M",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.63 },
+				new StatProbability{ Id=3, Probability=.24 },
+				new StatProbability{ Id=4, Probability=.14 },
+				new StatProbability{ Id=5, Probability=.07 },
+				new StatProbability{ Id=6, Probability=.03 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Indiana",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.74 },
+				new StatProbability{ Id=3, Probability=.47 },
+				new StatProbability{ Id=4, Probability=.14 },
+				new StatProbability{ Id=5, Probability=.07 },
+				new StatProbability{ Id=6, Probability=.03 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "TCU",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.68 },
+				new StatProbability{ Id=3, Probability=.26 },
+				new StatProbability{ Id=4, Probability=.12 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "San Diego St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.67 },
+				new StatProbability{ Id=3, Probability=.39 },
+				new StatProbability{ Id=4, Probability=.11 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Iowa St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.58 },
+				new StatProbability{ Id=3, Probability=.31 },
+				new StatProbability{ Id=4, Probability=.13 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Xavier",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.87 },
+				new StatProbability{ Id=3, Probability=.46 },
+				new StatProbability{ Id=4, Probability=.16 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Auburn",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.58 },
+				new StatProbability{ Id=3, Probability=.15 },
+				new StatProbability{ Id=4, Probability=.08 },
+				new StatProbability{ Id=5, Probability=.04 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Kansas St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.85 },
+				new StatProbability{ Id=3, Probability=.35 },
+				new StatProbability{ Id=4, Probability=.15 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Saint Mary\'s",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.60 },
+				new StatProbability{ Id=3, Probability=.18 },
+				new StatProbability{ Id=4, Probability=.09 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Arkansas",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.52 },
+				new StatProbability{ Id=3, Probability=.18 },
+				new StatProbability{ Id=4, Probability=.09 },
+				new StatProbability{ Id=5, Probability=.04 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Virginia",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.72 },
+				new StatProbability{ Id=3, Probability=.37 },
+				new StatProbability{ Id=4, Probability=.10 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Michigan St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.64 },
+				new StatProbability{ Id=3, Probability=.27 },
+				new StatProbability{ Id=4, Probability=.13 },
+				new StatProbability{ Id=5, Probability=.05 },
+				new StatProbability{ Id=6, Probability=.02 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Memphis",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.61 },
+				new StatProbability{ Id=3, Probability=.19 },
+				new StatProbability{ Id=4, Probability=.08 },
+				new StatProbability{ Id=5, Probability=.04 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Iowa",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.42 },
+				new StatProbability{ Id=3, Probability=.09 },
+				new StatProbability{ Id=4, Probability=.05 },
+				new StatProbability{ Id=5, Probability=.03 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Illinois",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.48 },
+				new StatProbability{ Id=3, Probability=.16 },
+				new StatProbability{ Id=4, Probability=.07 },
+				new StatProbability{ Id=5, Probability=.03 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Maryland",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.51 },
+				new StatProbability{ Id=3, Probability=.10 },
+				new StatProbability{ Id=4, Probability=.06 },
+				new StatProbability{ Id=5, Probability=.03 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "West Virginia",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.49 },
+				new StatProbability{ Id=3, Probability=.09 },
+				new StatProbability{ Id=4, Probability=.05 },
+				new StatProbability{ Id=5, Probability=.03 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Miami",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.60 },
+				new StatProbability{ Id=3, Probability=.27 },
+				new StatProbability{ Id=4, Probability=.06 },
+				new StatProbability{ Id=5, Probability=.02 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Utah St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.64 },
+				new StatProbability{ Id=3, Probability=.22 },
+				new StatProbability{ Id=4, Probability=.08 },
+				new StatProbability{ Id=5, Probability=.02 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Providence",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.33 },
+				new StatProbability{ Id=3, Probability=.18 },
+				new StatProbability{ Id=4, Probability=.09 },
+				new StatProbability{ Id=5, Probability=.04 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Boise St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.59 },
+				new StatProbability{ Id=3, Probability=.19 },
+				new StatProbability{ Id=4, Probability=.07 },
+				new StatProbability{ Id=5, Probability=.03 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Mississippi St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.25 },
+				new StatProbability{ Id=3, Probability=.13 },
+				new StatProbability{ Id=4, Probability=.04 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Penn St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.37 },
+				new StatProbability{ Id=3, Probability=.11 },
+				new StatProbability{ Id=4, Probability=.05 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Florida Atlantic",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.39 },
+				new StatProbability{ Id=3, Probability=.09 },
+				new StatProbability{ Id=4, Probability=.04 },
+				new StatProbability{ Id=5, Probability=.02 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "USC",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.36 },
+				new StatProbability{ Id=3, Probability=.12 },
+				new StatProbability{ Id=4, Probability=.05 },
+				new StatProbability{ Id=5, Probability=.02 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Drake",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.40 },
+				new StatProbability{ Id=3, Probability=.15 },
+				new StatProbability{ Id=4, Probability=.03 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Northwestern",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.41 },
+				new StatProbability{ Id=3, Probability=.11 },
+				new StatProbability{ Id=4, Probability=.03 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Missouri",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.36 },
+				new StatProbability{ Id=3, Probability=.09 },
+				new StatProbability{ Id=4, Probability=.03 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "NC State",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.22 },
+				new StatProbability{ Id=3, Probability=.07 },
+				new StatProbability{ Id=4, Probability=.03 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "VCU",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.40 },
+				new StatProbability{ Id=3, Probability=.10 },
+				new StatProbability{ Id=4, Probability=.03 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Arizona St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.18 },
+				new StatProbability{ Id=3, Probability=.05 },
+				new StatProbability{ Id=4, Probability=.02 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Charleston",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.33 },
+				new StatProbability{ Id=3, Probability=.14 },
+				new StatProbability{ Id=4, Probability=.02 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Pittsburgh",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.17 },
+				new StatProbability{ Id=3, Probability=.08 },
+				new StatProbability{ Id=4, Probability=.02 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Kent St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.26 },
+				new StatProbability{ Id=3, Probability=.11 },
+				new StatProbability{ Id=4, Probability=.02 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Nevada",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.14 },
+				new StatProbability{ Id=3, Probability=.03 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Oral Roberts",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.18 },
+				new StatProbability{ Id=3, Probability=.05 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Furman",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.28 },
+				new StatProbability{ Id=3, Probability=.09 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Iona",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.15 },
+				new StatProbability{ Id=3, Probability=.07 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Louisiana",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.13 },
+				new StatProbability{ Id=3, Probability=.03 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Vermont",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.11 },
+				new StatProbability{ Id=3, Probability=.03 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Grand Canyon",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.08 },
+				new StatProbability{ Id=3, Probability=.02 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Colgate",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.08 },
+				new StatProbability{ Id=3, Probability=.02 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Montana St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.15 },
+				new StatProbability{ Id=3, Probability=.02 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "UC Santa Barbara",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.11 },
+				new StatProbability{ Id=3, Probability=.02 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Princeton",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.06 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Kennesaw St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.13 },
+				new StatProbability{ Id=3, Probability=.02 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "N Kentucky",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.03 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "UNC Asheville",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.05 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Texas A&MCC",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.01 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "SE Missouri St",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.01 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Howard",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.02 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Texas Southern",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.01 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
+			}
+		},
+		new StatDetails {
+			Id = "Farleigh Dickinson",
+			Stats = new List<StatProbability>
+			{
+				new StatProbability{ Id=2, Probability=.01 },
+				new StatProbability{ Id=3, Probability=.01 },
+				new StatProbability{ Id=4, Probability=.01 },
+				new StatProbability{ Id=5, Probability=.01 },
+				new StatProbability{ Id=6, Probability=.01 },
+				new StatProbability{ Id=7, Probability=.01 }
 			}
 		}
 	};

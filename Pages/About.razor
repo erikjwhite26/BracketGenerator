@@ -1,33 +1,97 @@
 @page "/about"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
 
 <PageTitle>About</PageTitle>
 
-<h1>About this site</h1>
-<p>A new way to fill out brackets!</p>
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-6 mb-10">
 
-<h3>The Bracket</h3>
-<p>- The bracket is set with the 2025 tournament selections.</p>
-<p>- To fill out the bracket, simply click on the team you think will win each matchup.</p>
-<p>- Once filled, you will see your selected bracket winner as the Champion.</p>
+    <MudText Typo="Typo.h3" Class="mb-2">
+        About This Site
+    </MudText>
 
-<h3>Stats</h3>
-<p>- The Mathmatical equation is Team 2 Seed divided by the sum of both teams' Seeds.</p>
-<p>- The Historical equation is data gathered on seed matchups in previous tournaments.</p>
-<p>- The Athletic equation uses round by round probabilities from nytimes.com.</p>
-<p>- The Coin Flip equation returns .5 to mimic the odds of a coin flip.</p>
-<p>- The Random equation uses a random decimal between 0 and 1.</p>
+    <MudText Typo="Typo.subtitle1" Class="mb-6">
+        A new way to fill out brackets — fast, fun, and powered by real data.
+    </MudText>
 
-<h3>Auto-Fill</h3>
-<p>- Auto-Fill compares the outcome of the chosen stat equation and a random decimal between 0 and 1.</p>
-<p>- If the stat equation outcome is greater than or equal to the random decimal, Team 1 wins. Otherwise, Team 2 wins.</p>
+    <MudGrid GutterSize="3">
 
-<h3>Clear</h3>
-<p>- Clear will remove all current selections from the bracket.</p>
-<p>- A quick way to start with a fresh bracket.</p>
+        <!-- Bracket Card -->
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="3" Class="pa-4 d-flex flex-column h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px;">
+                <MudCardContent>
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">The Bracket</MudText>
+                    </MudStack>
 
-<h3>Export (Coming Soon)</h3>
-<p>- A quick way to export this bracket to one of the leading bracket sites.</p>
-<p>- Current bracket hosts available are: ESPN, CBS, Yahoo, and NCAA.</p>
-<p>- Username and Password are collected to perform sign in only.</p>
-<p>- Usernames and Passwords are not saved or sold.</p>
-<p>- Current functionality opens a new tab to the selected host.</p>
+                    <MudList Dense="true">
+                        <MudListItem>- The bracket uses the official 2026 tournament selections.</MudListItem>
+                        <MudListItem>- Click on the team you think will win each matchup.</MudListItem>
+                        <MudListItem>- Once complete, your chosen champion appears automatically.</MudListItem>
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- Stats Card -->
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="3" Class="pa-4 d-flex flex-column h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px;">
+                <MudCardContent>
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.ShowChart" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">Stats</MudText>
+                    </MudStack>
+
+                    <MudList Dense="true">
+                        <MudListItem>- <b>Mathematical:</b> Team 2 seed ÷ (Team 1 seed + Team 2 seed).</MudListItem>
+                        <MudListItem>- <b>Historical:</b> Based on real seed‑vs‑seed outcomes from past tournaments.</MudListItem>
+                        <MudListItem>- <b>538 Odds:</b> Uses round‑by‑round probabilities from FiveThirtyEight.</MudListItem>
+                        <MudListItem>- <b>Coin Flip:</b> Always returns 0.5.</MudListItem>
+                        <MudListItem>- <b>Random:</b> Generates a random decimal between 0 and 1.</MudListItem>
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- Auto-Fill Card -->
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="3" Class="pa-4 d-flex flex-column h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px;">
+                <MudCardContent>
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">Auto‑Fill</MudText>
+                    </MudStack>
+
+                    <MudList Dense="true">
+                        <MudListItem>- Compares the selected stat equation result to a random decimal.</MudListItem>
+                        <MudListItem>- If the stat result ≥ random value, Team 1 wins; otherwise Team 2 wins.</MudListItem>
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- Clear Card -->
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="3" Class="pa-4 d-flex flex-column h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px;">
+                <MudCardContent>
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.DeleteSweep" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">Clear</MudText>
+                    </MudStack>
+
+                    <MudList Dense="true">
+                        <MudListItem>- Removes all current selections from the bracket.</MudListItem>
+                        <MudListItem>- A quick way to start fresh.</MudListItem>
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+    </MudGrid>
+
+</MudContainer>

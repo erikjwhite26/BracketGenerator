@@ -1,6 +1,7 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
+    width: 100%;
     overflow: hidden;
     text-align: center;
     margin-bottom: 20px;
@@ -8,8 +9,9 @@ table {
 
 .stat-table {
     background-color: #fff;
+    margin-top: 10px;
     position: relative;
-    z-index: 1;
+    z-index: 0;
 }
 
 thead td {
@@ -18,7 +20,7 @@ thead td {
 
 th, td {
     border: 1px solid black;
-    width: 60px;
+    width: fit-content;
     position: relative;
 }
 
@@ -62,8 +64,8 @@ th:hover::after {
     z-index: -1;
 }
 
-.fivethirtyeight-stats table thead tr th:first-child,
-.fivethirtyeight-stats table tbody tr th:first-child {
+table thead tr th:first-child,
+table tbody tr th:first-child {
     width: 150px;
 }
 

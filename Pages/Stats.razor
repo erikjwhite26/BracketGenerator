@@ -1,168 +1,265 @@
 @page "/stats"
+@using BlazorApp.Data
+@using BlazorApp.Entities
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject IJSRuntime JS
+@inject FirestoreCacheService cache
 
 <PageTitle>Stats</PageTitle>
 
-<div>
-	<h1>Stats</h1>
-	<p>The tables below share the stats used in the calculation of the winner when using Auto-Fill.</p>
-	<p>The table provides the x value in the formula: x>=y where y is a random decimal between 0 and 1.</p>
-</div>
-<div class="stats-body">
-	<div class-="mathmatical-stats">
-		<h3>Mathmatical Stats Table</h3>
-		<table class="stat-table">
-			<thead>
-				<tr>
-					<th>Seeds</th>
-					@for(int l = 1; l<=16; l++)
-					{
-						<td>@l</td>
-					}
-				</tr>
-			</thead>
-			<tbody>
-				@{int k = 1;}
-				@for(int j = 1; j<=16; j++){
-					<tr>
-						<th>@j</th>
-						@for(k = 1; k <= 16; k++)
-						{
-							double x = Math.Round(((double)k / ((double)j + (double)k)),2);
-							<td class='@(@j == k ? "highlight-cell" : "") '>@x</td>
-						}
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
-	<br/>
-	<div class="historic-stats">
-		<h3>Historical Men's Stats Table</h3>
-		<table class="stat-table">
-			<thead>
-				<tr>
-					<th>Seeds</th>
-					@foreach(int seed in HistoricStats.Keys)
-					{
-						<td>@seed</td>
-					}
-				</tr>
-			</thead>
-			<tbody>
-				@{int i = 1;}
-				@foreach(int seed in HistoricStats.Keys){
-					<tr>
-						<th>@seed</th>
-						@for(i = 1; i <= 16; i++)
-						{
-							<td class='@(@seed == i ? "highlight-cell" : "") '>@HistoricStats[@seed][i]</td>
-						}
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
-	<br/>
-	<div class="historic-stats">
-		<h3>Historical Women's Stats Table</h3>
-		<table class="stat-table">
-			<thead>
-				<tr>
-					<th>Seeds</th>
-					@foreach(int seed in HistoricStatsW.Keys)
-					{
-						<td>@seed</td>
-					}
-				</tr>
-			</thead>
-			<tbody>
-				@{int n = 1;}
-				@foreach(int seed in HistoricStatsW.Keys){
-					<tr>
-						<th>@seed</th>
-						@for(n = 1; n <= 16; n++)
-						{
-							<td class='@(@seed == n ? "highlight-cell" : "") '>@HistoricStatsW[@seed][n]</td>
-						}
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
-	<br/>
-	<div class="fivethirtyeight-stats">
-		<h3>The Athletic Men's Stats Table</h3>
-		<table class="stat-table">
-			<thead>
-				<tr>
-					<th>Team/Round</th>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-				</tr>
-			</thead>
-			<tbody>
-				@{int m = 2;}
-				@foreach(var Team in FiveThirtyEightOdds.Keys){
-					<tr>
-						<th>@Team</th>
-						@for(m = 2; m <= 7; m++)
-						{
-							<td>@FiveThirtyEightOdds[@Team][m]</td>
-						}
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
-	<br/>
-	<div class="fivethirtyeight-stats">
-		<h3>The Athletic Women's Stats Table</h3>
-		<table class="stat-table">
-			<thead>
-				<tr>
-					<th>Team/Round</th>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-				</tr>
-			</thead>
-			<tbody>
-				@{int o = 2;}
-				@foreach(var Team in FiveThirtyEightOddsW.Keys){
-					<tr>
-						<th>@Team</th>
-						@for(o = 2; o <= 7; o++)
-						{
-							<td>@FiveThirtyEightOddsW[@Team][o]</td>
-						}
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
-</div>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-6 mb-10">
 
-@code 
-{
-	private Dictionary<int,Dictionary<int,double>> HistoricStats = new();
-	private Dictionary<int,Dictionary<int,double>> HistoricStatsW = new();
-	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOdds = new();
-	private Dictionary<string,Dictionary<int,double>> FiveThirtyEightOddsW = new();
-	private StatsService StatsService = new();
-	private StatsServiceW StatsServiceW = new();
-	
-	protected override void OnInitialized()
-	{   
-		HistoricStats = StatsService.HistoricStats;
-		HistoricStatsW = StatsServiceW.HistoricStats;
-		FiveThirtyEightOdds = StatsService.FiveThirtyEightStats;
-		FiveThirtyEightOddsW = StatsServiceW.FiveThirtyEightStats;
-	}
+    <MudText Typo="Typo.h3" Class="mb-2">Stats</MudText>
+    <MudText Typo="Typo.subtitle1" Class="mb-4">
+        These tables show the values used when determining Auto‑Fill outcomes.
+    </MudText>
+
+    <MudGrid GutterSize="3">
+
+        <!-- Mathematical Stats -->
+        <MudItem xs="12">
+            <MudCard Elevation="3" Class="pa-4 h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
+                <MudCardContent>
+
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.Calculate" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">Mathematical Stats</MudText>
+                    </MudStack>
+
+                    <div class="stats-table-wrapper">
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>Seeds</th>
+                                    @for (int l = 1; l <= 16; l++)
+                                    {
+                                        <td>@l</td>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int j = 1; j <= 16; j++)
+                                {
+                                    <tr>
+                                        <th>@j</th>
+                                        @for (int k = 1; k <= 16; k++)
+                                        {
+                                            double x = Math.Round(((double)k / ((double)j + (double)k)), 2);
+                                            <td class="@(@j == k ? "highlight-cell" : "")">@x</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- Historical Men's Stats -->
+        <MudItem xs="12">
+            <MudCard Elevation="3" Class="pa-4 h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
+                <MudCardContent>
+
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.History" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">Historical Men's Stats</MudText>
+                    </MudStack>
+
+                    <div class="stats-table-wrapper">
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>Seeds</th>
+                                    @foreach (var seed in HistoricStats)
+                                    {
+                                        <td>@seed.Id</td>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var seed in HistoricStats)
+                                {
+                                    <tr>
+                                        <th>@seed.Id</th>
+                                        @foreach (var stat in seed.Stats)
+                                        {
+											int seedIdInt = int.TryParse(seed.Id, out var parsed) ? parsed : -1;
+											<td class="@((stat.Id == seedIdInt) ? "highlight-cell" : "")">
+												@stat.Probability
+											</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- Historical Women's Stats -->
+        <MudItem xs="12">
+            <MudCard Elevation="3" Class="pa-4 h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
+                <MudCardContent>
+
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.History" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">Historical Women's Stats</MudText>
+                    </MudStack>
+
+                    <div class="stats-table-wrapper">
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>Seeds</th>
+                                    @foreach (var seed in HistoricStatsW)
+                                    {
+                                        <td>@seed.Id</td>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var seed in HistoricStatsW)
+                                {
+                                    <tr>
+                                        <th>@seed.Id</th>
+                                        @foreach (var stat in seed.Stats)
+                                        {
+											int seedIdInt = int.TryParse(seed.Id, out var parsed) ? parsed : -1;
+											<td class="@((stat.Id == seedIdInt) ? "highlight-cell" : "")">
+												@stat.Probability
+											</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- 538 Men's Stats -->
+        <MudItem xs="12">
+            <MudCard Elevation="3" Class="pa-4 h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
+                <MudCardContent>
+
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.BarChart" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">538 Men's Stats</MudText>
+                    </MudStack>
+
+                    <div class="stats-table-wrapper">
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>Team/Round</th>
+                                    <td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var statDetails in FiveThirtyEightOdds)
+                                {
+                                    <tr>
+                                        <th>@statDetails.Id</th>
+                                        @foreach (var stat in statDetails.Stats)
+                                        {
+                                            <td>@stat.Probability</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <!-- 538 Women's Stats -->
+        <MudItem xs="12">
+            <MudCard Elevation="3" Class="pa-4 h-100"
+                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
+                <MudCardContent>
+
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                        <MudIcon Icon="@Icons.Material.Filled.BarChart" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5">538 Women's Stats</MudText>
+                    </MudStack>
+
+                    <div class="stats-table-wrapper">
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>Team/Round</th>
+                                    <td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var statDetails in FiveThirtyEightOddsW)
+                                {
+                                    <tr>
+                                        <th>@statDetails.Id</th>
+                                        @foreach (var stat in statDetails.Stats)
+                                        {
+                                            <td>@stat.Probability</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+    </MudGrid>
+
+</MudContainer>
+
+@code {
+    private List<StatDetails> HistoricStats = new();
+    private List<StatDetails> HistoricStatsW = new();
+    private List<StatDetails> FiveThirtyEightOdds = new();
+    private List<StatDetails> FiveThirtyEightOddsW = new();
+
+    async Task<List<StatDetails>> RetrieveStat(string statId)
+    {
+        try
+        {
+            var statGroup = new StatGroup();
+            var statGroupRs = await cache.GetCachedAsync(
+                statId,
+                () => JS.InvokeAsync<StatGroup>(
+                    Constants.FUNCTION_RETRIEVE_STATS,
+                    statId,
+                    statGroup
+                ).AsTask()
+            );
+            return statGroupRs.StatDetails;
+        }
+        catch (Exception e)
+        {
+            Console.Write(e);
+        }
+        return [];
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        HistoricStats = await RetrieveStat(Constants.STATS_HISTORIC);
+        FiveThirtyEightOdds = (await RetrieveStat(Constants.STATS_538)).OrderBy(s => s.Id).ToList();
+        HistoricStatsW = await RetrieveStat(Constants.STATS_HISTORIC_W);
+        FiveThirtyEightOddsW = (await RetrieveStat(Constants.STATS_538_W)).OrderBy(s => s.Id).ToList();
+    }
 }
