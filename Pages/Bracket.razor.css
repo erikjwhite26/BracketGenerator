@@ -21,6 +21,10 @@ li:hover {
 	display:none;
 }
 
+.stat-select, .mud-input-control{
+	background: #ffffff
+}
+
 .alert-block {
 	display: flex;
 	height: 24px;
@@ -385,10 +389,10 @@ ul {
 .matchup-63 {
 	grid-column: 2 / span 1;
 	grid-row: 1/ span 4;
-	.team {
+}
+.team {
 	height:28px;
 	line-height: 28px;
-	}
 }
 
 @media (max-width: 1450px) {

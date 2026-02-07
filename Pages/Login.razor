@@ -1,0 +1,91 @@
+@page "/login"
+@using BlazorApp.Data
+@inject FirebaseAuthService Auth
+@inject NavigationManager Nav
+@inject IDialogService DialogService
+
+<MudPaper Class="login-container" Elevation="10">
+    <MudText Typo="Typo.h4" Class="mb-4 login-title">Login</MudText>
+
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <MudAlert Severity="Severity.Error" Dense="true" Class="mb-3">
+            @error
+        </MudAlert>
+    }
+
+    <MudTextField @bind-Value="email"
+                  Label="Email"
+                  Variant="Variant.Outlined"
+                  FullWidth="true"
+                  Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Filled.Email"
+                  Class="mb-3 login-input" />
+
+    <MudTextField @bind-Value="password"
+                  Label="Password"
+                  Variant="Variant.Outlined"
+                  FullWidth="true"
+                  InputType="InputType.Password"
+                  Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Filled.Lock"
+                  Class="mb-4 login-input" />
+
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               FullWidth="true"
+               Class="login-button"
+               OnClick="LoginUser">
+        Login
+    </MudButton>
+
+    <MudButton Variant="Variant.Text"
+               Color="Color.Primary"
+               FullWidth="true"
+               Class="register-button"
+               Href="/register">
+        Register
+    </MudButton>
+
+    <MudButton Variant="Variant.Text"
+               Color="Color.Secondary"
+               FullWidth="true"
+               Class="mt-2"
+               OnClick="ShowResetPasswordDialog">
+        Forgot Password?
+    </MudButton>
+</MudPaper>
+
+@code {
+    string email = "";
+    string password = "";
+    string error = "";
+
+    async Task LoginUser()
+    {
+        try
+        {
+            await Auth.Login(email, password);
+            Nav.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            error = HelperFunctions.GetFriendlyFirebaseAuthError(ex);
+        }
+    }
+    async Task ShowResetPasswordDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            ["Email"] = email
+        };
+
+        var dialog = DialogService.Show<ResetPasswordDialog>("Reset Password", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled && result.Data is string successMessage)
+        {
+            error = successMessage;
+        }
+    }
+}
