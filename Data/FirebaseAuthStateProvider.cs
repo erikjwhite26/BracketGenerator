@@ -55,6 +55,16 @@ public class FirebaseAuthStateProvider : AuthenticationStateProvider
         _isInitialized = true;
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
+    public async Task<string?> GetUserIdAsync()
+    {
+        var state = await GetAuthenticationStateAsync();
+        var user = state.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+            return user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        return null;
+    }
 
     public override Task<AuthenticationState> GetAuthenticationStateAsync()
     {

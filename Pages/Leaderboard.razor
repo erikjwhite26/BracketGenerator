@@ -3,6 +3,7 @@
 @using BlazorApp.Entities;
 
 @inject IJSRuntime JS;
+@inject FirebaseAuthStateProvider Auth
 
 <PageTitle>Leaderboard</PageTitle>
 
@@ -23,12 +24,18 @@
     </MudToggleGroup>
 
     <!-- Leaderboard Table -->
-    <MudTable Items="RankedBrackets" Hover="true" Dense="true" Elevation="2">
+    <MudTable Items="RankedBrackets"
+            Hover="true"
+            Dense="true"
+            Elevation="2"
+            RowClassFunc="GetRowClass">
+
         <HeaderContent>
             <MudTh>Rank</MudTh>
             <MudTh>Bracket Name</MudTh>
             <MudTh>Points</MudTh>
         </HeaderContent>
+
         <RowTemplate>
             <MudTd DataLabel="Rank">@context.Rank</MudTd>
             <MudTd DataLabel="Bracket">@context.Bracket.Id</MudTd>
@@ -40,6 +47,7 @@
 
 @code {
     private bool IsLoading { get; set; } = true;
+    private string? CurrentUserId;
     private string SelectedGender = Constants.URL_MENS;
     private string GenderBracketId = Constants.BRACKET_MEN;
     private List<RegionalMatchupGroup> OfficialMensBracket = new();
@@ -55,38 +63,39 @@
         await RetrieveBrackets();
         await RetrieveAllUserBrackets();
         await LoadLeaderboard();
+        CurrentUserId = await GetUserIdAsync();
         // default to men's on first load
         RankedBrackets = RankedMensBrackets;
         IsLoading = false;
     }
 
-    
-	async Task<bool> RetrieveBrackets(){
-		try{
-			var tourneyGroup = new TourneyGroup();
-			var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, Constants.BRACKET_MEN, tourneyGroup);
-			this.OfficialMensBracket = tourneyGroupRs.RegionalMatchupGroups;
+    private async Task<string?> GetUserIdAsync() => await Auth.GetUserIdAsync();
+
+    async Task<bool> RetrieveBrackets(){
+        try{
+            var tourneyGroup = new TourneyGroup();
+            var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, Constants.BRACKET_MEN, tourneyGroup);
+            this.OfficialMensBracket = tourneyGroupRs.RegionalMatchupGroups;
 
             var tourneyGroupW = new TourneyGroup();
             var tourneyGroupRsW = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, Constants.BRACKET_WOMEN, tourneyGroup);
             this.OfficialWomensBracket = tourneyGroupRsW.RegionalMatchupGroups;
-		}
-		catch(Exception e){
-			Console.Write(e);
-		}
-		return true;
-	}
-    
-	private async Task<bool> RetrieveAllUserBrackets(){
-		try{
-			this.UserBrackets = await JS.InvokeAsync<List<TourneyGroup>>(Constants.FUNCTION_RETRIEVE_ALL_USER_BRACKETS);
-            Console.Write(UserBrackets);
-		}
-		catch(Exception e){
-			Console.Write(e);
-		}
-		return true;
-	}
+        }
+        catch(Exception e){
+            Console.Write(e);
+        }
+        return true;
+    }
+
+    private async Task<bool> RetrieveAllUserBrackets(){
+        try{
+            this.UserBrackets = await JS.InvokeAsync<List<TourneyGroup>>(Constants.FUNCTION_RETRIEVE_ALL_USER_BRACKETS);
+        }
+        catch(Exception e){
+            Console.Write(e);
+        }
+        return true;
+    }
 
     private async Task<bool> LoadLeaderboard()
     {
@@ -101,6 +110,7 @@
             .Where(t => t.BracketType == bracketType)
             .Select(b => new LeaderboardEntry
             {
+                UserId = b.UserId,
                 Bracket = b,
                 Points = HelperFunctions.GetBracketPoints(matchups, b)
             })
@@ -141,10 +151,20 @@
         IsLoading = false;
     }
 
+    private string GetRowClass(LeaderboardEntry entry, int index) => entry.UserId == CurrentUserId ? "highlight-row" : "";
+
     public class LeaderboardEntry
     {
         public TourneyGroup Bracket { get; set; } = new();
+        public string UserId { get; set; }
         public int Points { get; set; }
         public int Rank { get; set; }
     }
 }
+
+<style>
+.highlight-row {
+    background-color: rgba(0, 123, 255, 0.12);
+    border-left: 4px solid #007bff;
+}
+</style>

@@ -203,11 +203,7 @@ window.retrieveAllUserBrackets = async () => {
                 console.error("[retrieveAllUserBrackets] Error processing doc:", docSnap.ref.path, innerErr);
             }
         });
-
-        console.log("[retrieveAllUserBrackets] Completed. Total brackets:", allBrackets.length);
-        console.log(allBrackets);
         return allBrackets;
-
     } catch (e) {
         console.error("[retrieveAllUserBrackets] Fatal error:", e);
         return [];
@@ -291,7 +287,6 @@ window.retrieveBrackets = async (id, tourneyGroup) => {
                     });
             }
         }
-        console.log(tourneyGroup);
         return tourneyGroup;
     }
     return null;
