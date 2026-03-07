@@ -21,6 +21,23 @@ li:hover {
 	display:none;
 }
 
+.team-input {
+    width: 120px;          /* adjust to fit your bracket spacing */
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    font-size: 0.85rem;
+    font-family: inherit;
+    display: inline-block;
+}
+
+/* Optional: subtle focus indicator */
+.team-input:focus {
+    border-bottom: 1px solid #1976d2;
+}
+
 .stat-select, .mud-input-control{
 	background: #ffffff
 }
@@ -87,29 +104,6 @@ li:hover {
 	display: block;
 	margin-right: 8px;
 	width: 100px;
-}
-
-/* Allow the chip itself to grow vertically */
-:global(.bracket-chip) {
-    white-space: normal !important;
-    height: auto !important;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-}
-
-/* Override MudChip internal content wrapper */
-:global(.bracket-chip .mud-chip-content) {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    white-space: normal !important;
-    line-height: 1.2;
-}
-
-/* MudChipSet forces all chips to be single-line unless overridden */
-:global(.mud-chip-set .mud-chip) {
-    height: auto !important;
-    white-space: normal !important;
 }
 
 .select {

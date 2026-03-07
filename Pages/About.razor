@@ -1,6 +1,4 @@
 @page "/about"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 
 <PageTitle>About</PageTitle>
 
@@ -26,7 +24,7 @@
                         <MudText Typo="Typo.h5">The Bracket</MudText>
                     </MudStack>
 
-                    <MudList Dense="true">
+                    <MudList T="string"> Dense="true">
                         <MudListItem>- The bracket uses the official 2026 tournament selections.</MudListItem>
                         <MudListItem>- Click on the team you think will win each matchup.</MudListItem>
                         <MudListItem>- Once complete, your chosen champion appears automatically.</MudListItem>
@@ -45,7 +43,7 @@
                         <MudText Typo="Typo.h5">Stats</MudText>
                     </MudStack>
 
-                    <MudList Dense="true">
+                    <MudList T="string" Dense="true">
                         <MudListItem>- <b>Mathematical:</b> Team 2 seed ÷ (Team 1 seed + Team 2 seed).</MudListItem>
                         <MudListItem>- <b>Historical:</b> Based on real seed‑vs‑seed outcomes from past tournaments.</MudListItem>
                         <MudListItem>- <b>538 Odds:</b> Uses round‑by‑round probabilities from FiveThirtyEight.</MudListItem>
@@ -66,7 +64,7 @@
                         <MudText Typo="Typo.h5">Auto‑Fill</MudText>
                     </MudStack>
 
-                    <MudList Dense="true">
+                    <MudList T="string" Dense="true">
                         <MudListItem>- Compares the selected stat equation result to a random decimal.</MudListItem>
                         <MudListItem>- If the stat result ≥ random value, Team 1 wins; otherwise Team 2 wins.</MudListItem>
                     </MudList>
@@ -84,7 +82,7 @@
                         <MudText Typo="Typo.h5">Clear</MudText>
                     </MudStack>
 
-                    <MudList Dense="true">
+                    <MudList T="string" Dense="true">
                         <MudListItem>- Removes all current selections from the bracket.</MudListItem>
                         <MudListItem>- A quick way to start fresh.</MudListItem>
                     </MudList>

@@ -1,0 +1,111 @@
+@page "/bracketadmin"
+@attribute [Authorize(Roles = "Admin")]
+@using BlazorApp.Data
+@using BlazorApp.Entities
+@using Microsoft.AspNetCore.Authorization
+
+@inject IJSRuntime JS;
+@inject FirestoreCacheService cache;
+@inject FirebaseAuthStateProvider AuthStateProvider
+
+<PageTitle>Bracket Admin</PageTitle>
+
+<MudGrid class="bracket-page">
+	<MudItem xs="12">
+		<MudGrid>
+            <MudItem xs="12" sm="6" Class="ml-auto">
+                <MudButton Variant="Variant.Filled"Size="Size.Large" FullWidth="true" @onclick="() => RetrieveBracket(Constants.BRACKET_MEN)" Color="Color.Primary">Men's Bracket</MudButton>
+            </MudItem>
+            <MudItem xs="12" sm="6" Class="ml-auto">
+                <MudButton Variant="Variant.Filled"Size="Size.Large" FullWidth="true" @onclick="() => RetrieveBracket(Constants.BRACKET_WOMEN)" Color="Color.Primary">Women's Bracket</MudButton>
+            </MudItem>
+		</MudGrid>
+	</MudItem>
+	<MudItem xs="12">
+		<MudGrid>
+            <AuthorizeView>
+                <Authorized>
+                    <MudItem xs="12" sm="6" Class="ml-auto">
+                        <MudButton Variant="Variant.Filled"Size="Size.Large" FullWidth="true" @onclick="() => SaveBracket()" Color="Color.Success">Save Bracket</MudButton>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" Class="ml-auto">
+                        <MudButton Variant="Variant.Filled"Size="Size.Large" FullWidth="true" @onclick="() => Clear()" Color="Color.Warning">Clear Bracket</MudButton>
+                    </MudItem>
+                </Authorized>
+            </AuthorizeView>
+		</MudGrid>
+	</MudItem>
+	<MudItem xs="12">
+	<div class="bracket-body">
+		<h2 class="champion">Champion: @Champion</h2>
+		<div class="bracket">
+			@foreach (var regionalMatchup in RegionalMatchupGroups)
+			{
+				<div class="region @regionalMatchup.RegionalMatchupDetails.RegionalClass">
+					@foreach (var matchupGroup in regionalMatchup.RegionalMatchupDetails.RegionalMatchups)
+					{
+						<ul class="matchup @matchupGroup.Matchup.MatchupClass">
+							<li class="team team-top">
+                                <input class="team-input"
+                                    value="@matchupGroup.Matchup.Team1.Name"
+                                    @oninput="e => matchupGroup.Matchup.Team1.Name = e.Value?.ToString()" />
+                            </li>
+
+                            <li class="team team-bottom">
+                                <input class="team-input"
+                                    value="@matchupGroup.Matchup.Team2.Name"
+                                    @oninput="e => matchupGroup.Matchup.Team2.Name = e.Value?.ToString()" />
+                            </li>
+						</ul>
+					}
+				</div>
+			}
+		</div>
+	</div>
+	</MudItem>
+</MudGrid>
+
+@code 
+{
+    private List<RegionalMatchupGroup> RegionalMatchupGroups = new();
+    private string BracketName = Constants.BRACKET_MEN;
+	private string Champion = "";
+
+    private void Clear(){
+        foreach(var tourneyMatchup in RegionalMatchupGroups){
+            foreach(var regionalMatchup in tourneyMatchup.RegionalMatchupDetails.RegionalMatchups){
+                regionalMatchup.Matchup.Team1 = new Team(){};
+                regionalMatchup.Matchup.Team2 = new Team(){};
+            }
+        }
+    }
+	
+    async Task<bool> RetrieveBracket(string bracketName){
+        try{
+            this.BracketName = bracketName;
+            var tourneyGroup = new TourneyGroup();
+            var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, this.BracketName, tourneyGroup);
+            this.RegionalMatchupGroups = tourneyGroupRs.RegionalMatchupGroups;
+            StateHasChanged();
+        }
+        catch(Exception e){
+            Console.Write(e);
+        }
+        return true;
+    }
+
+    private async Task<bool> SaveBracket()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync(Constants.FUNCTION_ADD_BRACKET, this.BracketName, HelperFunctions.ConvertBracket(this.RegionalMatchupGroups));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        return true;
+    }
+
+    protected override async Task OnInitializedAsync() => await RetrieveBracket(this.BracketName);
+}

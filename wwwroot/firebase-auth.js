@@ -26,8 +26,19 @@ window.logout = async function() {
     return await signOut(auth);
 }
 
-window.onAuthStateChanged = function(dotNetHelper) {
-    onAuthStateChanged(auth, user => {
-        dotNetHelper.invokeMethodAsync("AuthStateChanged", user ? user.uid : null);
+window.onAuthStateChanged = (dotnetHelper) => {
+    auth.onAuthStateChanged(async user => {
+        if (!user) {
+            dotnetHelper.invokeMethodAsync("AuthStateChanged", null, null);
+            return;
+        }
+
+        const tokenResult = await user.getIdTokenResult(true);
+
+        dotnetHelper.invokeMethodAsync(
+            "AuthStateChanged",
+            user.uid,
+            tokenResult.claims
+        );
     });
 };

@@ -1,17 +1,26 @@
-@page "/"
+@page "/bracket/{Gender}"
 @using BlazorApp.Data
 @using BlazorApp.Entities
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
+@using MudBlazor.Charts
+
 @inject IJSRuntime JS;
 @inject FirestoreCacheService cache;
+@inject FirebaseAuthStateProvider AuthStateProvider;
+@inject NavigationManager Nav;
 
 <PageTitle>Bracket</PageTitle>
 
+@if(IsLoading){
+	<div id="loading-message">
+		<h1>Loading the Madness</h1>
+		<div class="spinner-border" role="status"></div>
+	</div>
+}else{
 <MudGrid class="bracket-page">
 	<MudItem xs="12">
 		<MudGrid>
-			<MudItem xs="12" md="2">
+			<MudItem xs="12" sm="2">
 				<MudSelect style="background: #ffffff" Variant="Variant.Filled" Label="Stats to Use" @bind-Value="@StatOption" @onchange="StatOptionChanged">
 					<MudSelectItem Value="@("Mathmatical")" />
 					<MudSelectItem Value="@("Historical")" />
@@ -20,6 +29,26 @@
 					<MudSelectItem Value="@("Random")" />
 				</MudSelect>
 			</MudItem>
+            <!-- Bracket Name (Top Right) -->
+            <AuthorizeView>
+                <Authorized>
+                    <MudItem xs="12" sm="3" Class="ml-auto">
+                        <MudTextField @bind-Value="BracketName"
+                                      Label="Bracket Name"
+                                      Variant="Variant.Filled"
+                                      Style="background: #ffffff"
+                                      FullWidth="true" />
+                    </MudItem>
+                </Authorized>
+
+                <NotAuthorized>
+                    <MudItem xs="12" sm="3" Class="ml-auto">
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Filled">
+                            Login or register to save your bracket.
+                        </MudAlert>
+                    </MudItem>
+                </NotAuthorized>
+            </AuthorizeView>
 		</MudGrid>
 		<MudGrid>
 			<MudItem xs="6" md="1">
@@ -28,7 +57,53 @@
 			<MudItem xs="6" md="1">
 				<MudButton Variant="Variant.Filled" Size="Size.Large" FullWidth="true" @onclick="() => Clear()" Color="Color.Warning"><MudText>Clear</MudText></MudButton>
 			</MudItem>
+            <!-- Save Button (Right-Aligned) -->
+            <AuthorizeView>
+                <Authorized>
+                    <MudItem xs="12" sm="3" Class="ml-auto">
+                        <MudButton Variant="Variant.Filled"Size="Size.Large" FullWidth="true" @onclick="() => SaveBracket()" Color="Color.Success" 
+							Disabled="@string.IsNullOrWhiteSpace(BracketName)">Save Bracket</MudButton>
+                    </MudItem>
+                </Authorized>
+            </AuthorizeView>
 		</MudGrid>
+		@if (UserBrackets.Any())
+		{
+			<MudPaper Class="pa-2 mt-3" Elevation="1">
+				<MudText Typo="Typo.subtitle2">My Brackets</MudText>
+				<MudChipSet T="TourneyGroup"
+							SelectedValue="@ActiveBracket"
+							SelectedValueChanged="LoadBracket"
+							SelectionMode="SelectionMode.SingleSelection">
+
+					@foreach (var b in UserBrackets)
+					{
+						var points = GetBracketPoints(b);
+
+						<MudChip Value="@b"
+								Color="Color.Primary"
+								Variant="Variant.Filled"
+								Class="bracket-chip">
+
+							<div class="chip-content">
+								<span class="chip-title"><b>@b.Id</b></span>
+								<span>@points.ToString("0") pts</span>
+							</div>
+
+						</MudChip>
+					}
+
+					@if (!MaxEntries)
+					{
+						<MudChip Color="Color.Secondary"
+								Variant="Variant.Outlined"
+								Class="bracket-chip">
+							+ New
+						</MudChip>
+					}
+				</MudChipSet>
+			</MudPaper>
+		}
 	</MudItem>
 	<MudItem xs="12">
 	<div class="bracket-body">
@@ -36,156 +111,205 @@
 		<div class="bracket">
 			@foreach(var regionalMatchup in RegionalMatchupGroups)
 			{
-			<div class="region @regionalMatchup.RegionalMatchupDetails.RegionalClass">
-				@foreach(var matchupGroup in regionalMatchup.RegionalMatchupDetails.RegionalMatchups)
-				{
-					<ul class="matchup @matchupGroup.Matchup.MatchupClass">
-						<li @onclick='(() => Winner(matchupGroup.Matchup,1))' class="team team-top">@matchupGroup.Matchup.Team1.Seed @matchupGroup.Matchup.Team1.Name</li>
-						<li @onclick='(() => Winner(matchupGroup.Matchup,2))' class="team team-bottom">@matchupGroup.Matchup.Team2.Seed @matchupGroup.Matchup.Team2.Name</li>
-					</ul>
-				}
-			</div>
+				<div class="region @regionalMatchup.RegionalMatchupDetails.RegionalClass">
+					@foreach(var matchupGroup in regionalMatchup.RegionalMatchupDetails.RegionalMatchups)
+					{
+						<ul class="matchup @matchupGroup.Matchup.MatchupClass">
+							<li 
+								@onclick='(() => Winner(matchupGroup.Matchup,1))'
+								class="team team-top @GetTeamCssClass(regionalMatchup.Id, matchupGroup.Id, matchupGroup.Matchup.Team1.Name, 1)">
+								@matchupGroup.Matchup.Team1.Seed @matchupGroup.Matchup.Team1.Name
+							</li>
+
+							<li 
+								@onclick='(() => Winner(matchupGroup.Matchup,2))'
+								class="team team-bottom @GetTeamCssClass(regionalMatchup.Id, matchupGroup.Id, matchupGroup.Matchup.Team2.Name, 2)">
+								@matchupGroup.Matchup.Team2.Seed @matchupGroup.Matchup.Team2.Name
+							</li>
+						</ul>
+					}
+				</div>
 			}
 		</div>
 	</div>
 	</MudItem>
 </MudGrid>
+}
 
 @code 
 {
-	private List<RegionalMatchupGroup> RegionalMatchupGroups = new();
-	private List<StatDetails> HistoricalStats = new();
-	private List<StatDetails> FiveThirtyEightOdds = new();
-	private string Champion = "";
-	private string StatOption = "Mathmatical";
-	private bool HideAlert = true;
-	private string AlertMessage = "";
-	private StatsService StatsService = new();
-	private TourneyMatchup MatchupService = new();
+    [Parameter] public string? Gender { get; set; }
+    private string? GenderBracketId { get; set; }
+    private string? GenderHistoricalStatsId { get; set; }
+    private string? GenderFiveThirtyEightOddsId { get; set; }
+    private bool IsLoading { get; set; } = true;
+    private List<RegionalMatchupGroup> RegionalMatchupGroups = new();
+    private List<RegionalMatchupGroup> OfficialBracket = new();
+    private List<StatDetails> HistoricalStats = new();
+    private List<StatDetails> FiveThirtyEightOdds = new();
+    private string Champion = "";
+    private string StatOption = "Mathmatical";
+    private bool HideAlert = true;
+    private string AlertMessage = "";
+    private bool IsAuthenticated = false;
+    private string BracketName = "";
+    private List<TourneyGroup> UserBrackets = new();
+    private TourneyGroup? ActiveBracket;
+    private bool MaxEntries;
 
-	private async void AutoFill(){
-		HideAlert = true;
-		var rand = new Random();
-		foreach(var regionalMatchup in RegionalMatchupGroups){
-			foreach(var regional in regionalMatchup.RegionalMatchupDetails.RegionalMatchups){
-				var x = await GetXFactor(regional.Matchup);
-				var y = Math.Round(rand.NextDouble(),2);
-				
-				if(x>=y){
-					Winner(regional.Matchup, 1);
-				}else{
-					Winner(regional.Matchup, 2);
-				}
-			}
-		}
-	}
 
-	private async Task<double> GetXFactor(Matchup matchup){
-		var Seed1 = matchup.Team1.Seed;
-		var Seed2 = matchup.Team2.Seed;
-		if(StatOption=="Mathmatical"){
-			return Math.Round(((double)Seed2.GetValueOrDefault() / ((double)Seed1.GetValueOrDefault() + (double)Seed2.GetValueOrDefault())),2);
-		} else if(StatOption=="Coin Flip"){
-			return .50;
-		} else if(StatOption=="Random"){
-			return Math.Round(new Random().NextDouble(),2);
-		} else if(StatOption=="538 Odds"){
-			var Round = GetRound(matchup.NextMatchup);
-			var Team1Name = FormatTeamName(matchup.Team1.Name);
-			var Team2Name = FormatTeamName(matchup.Team2.Name);
-			return Math.Round((FiveThirtyEightOdds.First(s => s.Id == Team1Name).Stats.First(x => x.Id == Round).Probability) 
-				/ (FiveThirtyEightOdds.First(s => s.Id == Team1Name).Stats.First(x => x.Id == Round).Probability 
-				+ FiveThirtyEightOdds.First(x => x.Id == Team2Name).Stats.First(x => x.Id == Round).Probability),2);
-		} else {
-			return HistoricalStats.First(s => s.Id == Convert.ToString(Seed1.GetValueOrDefault()))
-				.Stats.First(x => x.Id == Seed2.GetValueOrDefault()).Probability;
-		}
-	}
+    private async void AutoFill(){
+        HideAlert = true;
+        var rand = new Random();
+        foreach(var regionalMatchup in RegionalMatchupGroups){
+            foreach(var regional in regionalMatchup.RegionalMatchupDetails.RegionalMatchups){
+                var x = await GetXFactor(regional.Matchup);
+                var y = Math.Round(rand.NextDouble(),2);
 
-	private int GetRound(int? NextMatchup){
-		switch(NextMatchup){
-			case int n when n >= 33 && n < 49:
-				return 2;
-			case int n when n >= 49 && n < 57:
-				return 3;
-			case int n when n >= 57 && n < 61:
-				return 4;
-			case int n when n >= 61 && n < 63:
-				return 5;
-			case int n when n == 63:
-				return 6;
-		}
-		return 7;
-	}
-	
-	private string FormatTeamName(string TeamName){
-		return TeamName.Split('/')[0];
-	}
+                if(x>=y){
+                    Winner(regional.Matchup, 1);
+                }else{
+                    Winner(regional.Matchup, 2);
+                }
+            }
+        }
+    }
 
-	private void Winner(Matchup matchup, int team){
-		var winningTeam = team==1? matchup.Team1: matchup.Team2;
-		var regional = matchup.NextMatchup>60? 5: matchup.Regional;
+    private async Task<double> GetXFactor(Matchup matchup){
+        var Seed1 = matchup.Team1.Seed;
+        var Seed2 = matchup.Team2.Seed;
+        if(StatOption=="Mathmatical"){
+            return Math.Round(((double)Seed2.GetValueOrDefault() / ((double)Seed1.GetValueOrDefault() + (double)Seed2.GetValueOrDefault())),2);
+        } else if(StatOption=="Coin Flip"){
+            return .50;
+        } else if(StatOption=="Random"){
+            return Math.Round(new Random().NextDouble(),2);
+        } else if(StatOption=="538 Odds"){
+            var Round = GetRound(matchup.NextMatchup);
+            var Team1Name = FormatTeamName(matchup.Team1.Name);
+            var Team2Name = FormatTeamName(matchup.Team2.Name);
+            return Math.Round((FiveThirtyEightOdds.First(s => s.Id == Team1Name).Stats.First(x => x.Id == Round).Probability) 
+                / (FiveThirtyEightOdds.First(s => s.Id == Team1Name).Stats.First(x => x.Id == Round).Probability 
+                + FiveThirtyEightOdds.First(x => x.Id == Team2Name).Stats.First(x => x.Id == Round).Probability),2);
+        } else {
+            return HistoricalStats.First(s => s.Id == Convert.ToString(Seed1.GetValueOrDefault()))
+                .Stats.First(x => x.Id == Seed2.GetValueOrDefault()).Probability;
+        }
+    }
 
-		if(matchup.NextMatchup==0){
-			Champion = winningTeam.Name;
-		}else if(matchup.NextMatchupTeam==1){
-			var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
-			if(!string.IsNullOrEmpty(m.Team1.Name) && m.Team1.Name != winningTeam.Name){
-				RemoveTeam(m,1,m.Team1.Name);
-			}
-			m.Team1 = winningTeam;
-		}else {
-			var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
-			if(!string.IsNullOrEmpty(m.Team2.Name) && m.Team2.Name != winningTeam.Name){
-				RemoveTeam(m,2,m.Team2.Name);
-			}
-			m.Team2 = winningTeam;			
-		}
-	}
+    private int GetRound(int? NextMatchup){
+        switch(NextMatchup){
+            case int n when n >= 33 && n < 49:
+                return 2;
+            case int n when n >= 49 && n < 57:
+                return 3;
+            case int n when n >= 57 && n < 61:
+                return 4;
+            case int n when n >= 61 && n < 63:
+                return 5;
+            case int n when n == 63:
+                return 6;
+        }
+        return 7;
+    }
 
-	private void RemoveTeam(Matchup matchup, int team, string teamName){
-		var regional = matchup.NextMatchup>60? 5: matchup.Regional;
-		
-		if(matchup.NextMatchup==0){
-			Champion = "";
-		}else if(matchup.NextMatchupTeam==1){
-			var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
-			if(!string.IsNullOrEmpty(m.Team1.Name) && m.Team1.Name == teamName){
-				m.Team1 = new Team(){};
-				RemoveTeam(m,1,teamName);
-			}
-		}else {
-			var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
-			if(!string.IsNullOrEmpty(m.Team2.Name) && m.Team2.Name == teamName){
-				m.Team2 = new Team(){};
-				RemoveTeam(m,2,teamName);
-			}
-		}
-	}
-	
-	private void Clear(){
-		foreach(var tourneyMatchup in RegionalMatchupGroups){
-			foreach(var regionalMatchup in tourneyMatchup.RegionalMatchupDetails.RegionalMatchups.Where(r => r.Id > 32)){
-				regionalMatchup.Matchup.Team1 = new Team(){};
-				regionalMatchup.Matchup.Team2 = new Team(){};
-			}
-		}
-		Champion = "";
-		HideAlert = true;
-	}
+    private string FormatTeamName(string? TeamName){
+        return TeamName?.Split('/')[0] ?? "";
+    }
 
-	private void StatOptionChanged(ChangeEventArgs e){
-		StatOption = e.Value as string;
+    private void Winner(Matchup matchup, int team){
+        var winningTeam = team==1? matchup.Team1: matchup.Team2;
+        var regional = matchup.NextMatchup>60? 5: matchup.Regional;
+
+        if(matchup.NextMatchup==0){
+            Champion = winningTeam.Name ?? "";
+        }else if(matchup.NextMatchupTeam==1){
+            var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
+            if(!string.IsNullOrEmpty(m.Team1.Name) && m.Team1.Name != winningTeam.Name){
+                RemoveTeam(m,1,m.Team1.Name);
+            }
+            m.Team1 = winningTeam;
+        }else {
+            var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
+            if(!string.IsNullOrEmpty(m.Team2.Name) && m.Team2.Name != winningTeam.Name){
+                RemoveTeam(m,2,m.Team2.Name);
+            }
+            m.Team2 = winningTeam;			
+        }
+    }
+
+    private void RemoveTeam(Matchup matchup, int team, string teamName){
+        var regional = matchup.NextMatchup>60? 5: matchup.Regional;
+
+        if(matchup.NextMatchup==0){
+            Champion = "";
+        }else if(matchup.NextMatchupTeam==1){
+            var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
+            if(!string.IsNullOrEmpty(m.Team1.Name) && m.Team1.Name == teamName){
+                m.Team1 = new Team(){};
+                RemoveTeam(m,1,teamName);
+            }
+        }else {
+            var m = RegionalMatchupGroups.First(t => t.Id == regional).RegionalMatchupDetails.RegionalMatchups.First(r => r.Id == matchup.NextMatchup).Matchup;
+            if(!string.IsNullOrEmpty(m.Team2.Name) && m.Team2.Name == teamName){
+                m.Team2 = new Team(){};
+                RemoveTeam(m,2,teamName);
+            }
+        }
+    }
+
+    private void Clear(){
+        foreach(var tourneyMatchup in RegionalMatchupGroups){
+            foreach(var regionalMatchup in tourneyMatchup.RegionalMatchupDetails.RegionalMatchups.Where(r => r.Id > 32)){
+                regionalMatchup.Matchup.Team1 = new Team(){};
+                regionalMatchup.Matchup.Team2 = new Team(){};
+            }
+        }
+        Champion = "";
+        HideAlert = true;
+    }
+
+    private string GetTeamCssClass(int regionId, int matchupId, string? teamName, int teamNumber)
+    {
+        // Find the matching region in the official bracket
+        var officialRegion = OfficialBracket
+            .FirstOrDefault(r => r.Id == regionId);
+
+        if (officialRegion == null)
+            return "";
+
+        // Find the matching matchup
+        var officialMatchup = officialRegion.RegionalMatchupDetails.RegionalMatchups
+            .FirstOrDefault(m => m.Id == matchupId);
+
+        if (officialMatchup == null || officialMatchup.Matchup.Round == 1 
+            || (teamNumber == 1 && string.IsNullOrWhiteSpace(officialMatchup.Matchup.Team1.Name))
+            || (teamNumber == 2 && string.IsNullOrWhiteSpace(officialMatchup.Matchup.Team2.Name)))
+            return "";
+
+        // Determine the official winner
+        // Compare the team name to the official winner
+        if (officialMatchup.Matchup.Team1.Name == teamName || officialMatchup.Matchup.Team2.Name == teamName)
+            return "correct-pick";
+
+        return "wrong-pick";
+    }
+
+    private int GetBracketPoints(TourneyGroup bracket) => HelperFunctions.GetBracketPoints(OfficialBracket, bracket);
+
+    private void StatOptionChanged(ChangeEventArgs e){
+		StatOption = e?.Value?.ToString() ?? string.Empty;
 	}
 
 	async Task<bool> RetrieveStats(){
 		try{
+			if(string.IsNullOrWhiteSpace(GenderHistoricalStatsId)) return false;
 			var statGroup = new StatGroup();
 			var statGroupRs = await cache.GetCachedAsync(
-											Constants.STATS_HISTORIC,
+											GenderHistoricalStatsId,
 											() => JS.InvokeAsync<StatGroup>(
 													Constants.FUNCTION_RETRIEVE_STATS,
-													Constants.STATS_HISTORIC,
+													GenderHistoricalStatsId,
 													statGroup
 												).AsTask()
 										);
@@ -195,12 +319,13 @@
 			Console.Write(e);
 		}
 		try{
+			if(string.IsNullOrWhiteSpace(GenderFiveThirtyEightOddsId)) return false;
 			var statGroup = new StatGroup();
 			var statGroupRs = await cache.GetCachedAsync(
-											Constants.STATS_538,
+											GenderFiveThirtyEightOddsId,
 											() => JS.InvokeAsync<StatGroup>(
 													Constants.FUNCTION_RETRIEVE_STATS,
-													Constants.STATS_538,
+													GenderFiveThirtyEightOddsId,
 													statGroup
 												).AsTask()
 										);										
@@ -215,8 +340,11 @@
 	async Task<bool> RetrieveBracket(){
 		try{
 			var tourneyGroup = new TourneyGroup();
-			var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, Constants.BRACKET_MEN, tourneyGroup);
+			var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, GenderBracketId, tourneyGroup);
 			this.RegionalMatchupGroups = tourneyGroupRs.RegionalMatchupGroups;
+			this.OfficialBracket = tourneyGroupRs.RegionalMatchupGroups
+				.Select(r => r.Clone())   // deep clone each region
+				.ToList();;
 			Console.Write(this.RegionalMatchupGroups);
 		}
 		catch(Exception e){
@@ -225,9 +353,96 @@
 		return true;
 	}
 
-	protected override async Task OnInitializedAsync()
-	{   
+	private async Task<bool> SaveBracket()
+	{
+		try
+		{
+			if(MaxEntries){
+				AlertMessage = "Entry limit reached.";
+				HideAlert = false;
+				return false;
+			}
+			// Convert your current bracket into a serializable object
+			var bracketToSave = new TourneyGroup
+			{
+				Id = BracketName,
+				Champion = Champion,
+				RegionalMatchupGroups = RegionalMatchupGroups
+			};
+
+			await JS.InvokeVoidAsync(Constants.FUNCTION_ADD_USER_BRACKET, GenderBracketId, bracketToSave.Id, bracketToSave.Champion, HelperFunctions.ConvertBracket(bracketToSave.RegionalMatchupGroups));
+
+			UserBrackets.Add(bracketToSave);
+			MaxEntries = UserBrackets.Count > 9;
+			AlertMessage = "Bracket saved successfully!";
+			HideAlert = false;
+		}
+		catch (Exception ex)
+		{
+			AlertMessage = "Error saving bracket.";
+			HideAlert = false;
+			Console.WriteLine(ex);
+		}
+		return true;
+	}
+
+	private async Task<bool> RetrieveUserBrackets(){
+		try{
+			this.UserBrackets = await JS.InvokeAsync<List<TourneyGroup>>(Constants.FUNCTION_RETRIEVE_USER_BRACKETS, GenderBracketId);
+			MaxEntries = UserBrackets.Count > 9;
+			// Reset selection so the first click always fires ValueChanged
+			ActiveBracket = null;
+			StateHasChanged();
+		}
+		catch(Exception e){
+			Console.Write(e);
+		}
+		return true;
+	}
+
+	private void LoadBracket(TourneyGroup selected)
+	{
+		if(selected == null){
+			NewBracket();
+		}else{
+			ActiveBracket = selected;
+			Champion = selected.Champion;
+			BracketName = selected.Id;
+
+			RegionalMatchupGroups = selected.RegionalMatchupGroups
+				.Select(r => r.Clone())   // deep clone each region
+				.ToList();
+		}
+		StateHasChanged();
+	}
+
+	private void NewBracket()
+	{
+		ActiveBracket = null;
+		BracketName = "";
+		Clear();
+	}
+
+	protected override async Task OnParametersSetAsync()
+	{
+		IsLoading = true;
+		if(Gender != Constants.URL_MENS && Gender != Constants.URL_WOMENS)
+		{
+			// Navigate to a route that doesn't exist → built‑in 404
+			Nav.NavigateTo("/not-found");
+		}
+		if(Gender == Constants.URL_MENS){
+			GenderBracketId = Constants.BRACKET_MEN;
+			GenderHistoricalStatsId = Constants.STATS_HISTORIC;
+			GenderFiveThirtyEightOddsId = Constants.STATS_538;
+		}else{
+			GenderBracketId = Constants.BRACKET_WOMEN;
+			GenderHistoricalStatsId = Constants.STATS_HISTORIC_W;
+			GenderFiveThirtyEightOddsId = Constants.STATS_538_W;
+		}
 		await RetrieveStats();
 		await RetrieveBracket();
+		await RetrieveUserBrackets();
+		IsLoading = false;
 	}
 }

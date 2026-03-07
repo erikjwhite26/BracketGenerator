@@ -20,7 +20,7 @@ public class FirebaseAuthStateProvider : AuthenticationStateProvider
     }
 
     [JSInvokable]
-    public void AuthStateChanged(string? uid)
+    public void AuthStateChanged(string? uid, Dictionary<string, object>? claims)
     {
         if (string.IsNullOrEmpty(uid))
         {
@@ -28,10 +28,28 @@ public class FirebaseAuthStateProvider : AuthenticationStateProvider
         }
         else
         {
+            var claimList = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, uid)
+            };
+
+            if (claims != null)
+            {
+                foreach (var kvp in claims)
+                {
+                    claimList.Add(new Claim(kvp.Key, kvp.Value.ToString() ?? ""));
+                }
+
+                // Map Firebase custom claim "admin" to Blazor role "Admin"
+                if (claims.TryGetValue("admin", out var isAdmin) &&
+                    isAdmin?.ToString() == "True")
+                {
+                    claimList.Add(new Claim(ClaimTypes.Role, "Admin"));
+                }
+            }
+
             _currentUser = new ClaimsPrincipal(
-                new ClaimsIdentity(
-                    [new Claim(ClaimTypes.NameIdentifier, uid)],
-                    "firebase"));
+                new ClaimsIdentity(claimList, "firebase"));
         }
 
         _isInitialized = true;

@@ -1,65 +1,32 @@
-@page "/stats"
+@page "/statsadmin"
+@attribute [Authorize(Roles = "Admin")]
 @using BlazorApp.Data
 @using BlazorApp.Entities
 @using Microsoft.AspNetCore.Authorization
 @inject IJSRuntime JS
 @inject FirestoreCacheService cache
 
-<PageTitle>Stats</PageTitle>
+<PageTitle>Stats Admin</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-6 mb-10">
 
-    <MudText Typo="Typo.h3" Class="mb-2">Stats</MudText>
-    <MudText Typo="Typo.subtitle1" Class="mb-4">
-        These tables show the values used when determining Auto‑Fill outcomes.
-    </MudText>
-
     <MudGrid GutterSize="3">
-
-        <!-- Mathematical Stats -->
-        <MudItem xs="12">
-            <MudCard Elevation="3" Class="pa-4 h-100"
-                     Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
-                <MudCardContent>
-
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
-                        <MudIcon Icon="@Icons.Material.Filled.Calculate" Size="Size.Medium" Class="mr-2" />
-                        <MudText Typo="Typo.h5">Mathematical Stats</MudText>
-                    </MudStack>
-
-                    <div class="stats-table-wrapper">
-                        <table class="stat-table">
-                            <thead>
-                                <tr>
-                                    <th>Seeds</th>
-                                    @for (int l = 1; l <= 16; l++)
-                                    {
-                                        <td>@l</td>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int j = 1; j <= 16; j++)
-                                {
-                                    <tr>
-                                        <th>@j</th>
-                                        @for (int k = 1; k <= 16; k++)
-                                        {
-                                            double x = Math.Round(((double)k / ((double)j + (double)k)), 2);
-                                            <td class="@(@j == k ? "highlight-cell" : "")">@x</td>
-                                        }
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-
+        
         <!-- Historical Men's Stats -->
         <MudItem xs="12">
+            <AuthorizeView>
+                <Authorized>
+                    <MudItem xs="12" Class="ml-auto">
+                        <MudButton Variant="Variant.Filled"
+                                Size="Size.Large"
+                                FullWidth="true"
+                                Color="Color.Success"
+                                @onclick="() => SaveStat(Constants.STATS_HISTORIC, HistoricStats)">
+                            Save Historical Men's Stats
+                        </MudButton>
+                    </MudItem>
+                </Authorized>
+            </AuthorizeView>
             <MudCard Elevation="3" Class="pa-4 h-100"
                      Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
                 <MudCardContent>
@@ -89,7 +56,9 @@
                                         {
 											int seedIdInt = int.TryParse(seed.Id, out var parsed) ? parsed : -1;
 											<td class="@((stat.Id == seedIdInt) ? "highlight-cell" : "")">
-												@stat.Probability
+                                                <input class="stat-input"
+                                                    value="@stat.Probability"
+                                                    @oninput='e => stat.Probability = double.Parse(e.Value?.ToString() ?? "0")' />
 											</td>
                                         }
                                     </tr>
@@ -104,6 +73,19 @@
 
         <!-- Historical Women's Stats -->
         <MudItem xs="12">
+            <AuthorizeView>
+                <Authorized>
+                    <MudItem xs="12" Class="ml-auto">
+                        <MudButton Variant="Variant.Filled"
+                                Size="Size.Large"
+                                FullWidth="true"
+                                Color="Color.Success"
+                                @onclick="() => SaveStat(Constants.STATS_HISTORIC_W, HistoricStatsW)">
+                            Save Historical Women's Stats
+                        </MudButton>
+                    </MudItem>
+                </Authorized>
+            </AuthorizeView>
             <MudCard Elevation="3" Class="pa-4 h-100"
                      Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
                 <MudCardContent>
@@ -133,7 +115,9 @@
                                         {
 											int seedIdInt = int.TryParse(seed.Id, out var parsed) ? parsed : -1;
 											<td class="@((stat.Id == seedIdInt) ? "highlight-cell" : "")">
-												@stat.Probability
+                                                <input class="stat-input"
+                                                    value="@stat.Probability"
+                                                    @oninput='e => stat.Probability = double.Parse(e.Value?.ToString() ?? "0")' />
 											</td>
                                         }
                                     </tr>
@@ -148,6 +132,30 @@
 
         <!-- 538 Men's Stats -->
         <MudItem xs="12">
+            <AuthorizeView>
+                <Authorized>
+                    <MudGrid>
+                        <MudItem xs="6" Class="ml-auto">
+                            <MudButton Variant="Variant.Filled"
+                                    Size="Size.Large"
+                                    FullWidth="true"
+                                    Color="Color.Success"
+                                    @onclick="() => SaveStat(Constants.STATS_538, FiveThirtyEightOdds)">
+                                Save 538 Men's Stats
+                            </MudButton>
+                        </MudItem>
+                        <MudItem xs="6" Class="ml-auto">
+                            <MudButton Variant="Variant.Filled"
+                                    Size="Size.Large"
+                                    FullWidth="true"
+                                    Color="Color.Warning"
+                                    @onclick="() => ResetStat(Constants.STATS_538)">
+                                Reset 538 Men's Stats
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </Authorized>
+            </AuthorizeView>
             <MudCard Elevation="3" Class="pa-4 h-100"
                      Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
                 <MudCardContent>
@@ -169,10 +177,18 @@
                                 @foreach (var statDetails in FiveThirtyEightOdds)
                                 {
                                     <tr>
-                                        <th>@statDetails.Id</th>
+                                        <th>
+                                            <input class="stat-input"
+                                                value="@statDetails.Id"
+                                                @oninput="e => statDetails.Id = e.Value?.ToString() ?? string.Empty" />
+                                        </th>
                                         @foreach (var stat in statDetails.Stats)
                                         {
-                                            <td>@stat.Probability</td>
+                                            <td>
+                                                <input class="stat-input"
+                                                    value="@stat.Probability"
+                                                    @oninput='e => stat.Probability = double.Parse(e.Value?.ToString() ?? "0")' />
+                                            </td>
                                         }
                                     </tr>
                                 }
@@ -186,6 +202,30 @@
 
         <!-- 538 Women's Stats -->
         <MudItem xs="12">
+            <AuthorizeView>
+                <Authorized>
+                    <MudGrid>
+                        <MudItem xs="6" Class="ml-auto">
+                            <MudButton Variant="Variant.Filled"
+                                    Size="Size.Large"
+                                    FullWidth="true"
+                                    Color="Color.Success"
+                                    @onclick="() => SaveStat(Constants.STATS_538_W, FiveThirtyEightOddsW)">
+                                Save 538 Women's Stats
+                            </MudButton>
+                        </MudItem>
+                        <MudItem xs="6" Class="ml-auto">
+                            <MudButton Variant="Variant.Filled"
+                                    Size="Size.Large"
+                                    FullWidth="true"
+                                    Color="Color.Warning"
+                                    @onclick="() => ResetStat(Constants.STATS_538_W)">
+                                Reset 538 Women's Stats
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </Authorized>
+            </AuthorizeView>
             <MudCard Elevation="3" Class="pa-4 h-100"
                      Style="background-color: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border-radius: 12px; overflow-x: scroll;">
                 <MudCardContent>
@@ -207,10 +247,18 @@
                                 @foreach (var statDetails in FiveThirtyEightOddsW)
                                 {
                                     <tr>
-                                        <th>@statDetails.Id</th>
+                                        <th>
+                                            <input class="stat-input"
+                                                value="@statDetails.Id"
+                                                @oninput="e => statDetails.Id = e.Value?.ToString() ?? string.Empty" />
+                                        </th>
                                         @foreach (var stat in statDetails.Stats)
                                         {
-                                            <td>@stat.Probability</td>
+                                            <td>
+                                                <input class="stat-input"
+                                                    value="@stat.Probability"
+                                                    @oninput='e => stat.Probability = double.Parse(e.Value?.ToString() ?? "0")' />
+                                            </td>
                                         }
                                     </tr>
                                 }
@@ -253,6 +301,63 @@
         }
         return [];
     }
+    
+    private async Task<bool> SaveStat(string statId, List<StatDetails> statDetails)
+    {
+        try
+        {
+            await JS.InvokeVoidAsync(Constants.FUNCTION_ADD_STAT, statId, HelperFunctions.ConvertStats(statDetails));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        return true;
+    }
+
+    private async Task<bool> ResetStat(string statId){
+        try{
+            var teams = new List<string>();
+            if(statId == Constants.STATS_538)
+            {
+                teams = await GetTeams(Constants.BRACKET_MEN);
+                teams.Zip(FiveThirtyEightOdds, (team, stat) => stat.Id = team).ToList();
+                FiveThirtyEightOdds = FiveThirtyEightOdds.OrderBy(s => s.Id).ToList();
+            } 
+            else if(statId == Constants.STATS_538_W)
+            {
+                teams = await GetTeams(Constants.BRACKET_WOMEN);
+                teams.Zip(FiveThirtyEightOddsW, (team, stat) => stat.Id = team).ToList();
+                FiveThirtyEightOddsW = FiveThirtyEightOddsW.OrderBy(s => s.Id).ToList();
+            }
+			StateHasChanged();            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        return true;
+    }
+
+	async Task<List<string>> GetTeams(string bracketId){
+		try{
+			var tourneyGroup = new TourneyGroup();
+			var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, bracketId, tourneyGroup);
+			return tourneyGroupRs.RegionalMatchupGroups
+                .SelectMany(r => r.RegionalMatchupDetails.RegionalMatchups)
+                .SelectMany(m => new[] { m.Matchup.Team1.Name, m.Matchup.Team2.Name })
+                .Where(name => !string.IsNullOrWhiteSpace(name))
+                .SelectMany(name => name.Split('/', StringSplitOptions.RemoveEmptyEntries)
+                                        .Select(n => n.Trim()))
+                .Where(n => !string.IsNullOrWhiteSpace(n))
+                .Distinct()
+                .ToList();
+		}
+		catch(Exception e){
+			Console.Write(e);
+		}
+		return [];
+	}
 
     protected override async Task OnInitializedAsync()
     {

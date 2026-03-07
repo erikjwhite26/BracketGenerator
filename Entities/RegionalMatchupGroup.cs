@@ -12,8 +12,13 @@ public class RegionalMatchupGroup{
         this.Id = Id;
         this.RegionalMatchupDetails = RegionalMatchupDetails;
     }
-    
-	[FirestoreProperty("Id")]
+    public RegionalMatchupGroup Clone() => new()
+    {
+        Id = Id,
+        RegionalMatchupDetails = RegionalMatchupDetails.Clone()
+    };
+
+    [FirestoreProperty("Id")]
     public int Id {get;set;}
 	[FirestoreProperty("RegionalMatchupDetails")]
     public RegionalMatchupDetails RegionalMatchupDetails {get;set;}

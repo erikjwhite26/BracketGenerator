@@ -17,7 +17,19 @@ public class RegionalMatchupDetails
         this.RegionalMatchups = RegionalMatchups;
     }
 
-	[FirestoreProperty("RegionalClass")]
+    public RegionalMatchupDetails Clone() => new()
+    {
+        RegionalClass = RegionalClass,
+        RegionalMatchups = RegionalMatchups
+                .Select(kvp => new MatchupGroup
+                {
+                    Id = kvp.Id,
+                    Matchup = kvp.Matchup.Clone()
+                })
+                .ToList()
+    };
+
+    [FirestoreProperty("RegionalClass")]
     public string RegionalClass {get;set;}
 	[FirestoreProperty("RegionalMatchups")]
     public List<MatchupGroup> RegionalMatchups {get;set;}

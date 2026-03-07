@@ -4,9 +4,12 @@
 @inject FirebaseAuthService Auth
 @inject NavigationManager Nav
 
-<div class="top-row ps-3 navbar navbar-dark">
+<div class="top-row navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href=""><i class="fa-solid fa-basketball"></i> March Madness</a>
+        <a class="navbar-brand" href="">
+            <MudIcon Icon="@Icons.Material.Filled.Home" Class="me-2" />
+            March Madness
+        </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,31 +20,49 @@
     <Authorized>  
         <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
             <nav class="flex-column">
+
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> Men's Bracket
+                    <NavLink class="nav-link" href=@($"bracket/{Constants.URL_MENS}") Match="NavLinkMatch.All">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Class="me-2" />
+                        Men's Bracket
                     </NavLink>
                 </div>
+
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="bracketw" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> Women's Bracket
+                    <NavLink class="nav-link" href=@($"bracket/{Constants.URL_WOMENS}") Match="NavLinkMatch.All">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Class="me-2" />
+                        Women's Bracket
                     </NavLink>
                 </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="leaderboard">
+                        <MudIcon Icon="@Icons.Material.Filled.Leaderboard" Class="me-2" />
+                        Leaderboard
+                    </NavLink>
+                </div>
+
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="stats">
-                        <span class="oi oi-plus" aria-hidden="true"></span> Stats
+                        <MudIcon Icon="@Icons.Material.Filled.PieChart" Class="me-2" />
+                        Stats
                     </NavLink>
                 </div>
+
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="about">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> About
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Class="me-2" />
+                        About
                     </NavLink>
                 </div>
+
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="login" onclick="@(() => Logout())">
-                        <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
+                    <NavLink class="nav-link" href="login" @onclick="@(() => Logout())">
+                        <MudIcon Icon="@Icons.Material.Filled.Logout" Class="me-2" />
+                        Logout
                     </NavLink>
                 </div>
+
             </nav>
         </div>
     </Authorized>
@@ -49,16 +70,56 @@
     <NotAuthorized>
         <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
             <nav class="flex-column">
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href=@($"bracket/{Constants.URL_MENS}") Match="NavLinkMatch.All">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Class="me-2" />
+                        Men's Bracket
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href=@($"bracket/{Constants.URL_WOMENS}") Match="NavLinkMatch.All">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Class="me-2" />
+                        Women's Bracket
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="leaderboard">
+                        <MudIcon Icon="@Icons.Material.Filled.Leaderboard" Class="me-2" />
+                        Leaderboard
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="stats">
+                        <MudIcon Icon="@Icons.Material.Filled.PieChart" Class="me-2" />
+                        Stats
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="about">
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Class="me-2" />
+                        About
+                    </NavLink>
+                </div>
+
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="login" Match="NavLinkMatch.All">
-                        <span class="oi oi-account-login" aria-hidden="true"></span> Login
+                        <MudIcon Icon="@Icons.Material.Filled.Login" Class="me-2" />
+                        Login
                     </NavLink>
                 </div>
+
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="register" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span> Register
+                        <MudIcon Icon="@Icons.Material.Filled.Person" Class="me-2" />
+                        Register
                     </NavLink>
                 </div>
+
             </nav>
         </div>
     </NotAuthorized>
@@ -77,6 +138,5 @@
     async Task Logout()
     {
         await Auth.Logout();
-        //Nav.NavigateTo("/login");
     }
 }

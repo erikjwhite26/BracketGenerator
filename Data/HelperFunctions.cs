@@ -27,7 +27,8 @@ public class HelperFunctions()
                         [key: "MatchupClass"] = mg.Matchup.MatchupClass,
                         [key: "NextMatchup"] = mg.Matchup.NextMatchup,
                         [key: "NextMatchupTeam"] = mg.Matchup.NextMatchupTeam,
-                        [key: "Regional"] = mg.Matchup.Regional
+                        [key: "Regional"] = mg.Matchup.Regional,
+                        [key: "Round"] = mg.Matchup.Round
                     };
 
                     if (mg.Matchup.Team1 != null)
@@ -127,4 +128,54 @@ public class HelperFunctions()
         // fallback
         return "Something went wrong. Please try again.";
     }
+
+    public static int GetBracketPoints(List<RegionalMatchupGroup> officialBracket, TourneyGroup bracket)
+	{
+		int correct = 0;
+
+		foreach (var region in bracket.RegionalMatchupGroups)
+		{
+			var officialRegion = officialBracket.FirstOrDefault(r => r.Id == region.Id);
+			if (officialRegion == null) continue;
+
+			foreach (var matchup in region.RegionalMatchupDetails.RegionalMatchups)
+			{
+				if(matchup.Matchup.Round == 1) continue;
+
+				var officialMatchup = officialRegion.RegionalMatchupDetails.RegionalMatchups
+					.FirstOrDefault(m => m.Id == matchup.Id);
+
+				if (officialMatchup == null) continue;
+
+				// Skip if official winner is missing
+				var officialWinner1 = officialMatchup.Matchup.Team1.Name;
+				if (string.IsNullOrWhiteSpace(officialWinner1))
+					continue;
+
+				// Determine user's winner
+				var userWinner1 = matchup.Matchup.Team1.Name;
+
+				if (!string.IsNullOrWhiteSpace(userWinner1) &&
+					userWinner1.Equals(officialWinner1, StringComparison.OrdinalIgnoreCase))
+				{
+					correct+=100*(matchup.Matchup.Round - 1);
+				}
+
+				// Skip if official winner is missing
+				var officialWinner2 = officialMatchup.Matchup.Team2.Name;
+				if (string.IsNullOrWhiteSpace(officialWinner2))
+					continue;
+
+				// Determine user's winner
+				var userWinner2 = matchup.Matchup.Team2.Name;
+
+				if (!string.IsNullOrWhiteSpace(userWinner2) &&
+					userWinner2.Equals(officialWinner2, StringComparison.OrdinalIgnoreCase))
+				{
+					correct+=100*(matchup.Matchup.Round - 1);
+				}
+			}
+		}
+		return correct;
+	}
 }

@@ -1,0 +1,171 @@
+@page "/"
+@using BlazorApp.Data;
+@using Microsoft.AspNetCore.Authorization;
+@inject NavigationManager Nav;
+
+<PageTitle>Home</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-6 mb-10">
+
+    <!-- Hero Section -->
+    <MudCard Elevation="3" Class="pa-6 mb-8 home-hero-card">
+        <MudCardContent Class="text-center">
+            <MudText Typo="Typo.h4" Class="home-title">
+                Welcome to Bracketology!
+            </MudText>
+
+            <MudText Typo="Typo.subtitle1" Class="home-subtitle">
+                Where data sharpens your instincts and every choice counts.<br/>Step up, make your picks, and compete for the top spot.
+            </MudText>
+
+            <AuthorizeView>
+                <NotAuthorized>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               OnClick="Login"
+                               Class="home-login-btn">
+                        Log In to Get Started
+                    </MudButton>
+                </NotAuthorized>
+            </AuthorizeView>
+        </MudCardContent>
+    </MudCard>
+
+    <!-- Navigation Cards -->
+    <MudGrid Class="home-card-grid" GutterSize="3">
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard Elevation="3" Class="home-card pa-4" @onclick='() => NavTo($"/bracket/{Constants.URL_MENS}")'>
+                <MudCardContent Class="text-center">
+                    <div class="card-header-inline">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5" Class="m-0">Men's Bracket</MudText>
+                    </div>
+                    <MudText Typo="Typo.body2">Build your men’s bracket, trust your instincts, and see how far your picks can go.</MudText>
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard Elevation="3" Class="home-card pa-4" @onclick='() => NavTo($"/bracket/{Constants.URL_WOMENS}")'>
+                <MudCardContent Class="text-center">
+                    <div class="card-header-inline">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsBasketball" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5" Class="m-0">Women's Bracket</MudText>
+                    </div>
+                    <MudText Typo="Typo.body2">Create your women’s bracket and join the chase for the perfect run.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard Elevation="3" Class="home-card pa-4" @onclick='() => NavTo("/leaderboard")'>
+                <MudCardContent Class="text-center">
+                    <div class="card-header-inline">
+                        <MudIcon Icon="@Icons.Material.Filled.BarChart" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5" Class="m-0">Leaderboard</MudText>
+                    </div>
+                    <MudText Typo="Typo.body2">Track how your bracket stacks up against the competition with real time rankings.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard Elevation="3" Class="home-card pa-4" @onclick='() => NavTo("/stats")'>
+                <MudCardContent Class="text-center">
+                    <div class="card-header-inline">
+                        <MudIcon Icon="@Icons.Material.Filled.PieChart" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5" Class="m-0">Stats</MudText>
+                    </div>
+                    <MudText Typo="Typo.body2">Explore the numbers behind the madness. Matchup data, odds, and trends that make picking fun.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard Elevation="3" Class="home-card pa-4" @onclick='() => NavTo("/about")'>
+                <MudCardContent Class="text-center">
+                    <div class="card-header-inline">
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Size="Size.Medium" Class="mr-2" />
+                        <MudText Typo="Typo.h5" Class="m-0">About</MudText>
+                    </div>
+                    <MudText Typo="Typo.body2">See how the bracket builder works and unlock everything you need to make winning picks.</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+    </MudGrid>
+
+</MudContainer>
+
+@code {
+    private void NavTo(string url) => Nav.NavigateTo(url);
+    private void Login() => Nav.NavigateTo("/login");
+}
+
+<style>
+/* --------------------------------------------- */
+/* HERO CARD                                      */
+/* --------------------------------------------- */
+.home-hero-card {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(4px) !important;
+    color: black !important;
+    border-radius: 12px !important;
+    overflow: visible !important;
+    text-align: left;
+}
+
+.home-title {
+    margin-bottom: 8px;
+}
+
+.home-subtitle {
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.home-login-btn {
+    margin-top: 10px;
+}
+
+.card-header-inline {
+    display: flex;
+    align-items: center;
+    justify-content: left; /* keeps it centered like your original layout */
+}
+
+/* --------------------------------------------- */
+/* NAVIGATION CARDS                               */
+/* --------------------------------------------- */
+.home-card-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.home-card-grid > .mud-item {
+    display: flex;
+}
+
+.home-card {
+    border-radius: 12px !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(4px) !important;
+    cursor: pointer !important;
+    /* Required because MudBlazor reset strips transitions */
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    /* Required so hover shadows aren’t clipped */
+    overflow: visible !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Hover effect */
+.home-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.22) !important;
+}
+</style>

@@ -1,0 +1,150 @@
+@page "/leaderboard"
+@using BlazorApp.Data;
+@using BlazorApp.Entities;
+
+@inject IJSRuntime JS;
+
+<PageTitle>Leaderboard</PageTitle>
+
+@if(IsLoading){
+	<div id="loading-message">
+		<h1>Loading the Madness</h1>
+		<div class="spinner-border" role="status"></div>
+	</div>
+}else{
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-6 mb-10">
+
+    <MudText Typo="Typo.h4" Class="mb-4">Leaderboard</MudText>
+
+    <!-- Gender Toggle -->
+    <MudToggleGroup T="string" Value="@SelectedGender" ValueChanged="OnGenderChanged" Outlined="true" Delimiters="true" Size="Size.Medium" Color="Color.Primary">
+        <MudToggleItem Value="@Constants.URL_MENS">Men's Bracket</MudToggleItem>
+        <MudToggleItem Value="@Constants.URL_WOMENS">Women's Bracket</MudToggleItem>
+    </MudToggleGroup>
+
+    <!-- Leaderboard Table -->
+    <MudTable Items="RankedBrackets" Hover="true" Dense="true" Elevation="2">
+        <HeaderContent>
+            <MudTh>Rank</MudTh>
+            <MudTh>Bracket Name</MudTh>
+            <MudTh>Points</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Rank">@context.Rank</MudTd>
+            <MudTd DataLabel="Bracket">@context.Bracket.Id</MudTd>
+            <MudTd DataLabel="Points">@context.Points</MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudContainer>
+}
+
+@code {
+    private bool IsLoading { get; set; } = true;
+    private string SelectedGender = Constants.URL_MENS;
+    private string GenderBracketId = Constants.BRACKET_MEN;
+    private List<RegionalMatchupGroup> OfficialMensBracket = new();
+    private List<RegionalMatchupGroup> OfficialWomensBracket = new();
+    private List<TourneyGroup> UserBrackets = new();
+    private List<LeaderboardEntry> RankedBrackets = new();
+    private List<LeaderboardEntry> RankedMensBrackets = new();
+    private List<LeaderboardEntry> RankedWomensBrackets = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsLoading = true;
+        await RetrieveBrackets();
+        await RetrieveAllUserBrackets();
+        await LoadLeaderboard();
+        // default to men's on first load
+        RankedBrackets = RankedMensBrackets;
+        IsLoading = false;
+    }
+
+    
+	async Task<bool> RetrieveBrackets(){
+		try{
+			var tourneyGroup = new TourneyGroup();
+			var tourneyGroupRs = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, Constants.BRACKET_MEN, tourneyGroup);
+			this.OfficialMensBracket = tourneyGroupRs.RegionalMatchupGroups;
+
+            var tourneyGroupW = new TourneyGroup();
+            var tourneyGroupRsW = await JS.InvokeAsync<TourneyGroup>(Constants.FUNCTION_RETRIEVE_BRACKETS, Constants.BRACKET_WOMEN, tourneyGroup);
+            this.OfficialWomensBracket = tourneyGroupRsW.RegionalMatchupGroups;
+		}
+		catch(Exception e){
+			Console.Write(e);
+		}
+		return true;
+	}
+    
+	private async Task<bool> RetrieveAllUserBrackets(){
+		try{
+			this.UserBrackets = await JS.InvokeAsync<List<TourneyGroup>>(Constants.FUNCTION_RETRIEVE_ALL_USER_BRACKETS);
+            Console.Write(UserBrackets);
+		}
+		catch(Exception e){
+			Console.Write(e);
+		}
+		return true;
+	}
+
+    private async Task<bool> LoadLeaderboard()
+    {
+        RankedMensBrackets = await CalculateLeaderboard(OfficialMensBracket, Constants.BRACKET_MEN);
+        RankedWomensBrackets = await CalculateLeaderboard(OfficialWomensBracket, Constants.BRACKET_WOMEN);
+        return true;
+    }
+
+    private async Task<List<LeaderboardEntry>> CalculateLeaderboard(List<RegionalMatchupGroup> matchups, string bracketType)
+    {
+        var entries = UserBrackets
+            .Where(t => t.BracketType == bracketType)
+            .Select(b => new LeaderboardEntry
+            {
+                Bracket = b,
+                Points = HelperFunctions.GetBracketPoints(matchups, b)
+            })
+            .ToList();
+
+        // sort + rank unchanged...
+        entries = entries.OrderByDescending(e => e.Points).ToList();
+
+        int rank = 1;
+        int previousPoints = -1;
+        int actualRank = 1;
+
+        foreach (var entry in entries)
+        {
+            if (entry.Points != previousPoints)
+            {
+                actualRank = rank;
+                previousPoints = entry.Points;
+            }
+            entry.Rank = actualRank;
+            rank++;
+        }
+
+        return entries;
+    }
+
+    private async Task OnGenderChanged(string gender)
+    {
+        IsLoading = true;
+        SelectedGender = gender;
+        if(gender == Constants.URL_WOMENS){
+            GenderBracketId = Constants.BRACKET_WOMEN;
+            RankedBrackets = RankedWomensBrackets;
+        }else{
+            GenderBracketId = Constants.BRACKET_MEN;
+            RankedBrackets = RankedMensBrackets;
+        }
+        IsLoading = false;
+    }
+
+    public class LeaderboardEntry
+    {
+        public TourneyGroup Bracket { get; set; } = new();
+        public int Points { get; set; }
+        public int Rank { get; set; }
+    }
+}

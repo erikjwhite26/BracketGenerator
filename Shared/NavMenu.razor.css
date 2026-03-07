@@ -1,52 +1,99 @@
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+/* --------------------------------------------- */
+/* TOP BAR CONTAINER                             */
+/* --------------------------------------------- */
 
 .top-row {
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
+
+    /* Make the entire bar a flex container */
+    display: flex;
+    align-items: center;
+    padding-left: 0; /* remove Bootstrap padding */
 }
 
+/* Override Bootstrap navbar spacing */
+.top-row.navbar {
+    padding: 0 !important;
+}
+
+/* --------------------------------------------- */
+/* INNER CONTAINER                               */
+/* --------------------------------------------- */
+
+.top-row .container-fluid {
+    display: flex;
+    align-items: center;
+
+    /* Brand left, toggler right */
+    justify-content: flex-start;
+    position: relative;
+}
+
+/* --------------------------------------------- */
+/* BRAND (March Madness)                         */
+/* --------------------------------------------- */
+
 .navbar-brand {
+    display: flex;
+    align-items: center;
+
+    /* Match nav-item padding (px-3 = 1rem) */
+    padding-left: 1rem;
+
+    height: 3rem; /* same height as nav links */
+    margin: 0;
+
     font-size: 1.2rem;
     color: orange;
 }
 
-.oi {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
+/* Align MudBlazor icon with text */
+.navbar-brand .mud-icon-root {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
-.iconify {
-    font-size: 1.3rem;
-    vertical-align: text-top;
-    top: -2px;
-    margin-left: 3px;
+/* --------------------------------------------- */
+/* NAV TOGGLER (hamburger)                       */
+/* --------------------------------------------- */
+
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    /* Position it on the right without affecting centering */
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
+
+/* --------------------------------------------- */
+/* NAV ITEMS (unchanged from your existing CSS)  */
+/* --------------------------------------------- */
 
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
 
-    .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
+.nav-item ::deep a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
 
 .nav-item ::deep a.active {
     background-color: rgba(255,255,255,0.25);
@@ -58,13 +105,16 @@
     color: white;
 }
 
+/* --------------------------------------------- */
+/* DESKTOP BEHAVIOR                              */
+/* --------------------------------------------- */
+
 @media (min-width: 900px) {
     .navbar-toggler {
         display: none;
     }
 
     .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
 }

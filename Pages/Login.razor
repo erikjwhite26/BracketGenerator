@@ -80,10 +80,10 @@
             ["Email"] = email
         };
 
-        var dialog = DialogService.Show<ResetPasswordDialog>("Reset Password", parameters);
+        var dialog = await DialogService.ShowAsync<ResetPasswordDialog>("Reset Password", parameters);
         var result = await dialog.Result;
 
-        if (!result.Cancelled && result.Data is string successMessage)
+        if (result != null && !result.Canceled && result.Data is string successMessage)
         {
             error = successMessage;
         }
