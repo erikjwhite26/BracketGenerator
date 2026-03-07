@@ -90,6 +90,29 @@ li:hover[b-zbx9xu7k6e] {
 	width: 100px;
 }
 
+/* Allow the chip itself to grow vertically */
+:global(.bracket-chip)[b-zbx9xu7k6e] {
+    white-space: normal !important;
+    height: auto !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+
+/* Override MudChip internal content wrapper */
+:global(.bracket-chip .mud-chip-content)[b-zbx9xu7k6e] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    white-space: normal !important;
+    line-height: 1.2;
+}
+
+/* MudChipSet forces all chips to be single-line unless overridden */
+:global(.mud-chip-set .mud-chip)[b-zbx9xu7k6e] {
+    height: auto !important;
+    white-space: normal !important;
+}
+
 .select[b-zbx9xu7k6e] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -115,6 +138,16 @@ li:hover[b-zbx9xu7k6e] {
 .export-btn[b-zbx9xu7k6e] {
 	position: absolute;
 	right: 0px;
+}
+
+.correct-pick[b-zbx9xu7k6e] {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong-pick[b-zbx9xu7k6e] {
+    text-decoration: line-through;
+    opacity: 0.6;
 }
 
 .bracket[b-zbx9xu7k6e] {
@@ -439,6 +472,477 @@ ul[b-zbx9xu7k6e] {
 		width: 150px;
 	}
 	.host[b-zbx9xu7k6e]{
+		width: 150px;
+	}
+}
+/* /Pages/BracketAdmin.razor.rz.scp.css */
+.bracket-page[b-qy19ptyh16]{
+	display: block;
+}
+.bracket-body[b-qy19ptyh16] {
+	margin-top: 40px;
+}
+li:hover[b-qy19ptyh16] {
+	background-color: #aafffc;
+	cursor: pointer;
+}
+.champion[b-qy19ptyh16]{
+	text-align: center;
+	font-weight: bold;
+}
+.action-menu[b-qy19ptyh16]{
+	display:block;
+	font-weight: bold;
+}
+
+.action-menu-mobile[b-qy19ptyh16]{
+	display:none;
+}
+
+.team-input[b-qy19ptyh16] {
+    width: 120px;          /* adjust to fit your bracket spacing */
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    font-size: 0.85rem;
+    font-family: inherit;
+    display: inline-block;
+}
+
+/* Optional: subtle focus indicator */
+.team-input:focus[b-qy19ptyh16] {
+    border-bottom: 1px solid #1976d2;
+}
+
+.stat-select[b-qy19ptyh16], .mud-input-control[b-qy19ptyh16]{
+	background: #ffffff
+}
+
+.alert-block[b-qy19ptyh16] {
+	display: flex;
+	height: 24px;
+}
+
+.alert-message[b-qy19ptyh16] {
+	position: absolute;
+	right: 0px;
+	margin-right: 8px;
+	padding-left: 110px;
+	width: 440px;
+	border-radius: 3px;
+}
+
+.alert-success[b-qy19ptyh16] {
+	background-color: greenyellow;
+}
+
+.alert-failure[b-qy19ptyh16] {
+	background-color: orange;
+}
+
+#alert-message.hidden[b-qy19ptyh16] {
+	display: none;
+}
+
+#alert-message[b-qy19ptyh16] {
+	display: flex;
+}
+
+.form-group[b-qy19ptyh16] {
+	margin-bottom: 4px;
+	margin-right: 8px;
+	display: flex;
+}
+
+.stats[b-qy19ptyh16] {
+	width: 162px;
+}
+
+.credentials[b-qy19ptyh16] {
+	display: flex;
+	position: absolute;
+	right: 0px;
+}
+
+.username[b-qy19ptyh16] {
+	display: block;
+	margin-right: 8px;
+	width: 162px;
+}
+
+.password[b-qy19ptyh16] {
+	display: block;
+	margin-right: 8px;
+	width: 162px;
+}
+
+.host[b-qy19ptyh16] {
+	display: block;
+	margin-right: 8px;
+	width: 100px;
+}
+
+.select[b-qy19ptyh16] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+	background-repeat: no-repeat;
+	background-position-x: 100%;
+	background-position-y: 5px;
+	border: 2px solid #000;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+.form-control[b-qy19ptyh16] {
+	border: 2px solid #000;
+	font-weight: bold;
+}
+
+.action-btn[b-qy19ptyh16] {
+	margin-right: 8px;
+}
+
+.export-btn[b-qy19ptyh16] {
+	position: absolute;
+	right: 0px;
+}
+
+.correct-pick[b-qy19ptyh16] {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong-pick[b-qy19ptyh16] {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.bracket[b-qy19ptyh16] {
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: repeat(98,8px);
+	gap: 2px 6px;
+	grid-auto-flow: column;
+	margin: 20px auto;
+	width: 1200px;
+
+	@media (min-width:1400px) {
+		grid-template-columns: repeat(11, 1fr);
+		width:1400px;[b-qy19ptyh16]
+	}
+}
+
+.region[b-qy19ptyh16] {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(46,8px);
+	gap: 2px 6px;
+	grid-auto-flow: column;
+}
+
+.region-1[b-qy19ptyh16] {
+	grid-column: 1 / span 4;
+	grid-row: 1 / span 47;
+}
+
+.final-four[b-qy19ptyh16] {
+	grid-column: 4 / span 3;
+	grid-row: 43 / span 6;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(6,8px);
+	gap: 2px 6px;
+	grid-auto-flow: column;
+
+	@media (min-width:1400px) {
+		grid-column: 5 / span 3;[b-qy19ptyh16]
+	}
+}
+
+.region-2[b-qy19ptyh16] {
+	grid-column: 1 / span 4;
+	grid-row: 53 / span 47
+}
+
+.region-3[b-qy19ptyh16] {
+	grid-column: -5 / span 4;
+	grid-row: 1 / span 47;
+}
+
+.region-4[b-qy19ptyh16] {
+	grid-column: -5 / span 4;
+	grid-row: 53 / span 47
+}
+
+
+ul[b-qy19ptyh16] {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.team[b-qy19ptyh16] {
+	background-color: white;
+	font-size: 11px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 5px;
+}
+
+.team-top[b-qy19ptyh16] {
+	margin-bottom: 2px;
+}
+
+.winner[b-qy19ptyh16] {
+	background-color: #0A6FAC;
+	color: white;
+}
+
+.matchup[b-qy19ptyh16] {
+	grid-column: span 1;
+	grid-row: span 4;
+	box-shadow: 1px 1px 10px rgba(0,0,0,.5);
+}
+
+.matchup-1[b-qy19ptyh16],
+.matchup-9[b-qy19ptyh16] {
+	grid-column: span 1;
+	grid-row: span 4;
+}
+
+.matchup-2[b-qy19ptyh16],
+.matchup-10[b-qy19ptyh16] {
+	grid-row: 7 / span 4;
+}
+
+.matchup-3[b-qy19ptyh16],
+.matchup-11[b-qy19ptyh16] {
+	grid-row: 13 / span 4;
+}
+
+.matchup-4[b-qy19ptyh16],
+.matchup-12[b-qy19ptyh16] {
+	grid-row: 19 / span 4;
+}
+
+.matchup-5[b-qy19ptyh16],
+.matchup-13[b-qy19ptyh16] {
+	grid-row: 25 / span 4;
+}
+
+.matchup-6[b-qy19ptyh16],
+.matchup-14[b-qy19ptyh16] {
+	grid-row: 31 / span 4;
+}
+
+.matchup-7[b-qy19ptyh16],
+.matchup-15[b-qy19ptyh16] {
+	grid-row: 37 / span 4;
+}
+
+.matchup-8[b-qy19ptyh16],
+.matchup-16[b-qy19ptyh16] {
+	grid-row: 43 / span 4;
+}
+
+.matchup-17[b-qy19ptyh16],
+.matchup-25[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 1/span 4;
+}
+
+.matchup-18[b-qy19ptyh16],
+.matchup-26[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 7/span 4;
+}
+
+.matchup-19[b-qy19ptyh16],
+.matchup-27[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 13/span 4;
+}
+
+.matchup-20[b-qy19ptyh16],
+.matchup-28[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 19/span 4;
+}
+
+.matchup-21[b-qy19ptyh16],
+.matchup-29[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 25/span 4;
+}
+
+.matchup-22[b-qy19ptyh16],
+.matchup-30[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 31/span 4;
+}
+
+.matchup-23[b-qy19ptyh16],
+.matchup-31[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 37/span 4;
+}
+
+.matchup-24[b-qy19ptyh16],
+.matchup-32[b-qy19ptyh16] {
+	grid-column: -2/span 1;
+	grid-row: 43/span 4;
+}
+
+.matchup-33[b-qy19ptyh16],
+.matchup-37[b-qy19ptyh16] {
+	grid-column: 2 / span 1;
+	grid-row: 4 / span 4;
+}
+
+.matchup-34[b-qy19ptyh16],
+.matchup-38[b-qy19ptyh16] {
+	grid-column: 2 / span 1;
+	grid-row: 16 / span 4;
+}
+
+.matchup-35[b-qy19ptyh16],
+.matchup-39[b-qy19ptyh16] {
+	grid-column: 2 / span 1;
+	grid-row: 28 / span 4;
+}
+
+.matchup-36[b-qy19ptyh16],
+.matchup-40[b-qy19ptyh16] {
+	grid-column: 2 / span 1;
+	grid-row: 40 / span 4;
+}
+
+.matchup-41[b-qy19ptyh16],
+.matchup-45[b-qy19ptyh16] {
+	grid-column: -3 / span 1;
+	grid-row: 4 / span 4;
+}
+
+.matchup-42[b-qy19ptyh16],
+.matchup-46[b-qy19ptyh16] {
+	grid-column: -3 / span 1;
+	grid-row: 16 / span 4;
+}
+
+.matchup-43[b-qy19ptyh16],
+.matchup-47[b-qy19ptyh16] {
+	grid-column: -3 / span 1;
+	grid-row: 28 / span 4;
+}
+
+.matchup-44[b-qy19ptyh16],
+.matchup-48[b-qy19ptyh16] {
+	grid-column: -3 / span 1;
+	grid-row: 40 / span 4;
+}
+
+.matchup-49[b-qy19ptyh16],
+.matchup-51[b-qy19ptyh16] {
+	grid-column: 3 / span 1;
+	grid-row: 10 / span 4;
+}
+
+.matchup-50[b-qy19ptyh16],
+.matchup-52[b-qy19ptyh16] {
+	grid-column: 3 / span 1;
+	grid-row: 34 / span 4;
+}
+
+.matchup-53[b-qy19ptyh16],
+.matchup-55[b-qy19ptyh16] {
+	grid-column: -4 / span 1;
+	grid-row: 10 / span 4;
+}
+
+.matchup-54[b-qy19ptyh16],
+.matchup-56[b-qy19ptyh16] {
+	grid-column: -4 / span 1;
+	grid-row: 34 / span 4;
+}
+
+.matchup-57[b-qy19ptyh16],
+.matchup-58[b-qy19ptyh16] {
+	grid-column: 4 / span 1;
+	grid-row: 22 / span 4;
+}
+
+.matchup-59[b-qy19ptyh16],
+.matchup-60[b-qy19ptyh16] {
+	grid-column: -5 / span 1;
+	grid-row: 22 / span 4;
+}
+
+.matchup-61[b-qy19ptyh16] {
+	grid-column: 1 / span 1;
+	grid-row: 6/ span 4;
+}
+
+.matchup-62[b-qy19ptyh16] {
+	grid-column: 3 / span 1;
+	grid-row: 6/ span 4;
+}
+
+.matchup-63[b-qy19ptyh16] {
+	grid-column: 2 / span 1;
+	grid-row: 1/ span 4;
+}
+.team[b-qy19ptyh16] {
+	height:28px;
+	line-height: 28px;
+}
+
+@media (max-width: 1450px) {
+	.bracket-body[b-qy19ptyh16] {
+		overflow-x: scroll;
+	}
+}
+
+@media (max-width: 900px) {
+	.bracket-body[b-qy19ptyh16] {
+		margin-top: 80px;
+	}
+	.action-menu[b-qy19ptyh16]{
+		display:none;
+	}
+	.action-menu-mobile[b-qy19ptyh16]{
+		display:block;
+	}
+	.form-group-host[b-qy19ptyh16]{
+		margin-top: 20px;
+	}
+	.action-btn[b-qy19ptyh16] {
+		height: 40px;
+	}
+	.btn-group-mobile[b-qy19ptyh16] {
+		display: flex;
+		position: absolute;
+		right: 0;
+		margin-top: 24px;
+	}
+	.credentials[b-qy19ptyh16] {
+		display: block;
+	}
+	.export-btn[b-qy19ptyh16]{
+		display: flex;
+		right: inherit;
+		margin-top: 25px;
+		width: 150px;
+	}
+	.stats[b-qy19ptyh16] {
+		display: block;
+		margin-right: 8px;
+		width: 150px;
+	}
+	.host[b-qy19ptyh16]{
 		width: 150px;
 	}
 }
@@ -960,6 +1464,101 @@ table tbody tr th:first-child[b-cg7p1gjo2p] {
         overflow-y: hidden;
     }
 }
+/* /Pages/StatsAdmin.razor.rz.scp.css */
+table[b-a3f2vmneb2] {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stat-table[b-a3f2vmneb2] {
+    background-color: #fff;
+    margin-top: 10px;
+    position: relative;
+    z-index: 0;
+}
+
+thead td[b-a3f2vmneb2] {
+    font-weight: bold;
+}
+
+th[b-a3f2vmneb2], td[b-a3f2vmneb2] {
+    border: 1px solid black;
+    width: fit-content;
+    position: relative;
+}
+
+.highlight-cell[b-a3f2vmneb2] {
+    background-color: gold;
+}
+
+th:hover[b-a3f2vmneb2] {
+    background-color: #ffa;
+}
+
+body:not(.nohover) tr:hover[b-a3f2vmneb2] {
+    background-color: #ffa;
+}
+
+td:hover[b-a3f2vmneb2] {
+    background-color: #aafffc;
+}
+
+td:hover[b-a3f2vmneb2]::before,
+th:hover[b-a3f2vmneb2]::before {
+    content: "";
+    position: absolute;
+    background-color: #ffa;
+    left: -5000px;
+    top: 0;
+    height: 100%;
+    width: 10000px;
+    z-index: -1;
+}
+
+td:hover[b-a3f2vmneb2]::after,
+th:hover[b-a3f2vmneb2]::after {
+    content: "";
+    position: absolute;
+    background-color: #ffa;
+    left: 0;
+    top: -5000px;
+    height: 10000px;
+    width: 100%;
+    z-index: -1;
+}
+
+table thead tr th:first-child[b-a3f2vmneb2],
+table tbody tr th:first-child[b-a3f2vmneb2] {
+    width: 150px;
+}
+
+@media (max-width:700px) {
+    .stats-body[b-a3f2vmneb2] {
+        overflow: scroll;
+        overflow-y: hidden;
+    }
+}
+
+.stat-input[b-a3f2vmneb2] {
+    width: 80px;          /* adjust to fit your bracket spacing */
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    font-size: 0.85rem;
+    font-family: inherit;
+    display: inline-block;
+}
+
+/* Optional: subtle focus indicator */
+.stat-input:focus[b-a3f2vmneb2] {
+    border-bottom: 1px solid #1976d2;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-3ij3p7wwc4] {
     position: relative;
@@ -1045,55 +1644,102 @@ main[b-3ij3p7wwc4] {
     }
 }
 /* /Shared/NavMenu.razor.rz.scp.css */
-.navbar-toggler[b-wk4bcz64v1] {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+/* --------------------------------------------- */
+/* TOP BAR CONTAINER                             */
+/* --------------------------------------------- */
 
 .top-row[b-wk4bcz64v1] {
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
+
+    /* Make the entire bar a flex container */
+    display: flex;
+    align-items: center;
+    padding-left: 0; /* remove Bootstrap padding */
 }
 
+/* Override Bootstrap navbar spacing */
+.top-row.navbar[b-wk4bcz64v1] {
+    padding: 0 !important;
+}
+
+/* --------------------------------------------- */
+/* INNER CONTAINER                               */
+/* --------------------------------------------- */
+
+.top-row .container-fluid[b-wk4bcz64v1] {
+    display: flex;
+    align-items: center;
+
+    /* Brand left, toggler right */
+    justify-content: flex-start;
+    position: relative;
+}
+
+/* --------------------------------------------- */
+/* BRAND (March Madness)                         */
+/* --------------------------------------------- */
+
 .navbar-brand[b-wk4bcz64v1] {
+    display: flex;
+    align-items: center;
+
+    /* Match nav-item padding (px-3 = 1rem) */
+    padding-left: 1rem;
+
+    height: 3rem; /* same height as nav links */
+    margin: 0;
+
     font-size: 1.2rem;
     color: orange;
 }
 
-.oi[b-wk4bcz64v1] {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
+/* Align MudBlazor icon with text */
+.navbar-brand .mud-icon-root[b-wk4bcz64v1] {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
-.iconify[b-wk4bcz64v1] {
-    font-size: 1.3rem;
-    vertical-align: text-top;
-    top: -2px;
-    margin-left: 3px;
+/* --------------------------------------------- */
+/* NAV TOGGLER (hamburger)                       */
+/* --------------------------------------------- */
+
+.navbar-toggler[b-wk4bcz64v1] {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    /* Position it on the right without affecting centering */
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
+
+/* --------------------------------------------- */
+/* NAV ITEMS (unchanged from your existing CSS)  */
+/* --------------------------------------------- */
 
 .nav-item[b-wk4bcz64v1] {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type[b-wk4bcz64v1] {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type[b-wk4bcz64v1] {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type[b-wk4bcz64v1] {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type[b-wk4bcz64v1] {
+    padding-bottom: 1rem;
+}
 
-    .nav-item[b-wk4bcz64v1]  a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
+.nav-item[b-wk4bcz64v1]  a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
 
 .nav-item[b-wk4bcz64v1]  a.active {
     background-color: rgba(255,255,255,0.25);
@@ -1105,13 +1751,16 @@ main[b-3ij3p7wwc4] {
     color: white;
 }
 
+/* --------------------------------------------- */
+/* DESKTOP BEHAVIOR                              */
+/* --------------------------------------------- */
+
 @media (min-width: 900px) {
     .navbar-toggler[b-wk4bcz64v1] {
         display: none;
     }
 
     .collapse[b-wk4bcz64v1] {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
 }
