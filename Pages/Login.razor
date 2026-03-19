@@ -43,7 +43,7 @@
                Color="Color.Primary"
                FullWidth="true"
                Class="register-button"
-               Href="/register">
+               OnClick="RegisterUser">
         Register
     </MudButton>
 
@@ -73,6 +73,19 @@
             error = HelperFunctions.GetFriendlyFirebaseAuthError(ex);
         }
     }
+
+    async Task RegisterUser()
+    {
+        try
+        {
+            Nav.NavigateTo("./register");
+        }
+        catch (Exception ex)
+        {
+            error = HelperFunctions.GetFriendlyFirebaseAuthError(ex);
+        }
+    }
+
     async Task ShowResetPasswordDialog()
     {
         var parameters = new DialogParameters
