@@ -42,7 +42,7 @@
                Color="Color.Primary"
                FullWidth="true"
                Class="register-button"
-               Href="/login">
+               OnClick="LoginUser">
         Already have an account? Login
     </MudButton>
 </MudPaper>
@@ -58,6 +58,18 @@
         {
             await Auth.Register(email, password);
             Nav.NavigateTo("./");
+        }
+        catch (Exception ex)
+        {
+            error = HelperFunctions.GetFriendlyFirebaseAuthError(ex);
+        }
+    }
+
+    async Task LoginUser()
+    {
+        try
+        {
+            Nav.NavigateTo("./login");
         }
         catch (Exception ex)
         {
